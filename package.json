@@ -1,10 +1,10 @@
 {
   "name": "gbot",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/GOKULNAIR94/gbot/issues"
   },
-  "homepage": "https://github.com/GOKULNAIR94/gbot#readme"
+  "homepage": "https://github.com/GOKULNAIR94/gbot#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  },
+  "devDependencies": {},
+  "description": ""
 }
