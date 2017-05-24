@@ -33,8 +33,9 @@ restService.post('/inputmsg', function(req, res)
   if( territoryStored != null )
      myContext = 'multiTerritory';
   
-    function query( urlPath ){
-      console.log( "urlPath : " + urlPath);
+  function query( urlPath, callback) {
+    
+    console.log( "urlPath : " + urlPath);
     options = 
     {
       host: 'cbhs-test.crm.us2.oraclecloud.com',
