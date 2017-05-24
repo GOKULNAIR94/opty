@@ -89,8 +89,8 @@ restService.post('/inputmsg', function(req, res)
 
     urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
     query( urlPath, function(result) {
-      var pId = promoObj.items[0].Id;
-      var pName = promoObj.items[0].RecordName;
+      var pId = result.items[0].Id;
+      var pName = result.items[0].RecordName;
       console.log(pId - pName);
     });
 
