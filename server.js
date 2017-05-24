@@ -55,7 +55,7 @@ restService.post('/inputmsg', function(req, res)
       {
         resObj=JSON.parse(responseString);
           console.log( "resObj : " + resObj);
-          return (resObj);
+          callback (resObj);
       });
       resx.on('error', function(e) 
       {
@@ -80,8 +80,10 @@ restService.post('/inputmsg', function(req, res)
     console.log(urlPath);
 
     var titleObj = query( urlPath );
-    //tNumber = titleObj.items[0].TitleNumber_c; 
-    console.log("titleObj : " + titleObj);
+    query( urlPath, function(result) {
+      //tNumber = titleObj.items[0].TitleNumber_c; 
+      console.log("titleObj : " + titleObj);
+    });
 
     //urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
     //var promoObj = query( urlPath );
@@ -93,9 +95,6 @@ restService.post('/inputmsg', function(req, res)
   function MultiTerritory(){
     console.log("MultiTerritory");
   }
-
-  
-
 });
 
 
