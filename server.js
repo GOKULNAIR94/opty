@@ -86,17 +86,15 @@ restService.post('/inputmsg', function(req, res)
       tNumber = result.items[0].TitleNumber_c; 
       console.log("titleObj : " + result);
       console.log("tNumber : " + tNumber);
-    });
 
-    urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
-    console.log("WTF : " +urlPath );
+      urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
       query( urlPath, function(result) {
       var promoCount = result.count;
       console.log( "promoCount : " + promoCount);
       speech = "";
       speech= 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
       var pId, pName;
-      
+
       for( var i =0; i< promoCount; i++)
       {
         pId = result.items[i].Id;
@@ -113,7 +111,10 @@ restService.post('/inputmsg', function(req, res)
                       displayText: speech,
                       //source: 'webhook-OSC-oppty'
                   })
+      });
     });
+
+    
 
   }
   function MultiTerritory(){
