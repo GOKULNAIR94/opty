@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 var urlPath = '';
 const https = require('https');
-var uname = 'kaamana';
-var pword = 'Oracle1234';
+var uname = 'gokuln';
+var pword = 'Goklnt@1';
 var request;
 var responseString;
 var resCode = '';
