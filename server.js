@@ -50,14 +50,14 @@ restService.post('/inputmsg', function(req, res)
     console.log(urlPath);
 
     var titleObj = query( urlPath );
-    tNumber = titleObj.items[0].TitleNumber_c; 
-    console.log("tNumber : " + tNumber);
+    //tNumber = titleObj.items[0].TitleNumber_c; 
+    console.log("titleObj : " + titleObj);
 
-    urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
-    var promoObj = query( urlPath );
-    var pId = promoObj.items[0].Id;
-    var pName = promoObj.items[0].RecordName;
-    console.log(pId - pId);
+    //urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
+    //var promoObj = query( urlPath );
+    //var pId = promoObj.items[0].Id;
+    //var pName = promoObj.items[0].RecordName;
+    //console.log(pId - pId);
 
   }
   function MultiTerritory(){
@@ -90,6 +90,7 @@ restService.post('/inputmsg', function(req, res)
         console.log("Got error: " + e.message);
       });          
     });
+    console.log( "resObj : " + resObj);
     return (resObj);
   }
 
