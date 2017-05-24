@@ -4,8 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
 var http = require('https');
-var jsonQuery = require('json-query');
-fs = require('fs');
+var fs = require('fs');
 restService.use(bodyParser.urlencoded(
 {
     extended: true
@@ -22,7 +21,7 @@ restService.use(bodyParser.json());
     var responseString;
 	var resCode = '';
 	var resObj = '';
-restService.post('/inputmsg', function(req, res) 
+restService.post('/movie', function(req, res) 
 {
     titleName = req.body.result.parameters.titleName;
     //titleName= titleName.charAt(0).toUpperCase() + titleName.slice(1);
