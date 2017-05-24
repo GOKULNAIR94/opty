@@ -21,7 +21,7 @@ restService.use(bodyParser.json());
     var responseString;
 	var resCode = '';
 	var resObj = '';
-restService.post('/movie', function(req, res) 
+restService.post('/inputmsg', function(req, res) 
 {
     titleName = req.body.result.parameters.titleName;
     //titleName= titleName.charAt(0).toUpperCase() + titleName.slice(1);
