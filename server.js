@@ -53,9 +53,10 @@ restService.post('/inputmsg', function(req, res)
             try
             {
                 resObj=JSON.parse(resCode);
-				console.log(resObj);               
+				//console.log(resObj);               
                 tNumber=resObj.items[0].TitleNumber_c;
 				console.log(tNumber);
+		    speech = tNumber;
 				return res.json
 			            ({
 			                speech: speech,
@@ -78,11 +79,7 @@ restService.post('/inputmsg', function(req, res)
         {
             console.log('Got error: ' + e.message);
         });
-    });
-      res.on('error', function(e) 
-        {
-            console.log('Got error: ' + e.message);
-        });   
+    });  
         
 });
 
