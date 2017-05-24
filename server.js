@@ -133,7 +133,7 @@ restService.post('/inputmsg', function(req, res)
       var msCount = result.count;
       console.log( "msCount : " + msCount);
       speech = "";
-      speech= 'There are ' + msCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
+      speech= 'There are ' + msCount + ' Market Spend(s) for the Promotion ' + pName + "\n Please select a Market Spend";
       var msId, msName;
 
       for( var i =0; i< msCount; i++)
