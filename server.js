@@ -14,8 +14,8 @@ app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 var urlPath = '';
 const https = require('https');
-var uname = 'gokuln';
-var pword = 'Goklnt@1';
+var uname = 'kaamana';
+var pword = 'Oracle1234';
 var request;
 var responseString;
 var resCode = '';
@@ -27,7 +27,9 @@ app.post('/inputmsg',function(request,response){
 	
 	titleName = req.body.result.parameters.titleName;
 	//titleName = encodeURIComponent(titleName);
-	urlPath = '/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + titleName + '&fields=TitleNumber_c';
+	var titleNameURL = titleName.trim().replace( / /g, "%20" );
+    
+	urlPath = '/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + titleNameURL + '&fields=TitleNumber_c';
 	
 	options = 
 	{
