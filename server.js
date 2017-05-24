@@ -56,13 +56,6 @@ restService.post('/inputmsg', function(req, res)
 				//console.log(resObj);               
                 tNumber=resObj.items[0].TitleNumber_c;
 				console.log(tNumber);
-		    speech = tNumber;
-				return res.json
-			            ({
-			                speech: speech,
-			                displayText: speech,
-			                //source: 'webhook-OSC-oppty'
-			            });
             }
             catch (error)
             {
@@ -72,6 +65,62 @@ restService.post('/inputmsg', function(req, res)
                 })
                console.log('Got ERROR');
             }
+			
+			//titleNumber=resObj.items[0].TitleNumber_ce;
+            	urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
+				console.log(urlPath);
+				options = 
+					{
+						host: 'cbhs-test.crm.us2.oraclecloud.com',
+						path: urlPath,
+						headers: 
+						{
+							'Authorization': 'Basic ' + new Buffer(uname + ':' + pword).toString('base64')
+						}
+					};
+				request = http.get(options, function(resx)
+				{
+					responseString = "";
+					resx.on('data', function(data) 
+					{
+						responseString += data;
+					});
+					resx.on('end', function() 
+					{
+					
+						resObj=JSON.parse(responseString);
+						//tNumber=resObj.items[0].TitleNumber_c;
+						//console.log(resObj);
+						var promoCount = resObj.count
+						console.log(promoCount);
+						var pId, pName;
+						for( var i =0; i< promoCount; i++)
+						{
+							pId=resObj.items[i].Id;
+							pName=resObj.items[i].RecordName;
+							speech = speech + "\n" + pId + " - " + pName;
+							if( i == promoCount - 1 )
+								speech = speech + ".";
+							else
+								speech = speech + ",";
+							
+						}
+						//speech= 'There are ' + promoCount + ' promotions for the Title ' + titleName;
+						console.log(speech);
+						return res.json
+			            ({
+			                speech: speech,
+			                displayText: speech,
+			                //source: 'webhook-OSC-oppty'
+			            })
+					});
+					resx.on('error', function(e) 
+					{
+						console.log("Got error: " + e.message);
+					});
+
+
+				});
     
         })
     
