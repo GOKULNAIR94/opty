@@ -90,7 +90,7 @@ restService.post('/inputmsg', function(req, res)
 
     urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
     query( urlPath, function(result) {
-      var promoCount = result.count();
+      var promoCount = result.count;
       console.log( "promoCount : " + promoCount);
       speech = "";
       speech= 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
