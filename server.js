@@ -178,8 +178,8 @@ function MultiTerritory(){
             
             
             
-            pId=resObj.items[i].Id;
-            pName=resObj.items[i].RecordName;
+            pId=resObj.items[0].Id;
+            pName=resObj.items[0].RecordName;
             speech =  pId + " - " + pName;
 
 //            return res.json
