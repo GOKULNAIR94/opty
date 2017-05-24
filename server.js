@@ -47,6 +47,7 @@ function Start()
 {
 	urlPath='/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + titleName + '&fields=TitleNumber_c'; 
 	console.log(urlPath);
+	
 	options = 
 	{
 		host: 'cbhs-test.crm.us2.oraclecloud.com',
@@ -56,7 +57,7 @@ function Start()
 			'Authorization': 'Basic ' + new Buffer(uname + ':' + pword).toString('base64')
 		}
 	};
-    request = http.get(options, function(resg)
+	request = http.get(options, function(resg)
     {
         responseString = "";
       	resg.on('data', function(data) 
@@ -149,7 +150,54 @@ function Start()
         {
             console.log('Got error: ' + e.message);
         });
-    });  
+    }); 
+	
+}
+function MultiTerritory(){
+	urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+territoryStored+'&fields=RecordName,Id'; 
+	options = 
+					{
+						host: 'cbhs-test.crm.us2.oraclecloud.com',
+						path: urlPath,
+						headers: 
+						{
+							'Authorization': 'Basic ' + new Buffer(uname + ':' + pword).toString('base64')
+						}
+					};
+	
+	request = http.get(options, function(resx)
+				{
+					responseString = "";
+					resx.on('data', function(data) 
+					{
+						responseString += data;
+					});
+					resx.on('end', function() 
+					{
+					
+						resObj=JSON.parse(responseString);
+						
+						
+						var pId, pName;
+						speech =  pId + " - " + pName;
+						speech = "";
+						
+						console.log(speech);
+						return res.json
+			            ({
+			                speech: speech,
+			                displayText: speech,
+			                //source: 'webhook-OSC-oppty'
+			            })
+					});
+					resx.on('error', function(e) 
+					{
+						console.log("Got error: " + e.message);
+					});
+
+
+				});
+	
 }
         
 });
