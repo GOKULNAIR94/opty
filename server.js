@@ -50,7 +50,7 @@ restService.post('/inputmsg', function(req, res)
     console.log(urlPath);
 
     var titleObj = query( urlPath );
-    //tNumber = titleObj.items[0].TitleNumber_c; 
+    tNumber = titleObj.items[0].TitleNumber_c; 
     console.log("titleObj : " + titleObj);
 
     //urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
@@ -86,14 +86,13 @@ restService.post('/inputmsg', function(req, res)
       {
         resObj=JSON.parse(responseString);
           console.log( "resObj : " + resObj);
+          return (resObj);
       });
       resx.on('error', function(e) 
       {
         console.log("Got error: " + e.message);
       });          
     });
-    
-    return (resObj);
   }
 
 });
