@@ -30,6 +30,7 @@ restService.post('/inputmsg', function(req, res)
   territoryStored = req.body.result.parameters.territoryStored;
   console.log( "titleName :" + titleName);
   console.log( " territoryStored : " + territoryStored);
+  
   if( territoryStored != null )
      myContext = 'multiTerritory';
   
@@ -89,9 +90,22 @@ restService.post('/inputmsg', function(req, res)
 
     urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
     query( urlPath, function(result) {
-      var pId = result.items[0].Id;
-      var pName = result.items[0].RecordName;
-      console.log(pId + " - " + pName);
+      var promoCount = result.count
+      console.log( "promoCount : " + promoCount);
+      speech = "";
+      speech= 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
+      var pId, pName;
+      
+      for( var i =0; i< promoCount; i++)
+      {
+        pId = result.items[i].Id;
+        pName = result.items[i].RecordName;
+        speech = speech + "\n\n" + parseInt(i+1,10) + ". " + pId + " - " + pName;
+        if( i == promoCount - 1 )
+          speech = speech + ".";
+        else
+          speech = speech + ",";  
+      }
     });
 
   }
