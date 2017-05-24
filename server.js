@@ -32,39 +32,8 @@ restService.post('/inputmsg', function(req, res)
   console.log( " territoryStored : " + territoryStored);
   if( territoryStored != null )
      myContext = 'multiTerritory';
-    
-  switch( myContext )
-  {
-    case "start":
-    
-      Start();
-      break;
-      
-    case "multiTerritory":
-      MultiTerritory()
-      break;
-  }
-
-  function Start(){
-    urlPath='/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + encodeURIComponent(titleName) + '&fields=TitleNumber_c'; 
-    console.log(urlPath);
-
-    var titleObj = query( urlPath );
-    tNumber = titleObj.items[0].TitleNumber_c; 
-    console.log("titleObj : " + titleObj);
-
-    //urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
-    //var promoObj = query( urlPath );
-    //var pId = promoObj.items[0].Id;
-    //var pName = promoObj.items[0].RecordName;
-    //console.log(pId - pId);
-
-  }
-  function MultiTerritory(){
-    console.log("MultiTerritory");
-  }
-
-  function query( urlPath ){
+  
+    function query( urlPath ){
       console.log( "urlPath : " + urlPath);
     options = 
     {
@@ -94,6 +63,38 @@ restService.post('/inputmsg', function(req, res)
       });          
     });
   }
+  switch( myContext )
+  {
+    case "start":
+    
+      Start();
+      break;
+      
+    case "multiTerritory":
+      MultiTerritory()
+      break;
+  }
+
+  function Start(){
+    urlPath='/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + encodeURIComponent(titleName) + '&fields=TitleNumber_c'; 
+    console.log(urlPath);
+
+    var titleObj = query( urlPath );
+    //tNumber = titleObj.items[0].TitleNumber_c; 
+    console.log("titleObj : " + titleObj);
+
+    //urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
+    //var promoObj = query( urlPath );
+    //var pId = promoObj.items[0].Id;
+    //var pName = promoObj.items[0].RecordName;
+    //console.log(pId - pId);
+
+  }
+  function MultiTerritory(){
+    console.log("MultiTerritory");
+  }
+
+  
 
 });
 
