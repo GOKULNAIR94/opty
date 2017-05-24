@@ -210,16 +210,16 @@ function MultiTerritory(){
             
             
             var msId, msName;
-            var promoCount = resObj.count
-            console.log( "promoCount : " + promoCount);
+            var msCount = resObj.count
+            console.log( "msCount : " + msCount);
             speech = "";
-            speech= 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
-            for( var i =0; i< promoCount; i++)
+            speech= 'There are ' + msCount + ' MS(s) for the Title ' + pName + "\n Please select a ms";
+            for( var i =0; i< msCount; i++)
             {
               msId = resObj.items[i].Id;
               msName = resObj.items[i].RecordName;
               speech = speech + "\n\n" + parseInt(i+1,10) + ". " + msId + " - " + msName;
-              if( i == promoCount - 1 )
+              if( i == msCount - 1 )
                 speech = speech + ".";
               else
                 speech = speech + ",";  
