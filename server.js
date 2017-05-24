@@ -65,6 +65,7 @@ restService.post('/inputmsg', function(req, res)
   }
 
   function query( urlPath ){
+      console.log( "urlPath : " + urlPath);
     options = 
     {
       host: 'cbhs-test.crm.us2.oraclecloud.com',
