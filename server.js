@@ -140,7 +140,7 @@ restService.post('/inputmsg', function(req, res)
       {
         msId = result.items[i].Id;
         msName = result.items[i].RecordName;
-        speech = speech + "\n\n" + parseInt(i+1,10) + ". " + msId + " - " + pNmsNameame;
+        speech = speech + "\n\n" + parseInt(i+1,10) + ". " + msId + " - " + msName;
         if( i == msCount - 1 )
           speech = speech + ".";
         else
