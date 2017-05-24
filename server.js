@@ -12,6 +12,7 @@ restService.use(bodyParser.urlencoded(
 restService.use(bodyParser.json());
     var titleName = '';
     var tNumber = '';
+    var territoryStored = '';
     var uname = 'gokuln';
     var pword = 'Goklnt@1';
     var speech = '';
@@ -24,6 +25,7 @@ restService.use(bodyParser.json());
 restService.post('/inputmsg', function(req, res) 
 {
     titleName = req.body.result.parameters.titleName;
+    territoryStored = req.body.result.parameters.TerritoryStored_c;
     //titleName= titleName.charAt(0).toUpperCase() + titleName.slice(1);
     titleName = encodeURIComponent(titleName);
     //titleName = titleName.trim().replace( / /g, "%20" );
