@@ -56,7 +56,7 @@ restService.post('/inputmsg', function(req, res)
       {
         resObj=JSON.parse(responseString);
           console.log( "resObj : " + resObj);
-          callback (resObj);
+          callback(resObj);
       });
       resx.on('error', function(e) 
       {
@@ -80,10 +80,9 @@ restService.post('/inputmsg', function(req, res)
     urlPath='/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + encodeURIComponent(titleName) + '&fields=TitleNumber_c'; 
     console.log(urlPath);
 
-    var titleObj = query( urlPath );
     query( urlPath, function(result) {
       //tNumber = titleObj.items[0].TitleNumber_c; 
-      console.log("titleObj : " + titleObj);
+      console.log("titleObj : " + result);
     });
 
     //urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
