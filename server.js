@@ -23,6 +23,8 @@ restService.use(bodyParser.json());
   var responseString;
   var resCode = '';
   var resObj = '';
+  var pId, pName, msId, msName;
+
   
 restService.post('/inputmsg', function(req, res) 
 {
@@ -93,8 +95,7 @@ restService.post('/inputmsg', function(req, res)
       console.log( "promoCount : " + promoCount);
       speech = "";
       speech= 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
-      var pId, pName;
-
+      
       for( var i =0; i< promoCount; i++)
       {
         pId = result.items[i].Id;
@@ -118,6 +119,41 @@ restService.post('/inputmsg', function(req, res)
 
   }
   function MultiTerritory(){
+    urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+territoryStored+'&fields=RecordName,Id'; 
+    console.log(urlPath);
+
+    query( urlPath, function(result) {
+      pId = result.items[0].Id;
+      pName = result.items[0].RecordName;
+      console.log("pId : " + pId);
+      console.log("pName : " + pName);
+
+      urlPath="/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + "&fields=Id,RecordName,Status_c,RequestType_c";
+      query( urlPath, function(result) {
+      var msCount = result.count;
+      console.log( "msCount : " + msCount);
+      speech = "";
+      speech= 'There are ' + msCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
+      var msId, msName;
+
+      for( var i =0; i< msCount; i++)
+      {
+        msId = result.items[i].Id;
+        msName = result.items[i].RecordName;
+        speech = speech + "\n\n" + parseInt(i+1,10) + ". " + msId + " - " + pNmsNameame;
+        if( i == msCount - 1 )
+          speech = speech + ".";
+        else
+          speech = speech + ",";  
+      }
+      return res.json
+                  ({
+                      speech: speech,
+                      displayText: speech,
+                      //source: 'webhook-OSC-oppty'
+                  })
+      });
+    });
     console.log("MultiTerritory");
   }
 });
