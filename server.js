@@ -91,7 +91,7 @@ restService.post('/inputmsg', function(req, res)
     query( urlPath, function(result) {
       var pId = result.items[0].Id;
       var pName = result.items[0].RecordName;
-      console.log(pId - pName);
+      console.log(pId + " - " + pName);
     });
 
   }
