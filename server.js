@@ -100,6 +100,7 @@ restService.post('/inputmsg', function(req, res)
 						var promoCount = resObj.count
 						console.log(promoCount);
 						var pId, pName;
+						speech = "";
 						for( var i =0; i< promoCount; i++)
 						{
 							pId=resObj.items[i].Id;
