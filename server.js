@@ -82,7 +82,7 @@ restService.post('/inputmsg', function(req, res)
     console.log(urlPath);
 
     query( urlPath, function(result) {
-      tNumber = titleObj.items[0].TitleNumber_c; 
+      tNumber = result.items[0].TitleNumber_c; 
       console.log("titleObj : " + titleObj);
       console.log("tNumber : " + tNumber);
     });
