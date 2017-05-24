@@ -69,9 +69,9 @@ function Start()
             resCode = responseString;
             try
             {
-                resObj=JSON.parse(resCode);
+                resObj = JSON.parse(resCode);
         //console.log(resObj);               
-                tNumber=resObj.items[0].TitleNumber_c;
+                tNumber = resObj.items[0].TitleNumber_c;
         console.log(tNumber);
             }
             catch (error)
@@ -89,7 +89,7 @@ function Start()
     else
       urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+territoryStored+'&fields=RecordName,Id'; 
     
-    console.log(urlPath);
+    console.log( urlPath );
         options = 
           {
             host: 'cbhs-test.crm.us2.oraclecloud.com',
@@ -116,11 +116,12 @@ function Start()
             console.log( "promoCount : " + promoCount);
             speech = "";
             speech= 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
-            
+            var pId, pName;
+              
             for( var i =0; i< promoCount; i++)
             {
-              pId=resObj.items[i].Id;
-              pName=resObj.items[i].RecordName;
+              pId = resObj.items[i].Id;
+              pName = resObj.items[i].RecordName;
               speech = speech + "\n\n" + parseInt(i+1,10) + ". " + pId + " - " + pName;
               if( i == promoCount - 1 )
                 speech = speech + ".";
@@ -178,7 +179,7 @@ function MultiTerritory(){
             resObj=JSON.parse(responseString);
             
             
-            var pId, pName;
+            
             pId=resObj.items[i].Id;
             pName=resObj.items[i].RecordName;
             speech =  pId + " - " + pName;
