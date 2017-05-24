@@ -163,7 +163,7 @@ function MultiTerritory(){
               'Authorization': 'Basic ' + new Buffer( uname + ':' + pword ).toString('base64')
             }
           };
-  
+  var pId, pName;
   request = http.get(options, function(resx)
         {
           responseString = "";
@@ -177,7 +177,7 @@ function MultiTerritory(){
             resObj=JSON.parse(responseString);
             
             
-            var pId, pName;
+            
             pId=resObj.items[i].Id;
             pName=resObj.items[i].RecordName;
             speech =  pId + " - " + pName;
