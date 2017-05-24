@@ -79,17 +79,17 @@ restService.post('/inputmsg', function(req, res)
       responseString = "";
       resx.on('data', function(data) 
       {
-      responseString += data;
+        responseString += data;
       });
       resx.on('end', function() 
       {
-      resObj=JSON.parse(responseString);
+        resObj=JSON.parse(responseString);
       });
       resx.on('error', function(e) 
       {
-      console.log("Got error: " + e.message);
-      });n          
-    }
+        console.log("Got error: " + e.message);
+      });          
+    });
     return (resObj);
   }
 
