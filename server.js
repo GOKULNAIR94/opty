@@ -64,6 +64,7 @@ restService.post('/inputmsg', function(req, res)
       });          
     });
   }
+
   switch( myContext )
   {
     case "start":
@@ -80,17 +81,22 @@ restService.post('/inputmsg', function(req, res)
     urlPath='/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + encodeURIComponent(titleName) + '&fields=TitleNumber_c'; 
     console.log(urlPath);
 
+    var titleObj;
     query( urlPath, function(result) {
-      tNumber = result.items[0].TitleNumber_c; 
-      console.log("titleObj : " + result);
-        console.log("tNumber : " + tNumber);
+      titleObj = result;
     });
+    tNumber = titleObj.items[0].TitleNumber_c; 
+    console.log("titleObj : " + titleObj);
+    console.log("tNumber : " + tNumber);
 
-    //urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
-    //var promoObj = query( urlPath );
-    //var pId = promoObj.items[0].Id;
-    //var pName = promoObj.items[0].RecordName;
-    //console.log(pId - pId);
+    urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
+    var promoObj;
+    query( urlPath, function(result) {
+      promoObj = result;
+    });
+    var pId = promoObj.items[0].Id;
+    var pName = promoObj.items[0].RecordName;
+    console.log(pId - pName);
 
   }
   function MultiTerritory(){
