@@ -56,7 +56,8 @@ function Start()
 		{
 			'Authorization': 'Basic ' + new Buffer(uname + ':' + pword).toString('base64')
 		}
-		request = http.get(options, function(resg)
+	};
+	request = http.get(options, function(resg)
     {
         responseString = "";
       	resg.on('data', function(data) 
@@ -82,8 +83,11 @@ function Start()
                console.log('Got ERROR');
             }
 			
+			//titleNumber=resObj.items[0].TitleNumber_ce;
+            	if( territoryStored == null)
 			urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
-		
+		else
+			urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+territoryStored+'&fields=RecordName,Id'; 
 		
 		console.log(urlPath);
 				options = 
@@ -109,9 +113,7 @@ function Start()
 						//tNumber=resObj.items[0].TitleNumber_c;
 						//console.log(resObj);
 						var promoCount = resObj.count
-						console.log( " promoCount : " +promoCount);
-						if( promoCount > 1 )
-							myContext = multiTerritory;
+						console.log(promoCount);
 						var pId, pName;
 						speech = "";
 						for( var i =0; i< promoCount; i++)
@@ -148,9 +150,7 @@ function Start()
         {
             console.log('Got error: ' + e.message);
         });
-		});
-	};
-	
+    }); 
 	
 }
 function MultiTerritory(){
