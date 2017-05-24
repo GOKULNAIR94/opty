@@ -89,7 +89,8 @@ restService.post('/inputmsg', function(req, res)
     });
 
     urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
-    query( urlPath, function(result) {
+    console.log("WTF : " +urlPath );
+      query( urlPath, function(result) {
       var promoCount = result.count;
       console.log( "promoCount : " + promoCount);
       speech = "";
