@@ -69,7 +69,7 @@ restService.post('/inputmsg', function(req, res)
             }
 			
 			//titleNumber=resObj.items[0].TitleNumber_ce;
-            	if( territoryStored == "undefined")
+            	if( territoryStored == null)
 			urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
 		else
 			urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+territoryStored+'&fields=RecordName,Id'; 
