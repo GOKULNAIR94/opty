@@ -177,7 +177,7 @@ function MultiTerritory(){
             resObj=JSON.parse(responseString);
             
             
-            
+            var pId, pName;
             pId=resObj.items[i].Id;
             pName=resObj.items[i].RecordName;
             speech =  pId + " - " + pName;
