@@ -10,7 +10,6 @@ restService.use(bodyParser.urlencoded(
     extended: true
 }));
 restService.use(bodyParser.json());
-var myContext = 'start';
     var titleName = '';
     var tNumber = '';
     var territoryStored = '';
@@ -23,29 +22,10 @@ var myContext = 'start';
     var responseString;
 	var resCode = '';
 	var resObj = '';
-	
 restService.post('/inputmsg', function(req, res) 
 {
-	titleName = req.body.result.parameters.titleName;
+    titleName = req.body.result.parameters.titleName;
     territoryStored = req.body.result.parameters.territoryStored;
-	switch( myContext )
-	{
-		case: 'start'
-		
-			Start();
-			break;
-			
-		case: 'multiTerritory'
-			var case = 2;
-			break;
-	}
-      
-        
-});
-
-function Start()
-{
-	
     //titleName= titleName.charAt(0).toUpperCase() + titleName.slice(1);
     titleName = encodeURIComponent(titleName);
     //titleName = titleName.trim().replace( / /g, "%20" );
@@ -155,8 +135,9 @@ function Start()
         {
             console.log('Got error: ' + e.message);
         });
-    });
-}
+    });  
+        
+});
 
 restService.listen((process.env.PORT || 9000), function() {
     console.log("Server up and listening");
