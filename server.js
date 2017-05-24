@@ -10,19 +10,19 @@ restService.use(bodyParser.urlencoded(
     extended: true
 }));
 restService.use(bodyParser.json());
-    var myContext = 'start';
-    var titleName = '';
-    var tNumber = '';
-    var territoryStored = '';
-    var uname = 'gokuln';
-    var pword = 'Goklnt@1';
-    var speech = '';
-    var options='';
-    var urlPath='';
-    var request;
-    var responseString;
-    var resCode = '';
-    var resObj = '';
+  var myContext = 'start';
+  var titleName = '';
+  var tNumber = '';
+  var territoryStored = '';
+  var uname = 'gokuln';
+  var pword = 'Goklnt@1';
+  var speech = '';
+  var options='';
+  var urlPath='';
+  var request;
+  var responseString;
+  var resCode = '';
+  var resObj = '';
   
 restService.post('/inputmsg', function(req, res) 
 {
@@ -30,7 +30,7 @@ restService.post('/inputmsg', function(req, res)
   territoryStored = req.body.result.parameters.territoryStored;
   console.log( "titleName :" + titleName);
   console.log( " territoryStored : " + territoryStored);
-  if( territoryStored == null )
+  if( territoryStored != null )
      myContext = 'multiTerritory';
     
   switch( myContext )
@@ -46,12 +46,55 @@ restService.post('/inputmsg', function(req, res)
   }
 
   function Start(){
-    console.log("Start");
+    urlPath='/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + encodeURIComponent(titleName) + '&fields=TitleNumber_c'; 
+    console.log(urlPath);
+
+    var titleObj = query( urlPath );
+    tNumber = titleObj.items[0].TitleNumber_c; 
+    console.log("tNumber : " + tNumber);
+
+    urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
+    var promoObj = query( urlPath );
+    var pId = promoObj.items[0].Id;
+    var pName = promoObj.items[0].RecordName;
+    console.log(pId - pId);
+
   }
   function MultiTerritory(){
     console.log("MultiTerritory");
   }
+
+  function query( urlPath ){
+    options = 
+    {
+      host: 'cbhs-test.crm.us2.oraclecloud.com',
+      path: urlPath,
+      headers: 
+      {
+        'Authorization': 'Basic ' + new Buffer( uname + ':' + pword ).toString('base64')
+      }
+    };
+
+    request = http.get(options, function(resx){
+      responseString = "";
+      resx.on('data', function(data) 
+      {
+      responseString += data;
+      });
+      resx.on('end', function() 
+      {
+      resObj=JSON.parse(responseString);
+      });
+      resx.on('error', function(e) 
+      {
+      console.log("Got error: " + e.message);
+      });n          
+    }
+    return (resObj);
+  }
+
 });
+
 
 restService.listen((process.env.PORT || 9000), function() {
     console.log("Server up and listening");
