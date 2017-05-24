@@ -85,13 +85,14 @@ restService.post('/inputmsg', function(req, res)
       resx.on('end', function() 
       {
         resObj=JSON.parse(responseString);
+          console.log( "resObj : " + resObj);
       });
       resx.on('error', function(e) 
       {
         console.log("Got error: " + e.message);
       });          
     });
-    console.log( "resObj : " + resObj);
+    
     return (resObj);
   }
 
