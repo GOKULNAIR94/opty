@@ -112,6 +112,7 @@ function Start()
 						console.log( " promoCount : " +promoCount);
 						if( promoCount > 1 )
 							myContext = multiTerritory;
+						
 						var pId, pName;
 						speech = "";
 						for( var i =0; i< promoCount; i++)
@@ -153,7 +154,7 @@ function Start()
 	
 	
 }
-function MultiTerritory(){
+/*function MultiTerritory(){
 	urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+territoryStored+'&fields=RecordName,Id'; 
 	options = 
 					{
@@ -198,8 +199,8 @@ function MultiTerritory(){
 
 				});
 	
-}
-        
+}*/
+		 
 });
 
 
