@@ -98,7 +98,7 @@ restService.post('/inputmsg', function(req, res)
 						{
 							pId=resObj.items[i].Id;
 							pName=resObj.items[i].RecordName;
-							speech = speech + "\n" + pId + " - " + pName;
+							speech = speech + "\n" + i+1 + ". " + pId + " - " + pName;
 							if( i == promoCount - 1 )
 								speech = speech + ".";
 							else
