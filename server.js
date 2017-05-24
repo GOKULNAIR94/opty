@@ -52,3 +52,7 @@ restService.post('/inputmsg', function(req, res)
     console.log("MultiTerritory");
   }
 });
+
+restService.listen((process.env.PORT || 9000), function() {
+    console.log("Server up and listening");
+});
