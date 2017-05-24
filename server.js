@@ -1,15 +1,16 @@
+'use strict';
 
-var http = require('http');
-var fs = require('fs'),
-express = require('express'),
-path = require('path');
-
-var app = express();
-
-var bodyParser = require('body-parser');
-app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
-
+const express = require('express');
+const bodyParser = require('body-parser');
+const restService = express();
+var http = require('https');
+var jsonQuery = require('json-query');
+fs = require('fs');
+restService.use(bodyParser.urlencoded(
+{
+    extended: true
+}));
+restService.use(bodyParser.json());
 
 
 var urlPath = '';
@@ -89,8 +90,4 @@ function send404(response){
 app.listen((process.env.PORT || 8000), function() {
     console.log("Server up and listening");
 });
-
-    Contact GitHub API Training Shop Blog About 
-
-    © 2017 GitHub, Inc. Terms Privacy Security Status Help 
 
