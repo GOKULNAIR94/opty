@@ -30,7 +30,7 @@ restService.post('/inputmsg', function(req, res)
   territoryStored = req.body.result.parameters.territoryStored;
   console.log( "titleName :" + titleName);
   console.log( " territoryStored : " + territoryStored);
-  if( territoryStored != null )
+  if( territoryStored == null )
      myContext = 'multiTerritory';
     
   switch( myContext )
