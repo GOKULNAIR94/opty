@@ -25,8 +25,8 @@ restService.post('/inputmsg', function(req, res)
 {
     titleName = req.body.result.parameters.titleName;
     //titleName= titleName.charAt(0).toUpperCase() + titleName.slice(1);
-    //titleName = encodeURIComponent(titleName);
-    var titleNameURL = titleName.trim().replace( / /g, "%20" );
+    titleName = encodeURIComponent(titleName);
+    //var titleNameURL = titleName.trim().replace( / /g, "%20" );
     
 	console.log(titleName);
     urlPath='/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + titleName + '&fields=TitleNumber_c'; 
