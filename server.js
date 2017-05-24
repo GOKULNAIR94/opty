@@ -25,7 +25,7 @@ restService.use(bodyParser.json());
 restService.post('/inputmsg', function(req, res) 
 {
     titleName = req.body.result.parameters.titleName;
-    territoryStored = req.body.result.parameters.TerritoryStored_c;
+    territoryStored = req.body.result.parameters.territoryStored;
     //titleName= titleName.charAt(0).toUpperCase() + titleName.slice(1);
     titleName = encodeURIComponent(titleName);
     //titleName = titleName.trim().replace( / /g, "%20" );
@@ -69,8 +69,12 @@ restService.post('/inputmsg', function(req, res)
             }
 			
 			//titleNumber=resObj.items[0].TitleNumber_ce;
-            	urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
-				console.log(urlPath);
+            	if( territoryStored == "")
+			urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
+		if( territoryStored != "")
+			urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+territoryStored+'&fields=RecordName,Id'; 
+		
+		console.log(urlPath);
 				options = 
 					{
 						host: 'cbhs-test.crm.us2.oraclecloud.com',
