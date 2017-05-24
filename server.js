@@ -25,7 +25,7 @@ restService.post('/inputmsg', function(req, res)
 {
     titleName = req.body.result.parameters.titleName;
     //titleName= titleName.charAt(0).toUpperCase() + titleName.slice(1);
-    //titleName = encodeURIComponent(titleName);
+    titleName = encodeURIComponent(titleName);
     titleName = titleName.trim().replace( / /g, "%20" );
     
 	console.log(titleName);
