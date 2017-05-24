@@ -26,6 +26,7 @@ var myContext = 'start';
 	
 restService.post('/inputmsg', function(req, res) 
 {
+	console.log(" myContext : " + myContext);
 	titleName = req.body.result.parameters.titleName;
     titleName = encodeURIComponent(titleName);
 	territoryStored = req.body.result.parameters.territoryStored;
