@@ -12,8 +12,8 @@ restService.use(bodyParser.urlencoded(
 restService.use(bodyParser.json());
     var titleName = '';
     var tNumber = '';
-    var uname = 'kaamana';
-    var pword = 'Oracle1234';
+    var uname = 'gokuln';
+    var pword = 'Goklnt@1';
     var speech = '';
     var options='';
     var urlPath='';
@@ -25,8 +25,10 @@ restService.post('/inputmsg', function(req, res)
 {
     titleName = req.body.result.parameters.titleName;
     //titleName= titleName.charAt(0).toUpperCase() + titleName.slice(1);
-    titleName = encodeURIComponent(titleName);
-    console.log(titleName);
+    //titleName = encodeURIComponent(titleName);
+    var titleNameURL = titleName.trim().replace( / /g, "%20" );
+    
+	console.log(titleName);
     urlPath='/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + titleName + '&fields=TitleNumber_c'; 
 	console.log(urlPath);
 	options = 
