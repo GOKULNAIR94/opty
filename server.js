@@ -84,19 +84,21 @@ restService.post('/inputmsg', function(req, res)
     var titleObj;
     query( urlPath, function(result) {
       titleObj = result;
+        console.log( "result : " + result);
+        console.log( "titleObj : " + titleObj);
     });
-    tNumber = titleObj.items[0].TitleNumber_c; 
-    console.log("titleObj : " + titleObj);
-    console.log("tNumber : " + tNumber);
+    //tNumber = titleObj.items[0].TitleNumber_c; 
+    console.log("titleObj 2 : " + titleObj);
+    //console.log("tNumber : " + tNumber);
 
-    urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
-    var promoObj;
-    query( urlPath, function(result) {
-      promoObj = result;
-    });
-    var pId = promoObj.items[0].Id;
-    var pName = promoObj.items[0].RecordName;
-    console.log(pId - pName);
+//     urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
+//     var promoObj;
+//     query( urlPath, function(result) {
+//       promoObj = result;
+//     });
+//     var pId = promoObj.items[0].Id;
+//     var pName = promoObj.items[0].RecordName;
+//     console.log(pId - pName);
 
   }
   function MultiTerritory(){
