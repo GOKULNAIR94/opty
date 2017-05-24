@@ -10,7 +10,7 @@ restService.use(bodyParser.urlencoded(
     extended: true
 }));
 restService.use(bodyParser.json());
-var myContext = 'start';
+    var myContext = 'start';
     var titleName = '';
     var tNumber = '';
     var territoryStored = '';
@@ -21,13 +21,16 @@ var myContext = 'start';
     var urlPath='';
     var request;
     var responseString;
-  var resCode = '';
-  var resObj = '';
+    var resCode = '';
+    var resObj = '';
   
 restService.post('/inputmsg', function(req, res) 
 {
   titleName = req.body.result.parameters.titleName;
   territoryStored = req.body.result.parameters.territoryStored;
+  if( territoryStored != null )
+     myContext = 'multiTerritory';
+    
   console.log(titleName);
   
   switch( myContext )
@@ -81,23 +84,24 @@ function Start()
                 })
                console.log('Got ERROR');
             }
-      
-      //titleNumber=resObj.items[0].TitleNumber_ce;
-              if( territoryStored == null)
-      urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
-    else
-      urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+territoryStored+'&fields=RecordName,Id'; 
+              
+            if( territoryStored == null)
+                urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
+            else
+                urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+territoryStored+'&fields=RecordName,Id'; 
     
-    console.log( urlPath );
-        options = 
-          {
-            host: 'cbhs-test.crm.us2.oraclecloud.com',
-            path: urlPath,
-            headers: 
+            console.log( urlPath );
+            
+            options = 
             {
-              'Authorization': 'Basic ' + new Buffer(uname + ':' + pword).toString('base64')
-            }
-          };
+              host: 'cbhs-test.crm.us2.oraclecloud.com',
+              path: urlPath,
+              headers: 
+              {
+                'Authorization': 'Basic ' + new Buffer(uname + ':' + pword).toString('base64')
+              }
+            };
+            
         request = http.get(options, function(resx)
         {
           responseString = "";
@@ -107,7 +111,6 @@ function Start()
           });
           resx.on('end', function() 
           {
-          
             resObj=JSON.parse(responseString);
             //tNumber=resObj.items[0].TitleNumber_c;
             //console.log(resObj);
@@ -116,7 +119,6 @@ function Start()
             speech = "";
             speech= 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
             var pId, pName;
-              
             for( var i =0; i< promoCount; i++)
             {
               pId = resObj.items[i].Id;
@@ -140,10 +142,7 @@ function Start()
           {
             console.log("Got error: " + e.message);
           });
-
-
         });
-    
         })
     
         resg.on('error', function(e) 
@@ -161,7 +160,7 @@ function MultiTerritory(){
             path: urlPath,
             headers: 
             {
-              'Authorization': 'Basic ' + new Buffer(uname + ':' + pword).toString('base64')
+              'Authorization': 'Basic ' + new Buffer( uname + ':' + pword ).toString('base64')
             }
           };
   
@@ -207,8 +206,6 @@ function MultiTerritory(){
           {
           
             resObj=JSON.parse(responseString);
-            
-            
             var msId, msName;
             var msCount = resObj.count
             console.log( "msCount : " + msCount);
