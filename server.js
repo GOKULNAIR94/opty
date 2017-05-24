@@ -27,7 +27,6 @@ var myContext = 'start';
 restService.post('/inputmsg', function(req, res) 
 {
   titleName = req.body.result.parameters.titleName;
-    titleName = encodeURIComponent(titleName);
   territoryStored = req.body.result.parameters.territoryStored;
   console.log(titleName);
   
@@ -45,7 +44,7 @@ restService.post('/inputmsg', function(req, res)
       
 function Start()
 {
-  urlPath='/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + titleName + '&fields=TitleNumber_c'; 
+  urlPath='/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + encodeURIComponent(titleName) + '&fields=TitleNumber_c'; 
   console.log(urlPath);
   
   options = 
@@ -214,7 +213,7 @@ function MultiTerritory(){
             var msCount = resObj.count
             console.log( "msCount : " + msCount);
             speech = "";
-            speech= 'There are ' + msCount + ' MS(s) for the Title ' + pName + "\n Please select a ms";
+            speech= 'There are ' + msCount + ' MS(s) for the Title ' + msName + "\n Please select a ms";
             for( var i =0; i< msCount; i++)
             {
               msId = resObj.items[i].Id;
