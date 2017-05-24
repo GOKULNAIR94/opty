@@ -33,12 +33,12 @@ restService.post('/inputmsg', function(req, res)
 	
 	switch( myContext )
 	{
-		case: 'start'
+		case "start":
 		
 			Start();
 			break;
 			
-		case: 'multiTerritory'
+		case "multiTerritory":
 			MultiTerritory()
 			break;
 	}
