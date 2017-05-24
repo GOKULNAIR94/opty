@@ -106,6 +106,12 @@ restService.post('/inputmsg', function(req, res)
         else
           speech = speech + ",";  
       }
+      return res.json
+                  ({
+                      speech: speech,
+                      displayText: speech,
+                      //source: 'webhook-OSC-oppty'
+                  })
     });
 
   }
