@@ -91,6 +91,7 @@ restService.post('/inputmsg', function(req, res)
   }
 
   function GetPromo(){
+	  console.log("GetPromo");
     urlPath='/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + encodeURIComponent(titleName) + '&fields=TitleNumber_c'; 
     console.log(urlPath);
 
@@ -128,7 +129,8 @@ restService.post('/inputmsg', function(req, res)
     
 
   }
-  function GetObject(){
+  function GetObject(){	  
+	  console.log("GetObject");
     urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+territoryStored+'&fields=RecordName,Id'; 
     console.log(urlPath);
 
@@ -168,6 +170,7 @@ restService.post('/inputmsg', function(req, res)
   }
   
     function GetValue(){
+	    console.log("GetValue");
 	  urlPath="/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=RecordName=" + msRecord + "&fields=Id,RecordName,Status_c,RequestType_c";
       query( urlPath, function(result) {
 	    var msStatus = result.items[0].Status_c;
