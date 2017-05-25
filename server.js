@@ -14,6 +14,8 @@ restService.use(bodyParser.json());
   var titleName = '';
   var tNumber = '';
   var territoryStored = '';
+  var objectName = '';
+  var attributeName = '';
   var msRecord = '';
   var uname = 'gokuln';
   var pword = 'Goklnt@1';
@@ -31,6 +33,8 @@ restService.post('/inputmsg', function(req, res)
 {
   titleName = req.body.result.parameters.titleName;
   territoryStored = req.body.result.parameters.territoryStored;
+  objectName = req.body.result.parameters.object;
+  attributeName = req.body.result.parameters.attribute;
   msRecord = req.body.result.parameters.msRecord;
   console.log( "titleName :" + titleName);
   console.log( " territoryStored : " + territoryStored);
@@ -174,11 +178,11 @@ restService.post('/inputmsg', function(req, res)
 	    console.log("GetValue");
 	  urlPath="/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=RecordName=" + msRecord + "&fields=Id,RecordName,Status_c,RequestType_c";
       query( urlPath, function(result) {
-	    var msStatus = result.items[0].Status_c;
+	    var msattribute = result.items[0][attributeName];
         var msRecordName = result.items[0].RecordName;
-		console.log( "Status of msRecordName : " + msStatus);
+		console.log( attributeName + " of " + msRecordName +" : "  + msattribute);
 		speech = "";
-		speech = "Status of "+msRecordName +" : " + msStatus;
+		speech = attributeName + " of "+msRecordName +" : " + msattribute;
 		return res.json
                   ({
                       speech: speech,
