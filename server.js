@@ -10,7 +10,7 @@ restService.use(bodyParser.urlencoded(
     extended: true
 }));
 restService.use(bodyParser.json());
-  var myContext = 'start';
+  var myContext = 'getPromo';
   var titleName = '';
   var tNumber = '';
   var territoryStored = '';
@@ -34,7 +34,7 @@ restService.post('/inputmsg', function(req, res)
   console.log( " territoryStored : " + territoryStored);
   
   if( territoryStored != null )
-     myContext = 'multiTerritory';
+     myContext = 'getObject';
   
   function query( urlPath, callback) {
     
@@ -70,17 +70,17 @@ restService.post('/inputmsg', function(req, res)
 
   switch( myContext )
   {
-    case "start":
+    case "getPromo":
     
-      Start();
+      GetPromo();
       break;
       
-    case "multiTerritory":
-      MultiTerritory()
+    case "getObject":
+      GetObject()
       break;
   }
 
-  function Start(){
+  function GetPromo(){
     urlPath='/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=' + encodeURIComponent(titleName) + '&fields=TitleNumber_c'; 
     console.log(urlPath);
 
@@ -118,7 +118,7 @@ restService.post('/inputmsg', function(req, res)
     
 
   }
-  function MultiTerritory(){
+  function GetObject(){
     urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+territoryStored+'&fields=RecordName,Id'; 
     console.log(urlPath);
 
