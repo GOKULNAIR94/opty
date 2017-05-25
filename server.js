@@ -95,8 +95,8 @@ restService.post('/inputmsg', function(req, res)
     console.log(urlPath);
 
     query( urlPath, function(result) {
-      tNumber = result.items[0].TitleNumber_c; 
       console.log("titleObj : " + result);
+      tNumber = result.items[0].TitleNumber_c; 
       console.log("tNumber : " + tNumber);
 
       urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
