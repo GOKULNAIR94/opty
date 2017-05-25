@@ -150,16 +150,14 @@ restService.post('/inputmsg', function(req, res)
       var msCount = result.count;
       console.log( "msCount : " + msCount);
       speech = "";
-	      
+	     if( msCount == 0)
+	      {
+		    speech = 'There are ' + msCount + ' Records for the Promotion ' + pName ;
+		    
+	      }
 	      if( msCount == 1)
 	      {
-		    speech = attributeName + " of "+msRecordName +" : " + msattribute;
-		    return res.json
-                    ({
-                      speech: speech,
-                      displayText: speech,
-                      //source: 'webhook-OSC-oppty'
-                    })
+		    speech = attributeName + " of "+msRecordName +" : " + msattribute;  
 	      }
 	      if( msCount > 1)
 	      {
@@ -176,13 +174,13 @@ restService.post('/inputmsg', function(req, res)
         else
           speech = speech + ",";  
       }
+	      }
       return res.json
                   ({
                       speech: speech,
                       displayText: speech,
                       //source: 'webhook-OSC-oppty'
                   })
-	      }
       });
     });
     console.log("MultiTerritory");
