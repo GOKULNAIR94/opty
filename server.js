@@ -14,11 +14,11 @@ restService.use(bodyParser.json());
   var titleName = '';
   var tNumber = '';
   var territoryStored = '';
+  var objectName = '';
+  var attributeName = '';
   var msRecord = '';
-  
   var uname = 'gokuln';
   var pword = 'Goklnt@1';
-  
   var speech = '';
   var options='';
   var urlPath='';
@@ -33,6 +33,8 @@ restService.post('/inputmsg', function(req, res)
 {
   titleName = req.body.result.parameters.titleName;
   territoryStored = req.body.result.parameters.territoryStored;
+  objectName = req.body.result.parameters.object;
+  attributeName = req.body.result.parameters.attribute;
   msRecord = req.body.result.parameters.msRecord;
   console.log( "titleName :" + titleName);
   console.log( " territoryStored : " + territoryStored);
@@ -110,14 +112,13 @@ restService.post('/inputmsg', function(req, res)
       speech = "";
 	      if( promoCount == 0)
 	      {
-		    speech = 'There are ' + msCount + ' Records for the Promotion ' + pName ;
-		    
+		    speech = 'There are ' + promoCount + ' Records for the Promotion ' + pName ;   
 	      }
 	      if( promoCount == 1)
 	      {
-		    GetObject();   
+		  GetObject();
 	      }
-	      if( promoCount > 1 )
+	      if( promoCount > 1)
 	      {
       speech= 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
       
@@ -155,22 +156,20 @@ restService.post('/inputmsg', function(req, res)
       console.log("pId : " + pId);
       console.log("pName : " + pName);
 
-      urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=PromotionName_Id_c=" + pId;
+      urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=PromotionName_Id_c=" + pId + "&fields=Id,RecordName,Status_c,RequestType_c";
       query( urlPath, function(result) {
       var msCount = result.count;
       console.log( "msCount : " + msCount);
       speech = "";
-	      
 	      if( msCount == 0)
 	      {
-		    speech = 'There are ' + msCount + ' Records for the Promotion ' + pName ;
-		    
+		    speech = 'There are ' + msCount + ' Records for the Promotion ' + pName ;   
 	      }
 	      if( msCount == 1)
 	      {
-		    GetValue();   
+		  GetValue();
 	      }
-	      if( msCount > 1 )
+	      if( msCount > 1)
 	      {
       speech= 'There are ' + msCount + ' Market Spend(s) for the Promotion ' + pName + "\n Please select a Market Spend";
       var msId, msName;
@@ -185,13 +184,14 @@ restService.post('/inputmsg', function(req, res)
         else
           speech = speech + ",";  
       }
-	      }
+	  }
       return res.json
                   ({
                       speech: speech,
                       displayText: speech,
                       //source: 'webhook-OSC-oppty'
                   })
+	      
       });
     });
     console.log("MultiTerritory");
@@ -199,13 +199,13 @@ restService.post('/inputmsg', function(req, res)
   
     function GetValue(){
 	    console.log("GetValue");
-	  urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=RecordName=" + msRecord;
+	  urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=RecordName=" + msRecord + "&fields=Id,RecordName,Status_c,RequestType_c";
       query( urlPath, function(result) {
-	    var msStatus = result.items[0][attributeName];
+	    var msattribute = result.items[0][attributeName];
         var msRecordName = result.items[0].RecordName;
-		console.log( attributeName + " of msRecordName : " + msStatus);
+		console.log( attributeName + " of " + msRecordName +" : "  + msattribute);
 		speech = "";
-		speech = attributeName + " of "+msRecordName +" : " + msStatus;
+		speech = attributeName + " of "+msRecordName +" : " + msattribute;
 		return res.json
                   ({
                       speech: speech,
