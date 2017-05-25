@@ -178,7 +178,7 @@ restService.post('/inputmsg', function(req, res)
         var msRecordName = result.items[0].RecordName;
 		console.log( "Status of msRecordName : " + msStatus);
 		speech = "";
-		speech = "Status of +"msRecordName"+" : " + msStatus;
+		speech = "Status of "+msRecordName +" : " + msStatus;
 		return res.json
                   ({
                       speech: speech,
