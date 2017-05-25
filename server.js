@@ -109,7 +109,7 @@ try
 		console.log("tNumber : " + tNumber);
       
 	  
-      urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c=Global&fields=RecordName,Id'; 
+      urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + '&fields=RecordName,Id'; 
       query( urlPath, function(result) {
       var promoCount = result.count;
       console.log( "promoCount : " + promoCount);
