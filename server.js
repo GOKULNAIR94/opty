@@ -155,7 +155,7 @@ restService.post('/inputmsg', function(req, res)
       console.log("pId : " + pId);
       console.log("pName : " + pName);
 
-      urlPath="/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + "&fields=Id,RecordName,Status_c,RequestType_c";
+      urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=PromotionName_Id_c=" + pId;
       query( urlPath, function(result) {
       var msCount = result.count;
       console.log( "msCount : " + msCount);
@@ -199,13 +199,13 @@ restService.post('/inputmsg', function(req, res)
   
     function GetValue(){
 	    console.log("GetValue");
-	  urlPath="/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=RecordName=" + msRecord + "&fields=Id,RecordName,Status_c,RequestType_c";
+	  urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=RecordName=" + msRecord;
       query( urlPath, function(result) {
-	    var msStatus = result.items[0].Status_c;
+	    var msStatus = result.items[0][attributeName];
         var msRecordName = result.items[0].RecordName;
-		console.log( "Status of msRecordName : " + msStatus);
+		console.log( attributeName + " of msRecordName : " + msStatus);
 		speech = "";
-		speech = "Status of "+msRecordName +" : " + msStatus;
+		speech = attributeName + " of "+msRecordName +" : " + msStatus;
 		return res.json
                   ({
                       speech: speech,
