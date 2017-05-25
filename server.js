@@ -34,6 +34,7 @@ restService.post('/inputmsg', function(req, res)
   msRecord = req.body.result.parameters.msRecord;
   console.log( "titleName :" + titleName);
   console.log( " territoryStored : " + territoryStored);
+  console.log( " msRecord : " + msRecord);
   
   if( territoryStored != null )
   {
@@ -85,7 +86,7 @@ restService.post('/inputmsg', function(req, res)
       GetObject()
       break;
 	  
-	case "getValue":
+    case "getValue":
       GetValue()
       break;
   }
