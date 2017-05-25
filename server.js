@@ -177,6 +177,14 @@ restService.post('/inputmsg', function(req, res)
 	    var msStatus = result.items[0].Status_c;
         var msRecordName = result.items[0].RecordName;
 		console.log( "Status of msRecordName : " + msStatus);
+		speech = "";
+		speech = "Status of msRecordName : " + msStatus;
+		return res.json
+                  ({
+                      speech: speech,
+                      displayText: speech,
+                      //source: 'webhook-OSC-oppty'
+                  })
 	  });
 	}
 });
