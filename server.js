@@ -145,11 +145,24 @@ restService.post('/inputmsg', function(req, res)
       console.log("pId : " + pId);
       console.log("pName : " + pName);
 
-      urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=PromotionName_Id_c=" + pId + "&fields=Id,RecordName,Status_c,RequestType_c";
+      urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=PromotionName_Id_c=" + pId;
       query( urlPath, function(result) {
       var msCount = result.count;
       console.log( "msCount : " + msCount);
       speech = "";
+	      
+	      if( msCount == 1)
+	      {
+		    speech = attributeName + " of "+msRecordName +" : " + msattribute;
+		    return res.json
+                    ({
+                      speech: speech,
+                      displayText: speech,
+                      //source: 'webhook-OSC-oppty'
+                    })
+	      }
+	      if( msCount > 1)
+	      {
       speech= 'There are ' + msCount + ' Market Spend(s) for the Promotion ' + pName + "\n Please select a Market Spend";
       var msId, msName;
 
@@ -169,6 +182,7 @@ restService.post('/inputmsg', function(req, res)
                       displayText: speech,
                       //source: 'webhook-OSC-oppty'
                   })
+	      }
       });
     });
     console.log("MultiTerritory");
@@ -176,7 +190,7 @@ restService.post('/inputmsg', function(req, res)
   
     function GetValue(){
 	    console.log("GetValue");
-	  urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=RecordName=" + msRecord + "&fields=Id,RecordName,Status_c,RequestType_c";
+	  urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=RecordName=" + msRecord;
       query( urlPath, function(result) {
 	    var msattribute = result.items[0][attributeName];
         var msRecordName = result.items[0].RecordName;
