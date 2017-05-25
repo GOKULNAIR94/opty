@@ -145,7 +145,7 @@ restService.post('/inputmsg', function(req, res)
       console.log("pId : " + pId);
       console.log("pName : " + pName);
 
-      urlPath="/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + "&fields=Id,RecordName,Status_c,RequestType_c";
+      urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=PromotionName_Id_c=" + pId + "&fields=Id,RecordName,Status_c,RequestType_c";
       query( urlPath, function(result) {
       var msCount = result.count;
       console.log( "msCount : " + msCount);
