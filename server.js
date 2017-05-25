@@ -14,6 +14,7 @@ restService.use(bodyParser.json());
   var titleName = '';
   var tNumber = '';
   var territoryStored = '';
+  var msRecord = '';
   var uname = 'gokuln';
   var pword = 'Goklnt@1';
   var speech = '';
@@ -30,11 +31,16 @@ restService.post('/inputmsg', function(req, res)
 {
   titleName = req.body.result.parameters.titleName;
   territoryStored = req.body.result.parameters.territoryStored;
+  msRecord = req.body.result.parameters.msRecord;
   console.log( "titleName :" + titleName);
   console.log( " territoryStored : " + territoryStored);
   
   if( territoryStored != null )
-     myContext = 'getObject';
+  {
+    myContext = 'getObject';
+	if( msRecord != null )
+	  myContext = 'getValue';
+  }
   
   function query( urlPath, callback) {
     
@@ -77,6 +83,10 @@ restService.post('/inputmsg', function(req, res)
       
     case "getObject":
       GetObject()
+      break;
+	  
+	case "getValue":
+      GetValue()
       break;
   }
 
@@ -156,6 +166,15 @@ restService.post('/inputmsg', function(req, res)
     });
     console.log("MultiTerritory");
   }
+  
+    function GetValue(){
+	  urlPath="/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=RecordName=" + msRecord + "&fields=Id,RecordName,Status_c,RequestType_c";
+      query( urlPath, function(result) {
+	    var msStatus = result.items[0].Status_c;
+        var msRecordName = result.items[0].RecordName;
+		console.log( "Status of msRecordName : " + msStatus);
+	  }
+	}
 });
 
 
