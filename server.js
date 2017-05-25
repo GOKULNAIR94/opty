@@ -38,10 +38,10 @@ restService.post('/inputmsg', function(req, res)
   if( territoryStored != null )
   {
     myContext = 'getObject';
-	if( msRecord != null )
-	  myContext = 'getValue';
   }
-  
+  if( msRecord != null )
+	  myContext = 'getValue';
+	
   function query( urlPath, callback) {
     
     console.log( "urlPath : " + urlPath);
