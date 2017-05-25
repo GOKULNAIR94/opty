@@ -152,7 +152,7 @@ try
   }
   function GetObject(){	  
 	  console.log("GetObject");
-    urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+territoryStored+'&fields=RecordName,Id'; 
+    urlPath='/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c='+ tNumber + ';TerritoryStored_c='+ "Global" +'&fields=RecordName,Id'; 
     console.log(urlPath);
 
     query( urlPath, function(result) {
