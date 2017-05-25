@@ -110,16 +110,6 @@ restService.post('/inputmsg', function(req, res)
       var promoCount = result.count;
       console.log( "promoCount : " + promoCount);
       speech = "";
-	      if( promoCount == 0)
-	      {
-		    speech = 'There are ' + promoCount + ' Records for the Promotion ' + pName ;   
-	      }
-	      if( promoCount == 1)
-	      {
-		  GetObject();
-	      }
-	      if( promoCount > 1)
-	      {
       speech= 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
       
       for( var i =0; i< promoCount; i++)
@@ -132,7 +122,6 @@ restService.post('/inputmsg', function(req, res)
         else
           speech = speech + ",";  
       }
-	      }
       return res.json
                   ({
                       speech: speech,
@@ -156,21 +145,11 @@ restService.post('/inputmsg', function(req, res)
       console.log("pId : " + pId);
       console.log("pName : " + pName);
 
-      urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=PromotionName_Id_c=" + pId + "&fields=Id,RecordName,Status_c,RequestType_c";
+      urlPath="/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + "&fields=Id,RecordName,Status_c,RequestType_c";
       query( urlPath, function(result) {
       var msCount = result.count;
       console.log( "msCount : " + msCount);
       speech = "";
-	      if( msCount == 0)
-	      {
-		    speech = 'There are ' + msCount + ' Records for the Promotion ' + pName ;   
-	      }
-	      if( msCount == 1)
-	      {
-		  GetValue();
-	      }
-	      if( msCount > 1)
-	      {
       speech= 'There are ' + msCount + ' Market Spend(s) for the Promotion ' + pName + "\n Please select a Market Spend";
       var msId, msName;
 
@@ -184,14 +163,12 @@ restService.post('/inputmsg', function(req, res)
         else
           speech = speech + ",";  
       }
-	  }
       return res.json
                   ({
                       speech: speech,
                       displayText: speech,
                       //source: 'webhook-OSC-oppty'
                   })
-	      
       });
     });
     console.log("MultiTerritory");
