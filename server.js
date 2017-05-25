@@ -173,7 +173,7 @@ restService.post('/inputmsg', function(req, res)
 	    var msStatus = result.items[0].Status_c;
         var msRecordName = result.items[0].RecordName;
 		console.log( "Status of msRecordName : " + msStatus);
-	  }
+	  });
 	}
 });
 
