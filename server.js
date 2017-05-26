@@ -183,7 +183,7 @@ restService.post('/inputmsg', function(req, res) {
 
     function GetValue() {
         console.log("GetValue");
-        urlPath = "/salesApi/resources/latest/" + objectName + "?onlyData=true&q=RecordName=" + msRecord + "&fields=Id,RecordName,Status_c,RequestType_c";
+        urlPath = "/salesApi/resources/latest/" + objectName + "?onlyData=true&q=RecordName=" + msRecord;
         query(urlPath, function(result) {
             var msattribute = result.items[0][attributeName];
             msId = result.items[0].Id;
