@@ -88,7 +88,7 @@ restService.post('/inputmsg', function( req, res ) {
         case "__ORACO__PromotionProgram_c":
 		{
 			speech = "";
-            if( TerritoryStored_c != null ){
+            if( territoryStored != null ){
                 urlPath = Logic.__ORACO__PromotionProgram_c.getTerritory;
                 query(urlPath, function( result ) {
                     console.log("titleObj : " + result);
