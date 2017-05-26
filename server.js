@@ -11,12 +11,15 @@ restService.use(bodyParser.urlencoded(
 }));
 restService.use(bodyParser.json());
   var myContext = 'getPromo';
+  var actionType = "";
   var titleName = '';
   var tNumber = '';
   var territoryStored = '';
   var objectName = '';
   var attributeName = '';
   var msRecord = '';
+  var newValue = "";
+  
   var uname = 'gokuln';
   var pword = 'Goklnt@1';
   var speech = '';
@@ -36,9 +39,14 @@ restService.post('/inputmsg', function(req, res)
   objectName = req.body.result.parameters.object;
   attributeName = req.body.result.parameters.attribute;
   msRecord = req.body.result.parameters.msRecord;
+  actionType = req.body.result.parameters.actionType;
+  newValue = req.body.result.parameters.newValue;
+  
   console.log( "titleName :" + titleName);
   console.log( " territoryStored : " + territoryStored);
   console.log( " msRecord : " + msRecord);
+  console.log( " actionType : " + actionType);
+  console.log( " newValue : " + newValue);
   
   if( territoryStored != null )
   {
@@ -46,7 +54,10 @@ restService.post('/inputmsg', function(req, res)
   }
   if( msRecord != null )
 	  myContext = 'getValue';
-	
+  if( actionType == "update" )
+  {
+	myContext = "update";
+  }
   function query( urlPath, callback) {
     
     console.log( "urlPath : " + urlPath);
@@ -92,6 +103,13 @@ restService.post('/inputmsg', function(req, res)
 	  
     case "getValue":
       GetValue()
+      break;
+	  
+	case "update":
+      Update()
+      break;
+	  
+	case "default":
       break;
   }
 
@@ -179,6 +197,7 @@ restService.post('/inputmsg', function(req, res)
 	  urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=RecordName=" + msRecord + "&fields=Id,RecordName,Status_c,RequestType_c";
       query( urlPath, function(result) {
 	    var msattribute = result.items[0][attributeName];
+		var msId = result.items[0].Id;
         var msRecordName = result.items[0].RecordName;
 		console.log( attributeName + " of " + msRecordName +" : "  + msattribute);
 		speech = "";
@@ -190,6 +209,37 @@ restService.post('/inputmsg', function(req, res)
                       //source: 'webhook-OSC-oppty'
                   })
 	  });
+	}
+	
+	function Update(){
+	var bodyToUpdate = {
+		attributeName : newValue
+	}
+	    console.log("Update");
+	  urlPath="/salesApi/resources/latest/" + objectName + "/" + msId;
+      var newoptions = {
+        host: "cbhs-test.crm.us2.oraclecloud.com",
+        path:urlPath,
+        data: bodyToUpdate,
+        method:'POST',
+		headers: {
+			'Authorization': 'Basic ' + new Buffer( uname + ':' + pword ).toString('base64'),
+			'Content-Type': 'application/vnd.oracle.adf.resourceitem+json'
+		}
+	  };
+	  var post_req = https.request(newoptions, function(res) {
+		  res.on('data', function (chunk) {
+			  console.log('Response: ' + chunk);
+		  });
+				res.on('end', function() {
+			debugger;
+			response.send({statusCode : 200});
+		  })
+		}).on('error', function(e){
+		console.error(e);
+	  });
+		post_req.write(JSON.stringify(request.body));
+		post_req.end();
 	}
 });
 
