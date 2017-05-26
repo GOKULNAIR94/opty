@@ -217,29 +217,27 @@ restService.post('/inputmsg', function(req, res) {
                 'Content-Type': 'application/vnd.oracle.adf.resourceitem+json'
             }
         };
-        var post_req = http.request(newoptions, function(res) {
-            res.on('data', function(chunk) {
+        var post_req = http.request(newoptions, function(resp) {
+            resp.on('data', function(chunk) {
                 console.log('Response: ' + chunk);
+				speech = "Response" + Response;
             });
-            res.on('end', function() {
+            resp.on('end', function() {
                 //response.send({statusCode : 200});
-                return res.json({
-                    speech: "Test Update",
-                    displayText: speech,
-                    //source: 'webhook-OSC-oppty'
-                })
+                
             })
         }).on('error', function(e) {
             console.log("Error" + e);
-            return res.json({
-                speech: " Error Test Update",
-                displayText: speech,
-                //source: 'webhook-OSC-oppty'
-            })
+            speech = "Error" + e;
         });
         post_req.write(JSON.stringify( bodyToUpdate ));
         post_req.end();
     }
+	return res.json({
+                    speech: speech,
+                    displayText: speech,
+                    //source: 'webhook-OSC-oppty'
+                })
 });
 
 
