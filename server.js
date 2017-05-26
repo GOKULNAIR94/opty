@@ -19,6 +19,7 @@ restService.use(bodyParser.json());
   var attributeName = '';
   var msRecord = '';
   var newValue = "";
+  var msId = "";
   
   var uname = 'gokuln';
   var pword = 'Goklnt@1';
@@ -197,7 +198,7 @@ restService.post('/inputmsg', function(req, res)
 	  urlPath="/salesApi/resources/latest/" + objectName + "?onlyData=true&q=RecordName=" + msRecord + "&fields=Id,RecordName,Status_c,RequestType_c";
       query( urlPath, function(result) {
 	    var msattribute = result.items[0][attributeName];
-		var msId = result.items[0].Id;
+		 msId = result.items[0].Id;
         var msRecordName = result.items[0].RecordName;
 		console.log( attributeName + " of " + msRecordName +" : "  + msattribute);
 		speech = "";
