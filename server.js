@@ -122,10 +122,10 @@ restService.post('/inputmsg', function( req, res ) {
 									speech= 'There are ' + Count + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
 									for( var i =0; i< Count; i++)
 								    {
-										msId = result.items[i].Id;
-										msName = result.items[i].RecordName;
-										speech = speech + "\n\n" + parseInt(i+1,10) + ". " + msId + " - " + msName;
-										if( i == msCount - 1 )
+										pId = result.items[i].Id;
+										pName = result.items[i].RecordName;
+										speech = speech + "\n\n" + parseInt(i+1,10) + ". " + pId + " - " + pName;
+										if( i == Count - 1 )
 										  speech = speech + ".";
 										else
 										  speech = speech + ",";  
