@@ -204,6 +204,7 @@ restService.post('/inputmsg', function(req, res) {
             attributeName: newValue
         }
         console.log("Update");
+	    console.log("bodyToUpdate -" + bodyToUpdate);
         urlPath = "/salesApi/resources/latest/" + objectName + "/" + msId;
 		console.log("URL : " +  urlPath);
         var newoptions = {
