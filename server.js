@@ -37,28 +37,33 @@ var output = '';
 var pId = "";
 var recordName = "";
 
-var Logic = {
-    "__ORACO__PromotionProgram_c" : {
-        "getTitle" : "/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=" + encodeURIComponent(titleName) + "&fields=TitleNumber_c",
-        "getPromo" : "/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=" + tNumber + "&fields=RecordName,Id" + attributeName,
-        "getTerritory" : '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored + '&fields=RecordName,Id' + attributeName
-    },
-    "MarketSpend_c" : {
-        "getTitle" : "/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=" + encodeURIComponent(titleName) + "&fields=TitleNumber_c",
-        "getPromo" : "/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=" + tNumber + "&fields=RecordName,Id" + attributeName,
-        "getTerritory" : '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored + '&fields=RecordName,Id' + attributeName,
-        "getRecords":"/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + "&fields=Id,RecordName",
-        "getRecord":"/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + ";RecordName=" + recordName + "&fields=Id,RecordName,Status_c,RequestType_c"
-    }
-}
+var Logic;
 
 restService.post('/inputmsg', function( req, res ) {
     titleName = req.body.result.parameters.titleName;
     territoryStored = req.body.result.parameters.territoryStored;
     objectName = req.body.result.parameters.object;
     attributeName = req.body.result.parameters.attribute;
-
-    function query( urlPath, callback ) {
+	console.log( "titleName :" + titleName);
+	console.log( " territoryStored : " + territoryStored);
+	console.log( " objectName : " + objectName);
+	console.log( " attributeName : " + attributeName);
+	
+	Logic = {
+		"__ORACO__PromotionProgram_c" : {
+			"getTitle" : "/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=" + encodeURIComponent(titleName) + "&fields=TitleNumber_c",
+			"getPromo" : "/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=" + tNumber + "&fields=RecordName,Id" + attributeName,
+			"getTerritory" : '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored + '&fields=RecordName,Id' + attributeName
+		},
+		"MarketSpend_c" : {
+			"getTitle" : "/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=" + encodeURIComponent(titleName) + "&fields=TitleNumber_c",
+			"getPromo" : "/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=" + tNumber + "&fields=RecordName,Id" + attributeName,
+			"getTerritory" : '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored + '&fields=RecordName,Id' + attributeName,
+			"getRecords":"/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + "&fields=Id,RecordName",
+			"getRecord":"/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + ";RecordName=" + recordName + "&fields=Id,RecordName,Status_c,RequestType_c"
+		}
+	}
+	function query( urlPath, callback ) {
         console.log("urlPath : " + urlPath);
         options = {
             host: 'cbhs-test.crm.us2.oraclecloud.com',
