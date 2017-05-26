@@ -220,7 +220,7 @@ restService.post('/inputmsg', function(req, res) {
         var post_req = http.request(newoptions, function(resp) {
             resp.on('data', function(chunk) {
                 console.log('Response: ' + chunk);
-				speech = "Response" + Response;
+				speech = "Response" + chunk;
             });
             resp.on('end', function() {
                 //response.send({statusCode : 200});
