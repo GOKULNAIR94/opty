@@ -220,7 +220,13 @@ restService.post('/inputmsg', function(req, res) {
         var post_req = http.request(newoptions, function(resp) {
             resp.on('data', function(chunk) {
                 console.log('Response: ' + chunk);
-				speech = "Response" + chunk;
+			speech = "Value has been updated.";
+		    return res.json({
+                    speech: speech,
+                    displayText: speech,
+                    //source: 'webhook-OSC-oppty'
+                })
+		    
             });
             resp.on('end', function() {
                 //response.send({statusCode : 200});
@@ -233,11 +239,7 @@ restService.post('/inputmsg', function(req, res) {
         post_req.write(JSON.stringify( bodyToUpdate ));
         post_req.end();
 		
-		return res.json({
-                    speech: speech,
-                    displayText: speech,
-                    //source: 'webhook-OSC-oppty'
-                })
+		
     }
 	
 });
