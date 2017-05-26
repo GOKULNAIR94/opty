@@ -238,7 +238,7 @@ restService.post('/inputmsg', function(req, res) {
                 //source: 'webhook-OSC-oppty'
             })
         });
-        post_req.write(JSON.stringify(request.body));
+        post_req.write(JSON.stringify( bodyToUpdate ));
         post_req.end();
     }
 });
