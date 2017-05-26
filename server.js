@@ -202,7 +202,7 @@ restService.post('/inputmsg', function(req, res) {
     function Update() {
         var bodyToUpdate = {};
 	    bodyToUpdate[attributeName] = newValue;
-        }
+        
         console.log("Update");
 	    console.log("bodyToUpdate -" + bodyToUpdate.toString());
         urlPath = "/salesApi/resources/latest/" + objectName + "/" + msId;
