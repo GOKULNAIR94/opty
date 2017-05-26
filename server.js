@@ -200,8 +200,8 @@ restService.post('/inputmsg', function(req, res) {
     }
 
     function Update() {
-        var bodyToUpdate = {
-            attributeName : newValue
+        var bodyToUpdate = {};
+	    bodyToUpdate[attributeName] = newValue;
         }
         console.log("Update");
 	    console.log("bodyToUpdate -" + bodyToUpdate.toString());
