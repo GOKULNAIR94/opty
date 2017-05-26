@@ -221,7 +221,7 @@ restService.post('/inputmsg', function(req, res)
         host: "cbhs-test.crm.us2.oraclecloud.com",
         path:urlPath,
         data: bodyToUpdate,
-        method:'POST',
+        method:'PATCH',
 		headers: {
 			'Authorization': 'Basic ' + new Buffer( uname + ':' + pword ).toString('base64'),
 			'Content-Type': 'application/vnd.oracle.adf.resourceitem+json'
