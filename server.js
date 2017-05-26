@@ -46,7 +46,7 @@ var Logic = {
     "MarketSpend_c" : {
         "getTitle" : "/salesApi/resources/latest/Title_c?onlyData=true&q=TitleName_c=" + encodeURIComponent(titleName) + "&fields=TitleNumber_c",
         "getPromo" : "/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=" + tNumber + "&fields=RecordName,Id" + attributeName,
-        "getTerritory" : '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored + '&fields=RecordName,Id' + attributeName
+        "getTerritory" : '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored + '&fields=RecordName,Id' + attributeName,
         "getRecords":"/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + "&fields=Id,RecordName",
         "getRecord":"/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + ";RecordName=" + recordName + "&fields=Id,RecordName,Status_c,RequestType_c"
     }
