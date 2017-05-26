@@ -233,7 +233,8 @@ restService.post('/inputmsg', function(req, res)
 			  console.log('Response: ' + chunk);
 		  });
 				res.on('end', function() {
-			response.send({statusCode : 200});
+			//response.send({statusCode : 200});
+					console.log('Response 2: ' + chunk); 
 			return res.json
                   ({
                       speech: "Test Update",
@@ -242,7 +243,13 @@ restService.post('/inputmsg', function(req, res)
                   })
 		  })
 		}).on('error', function(e){
-		console.error(e);
+		  console.log("Error" + e);
+		return res.json
+                  ({
+                      speech: " Error Test Update",
+                      displayText: speech,
+                      //source: 'webhook-OSC-oppty'
+                  })
 	  });
 		post_req.write(JSON.stringify(request.body));
 		post_req.end();
