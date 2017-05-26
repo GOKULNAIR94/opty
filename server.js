@@ -223,7 +223,6 @@ restService.post('/inputmsg', function(req, res) {
             });
             res.on('end', function() {
                 //response.send({statusCode : 200});
-                console.log('Response 2: ' + chunk);
                 return res.json({
                     speech: "Test Update",
                     displayText: speech,
