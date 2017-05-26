@@ -232,12 +232,14 @@ restService.post('/inputmsg', function(req, res) {
         });
         post_req.write(JSON.stringify( bodyToUpdate ));
         post_req.end();
-    }
-	return res.json({
+		
+		return res.json({
                     speech: speech,
                     displayText: speech,
                     //source: 'webhook-OSC-oppty'
                 })
+    }
+	
 });
 
 
