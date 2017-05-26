@@ -228,7 +228,7 @@ restService.post('/inputmsg', function(req, res)
 			'Content-Type': 'application/vnd.oracle.adf.resourceitem+json'
 		}
 	  };
-	  var post_req = https.request(newoptions, function(res) {
+	  var post_req = http.request(newoptions, function(res) {
 		  res.on('data', function (chunk) {
 			  console.log('Response: ' + chunk);
 		  });
