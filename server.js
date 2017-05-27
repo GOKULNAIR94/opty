@@ -19,6 +19,7 @@ var attributeName = '';
 var msRecord = '';
 var newValue = "";
 var msId = "";
+var outputAttribute ="";
 
 var uname = 'gokuln';
 var pword = 'Goklnt@1';
@@ -120,16 +121,29 @@ restService.post('/inputmsg', function(req, res) {
                 var promoCount = result.count;
                 console.log("promoCount : " + promoCount);
                 speech = "";
-                speech = 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
-
-                for (var i = 0; i < promoCount; i++) {
-                    pId = result.items[i].Id;
-                    pName = result.items[i].RecordName;
-                    speech = speech + "\n\n" + parseInt(i + 1, 10) + ". " + pId + " - " + pName;
-                    if (i == promoCount - 1)
-                        speech = speech + ".";
-                    else
-                        speech = speech + ",";
+                if( promoCount == 1 )
+                {
+                    pId = result.items[0].Id;
+                    outputAttribute = result.items[0][attributeName];
+                    speech = attributeName + " of " + titleName + " : " + msattribute;
+                }
+                if( promoCount == 0 )
+                {
+                    speech = 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + ".";
+                }
+                if( promoCount > 1 )
+                {
+                    speech = 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
+                
+                    for (var i = 0; i < promoCount; i++) {
+                        pId = result.items[i].Id;
+                        pName = result.items[i].RecordName;
+                        speech = speech + "\n\n" + parseInt(i + 1, 10) + ". " + pId + " - " + pName;
+                        if (i == promoCount - 1)
+                            speech = speech + ".";
+                        else
+                            speech = speech + ",";
+                    }
                 }
                 return res.json({
                     speech: speech,
