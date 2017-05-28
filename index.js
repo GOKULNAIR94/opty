@@ -1,6 +1,29 @@
 (function (restService) {
     restService.init = function ( req, res ) {
-      
+      var myContext = 'getPromo';
+var actionType = "";
+var titleName = '';
+var tNumber = '';
+var territoryStored = '';
+var objectName = '';
+var attributeName = '';
+var msRecord = '';
+var newValue = "";
+var msId = "";
+var outputAttribute ="";
+
+var uname = 'gokuln';
+var pword = 'Goklnt@1';
+var speech = '';
+var options = '';
+var urlPath = '';
+var request;
+var responseString;
+var resCode = '';
+var resObj = '';
+var pId, pName, msId, msName;
+
+
     titleName = req.body.result.parameters.titleName;
     territoryStored = req.body.result.parameters.territoryStored;
     objectName = req.body.result.parameters.objectName;
