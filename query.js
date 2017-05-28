@@ -3,6 +3,8 @@
 
 module.exports = function(req, res) {
 
+var http = require('https');
+var fs = require('fs');
 var myContext = 'getPromo';
 var actionType = "";
 var titleName = '';
