@@ -8,9 +8,9 @@ restService.use(bodyParser.urlencoded({
 }));
 restService.use(bodyParser.json());
 
-var query = require('./query')
+var index = require('./index')
 
-restService.post('/inputmsg', query);
+restService.post('/inputmsg', index);
 
 
 restService.listen((process.env.PORT || 9000), function() {
