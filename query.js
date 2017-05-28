@@ -1,3 +1,8 @@
+
+
+
+module.exports = function(req, res) {
+
 var myContext = 'getPromo';
 var actionType = "";
 var titleName = '';
@@ -19,10 +24,6 @@ var responseString;
 var resCode = '';
 var resObj = '';
 var pId, pName, msId, msName;
-
-
-export.modules = function(req, res) {
-
 
     titleName = req.body.result.parameters.titleName;
     territoryStored = req.body.result.parameters.territoryStored;

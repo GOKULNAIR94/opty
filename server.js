@@ -11,7 +11,7 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 var query = require('./query')
-
+debugger;
 restService.post('/inputmsg', query);
 
 
