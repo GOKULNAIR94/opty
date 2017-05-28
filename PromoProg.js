@@ -8,7 +8,7 @@ module.exports = function PromoProg( req, res, callback ) {
     var tNumber = '';
 
     titleName = req.body.result.parameters.titleName;
-    territoryStored = req.body.result.parameters.territoryStored;
+    territoryStored = req.body.result.parameters.Territory;
     objectName = req.body.result.parameters.object;
     actionType = req.body.result.parameters.actionType;
 
