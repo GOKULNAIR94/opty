@@ -4,7 +4,7 @@ module.exports = function(req, res) {
     var PromoProg = require( "./PromoProg" );
     console.log( "In Query!" );
 
-    objectName = req.body.result.parameters.object;
+    objectName = req.body.result.parameters.objectName;
     console.log( "objectName" + objectName);
     
     if( objectName == "__ORACO__PromotionProgram_c" ){
