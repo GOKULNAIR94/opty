@@ -19,7 +19,9 @@ module.exports = function PromoProg( req, res, callback ) {
     objectName = req.body.result.parameters.object;
     actionType = req.body.result.parameters.actionType;
     attributeName = req.body.result.parameters.PPattributes;
-    ogAttribute = req.body.result.contexts[0].parameters["PPattributes.original"];
+    //ogAttribute = req.body.result.contexts[0].parameters["PPattributes.original"];
+    ogAttribute = req.body.result.parameters["PPattributes"];
+
 
     console.log( "titleName : " + titleName );
     
