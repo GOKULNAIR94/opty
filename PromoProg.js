@@ -10,12 +10,12 @@ module.exports = function PromoProg( req, res, callback ) {
     var speech = '';
     var ogAttribute = '';
 
-    titleName = req.body.result.contexts.parameters[titleName.original];
+    titleName = req.body.result.contexts.parameters["titleName.original"];
     territoryStored = req.body.result.parameters.Territory;
     objectName = req.body.result.parameters.object;
     actionType = req.body.result.parameters.actionType;
     attributeName = req.body.result.parameters.PPattributes;
-    ogAttribute = req.body.result.contexts.parameters[PPattributes.original];
+    ogAttribute = req.body.result.contexts.parameters["PPattributes.original"];
 
     console.log( "titleName : " + titleName );
     
