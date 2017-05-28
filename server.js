@@ -10,11 +10,9 @@ restService.use(bodyParser.urlencoded({
 }));
 restService.use(bodyParser.json());
 
-ver funcky = require('./index');
+var query = require('./query')
 
-restService.post('/inputmsg' {
-	funcky.init(restService);
-});
+restService.post('/inputmsg', query);
 
 
 restService.listen((process.env.PORT || 9000), function() {
