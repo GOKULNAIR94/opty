@@ -36,8 +36,8 @@ var pId, pName, msId, msName;
 restService.post('/inputmsg', function(req, res) {
     titleName = req.body.result.parameters.titleName;
     territoryStored = req.body.result.parameters.territoryStored;
-    objectName = req.body.result.parameters.object;
-    attributeName = req.body.result.parameters.attribute;
+    objectName = req.body.result.parameters.objectName;
+    attributeName = req.body.result.parameters.PPattributes;
     msRecord = req.body.result.parameters.msRecord;
     actionType = req.body.result.parameters.actionType;
     newValue = req.body.result.parameters.newValue;
