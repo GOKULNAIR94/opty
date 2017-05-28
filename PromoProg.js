@@ -28,7 +28,7 @@ module.exports = function PromoProg( req, res, callback ) {
         tNumber = result.items[0].TitleNumber_c;
         console.log("tNumber : " + tNumber);
         
-        if( territoryStored != null ){
+        if( territoryStored != null && territoryStored != "" ){
             console.log( "Territory not null: " + territoryStored );
             urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored;
             Query( req, res, urlPath, function( result ) {
