@@ -70,7 +70,19 @@ module.exports = function PromoProg( req, res, callback ) {
                 }
 
                 if( promoCount == 1 ){
-                    speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                    if( actionType == "update" ){
+                        var bodyToUpdate = {};
+                        var newValue = req.body.result.parameters.newValue;
+                        bodyToUpdate[attributeName] = newValue;
+                        urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c/' + result.items[0].Id;
+                        Update( req, res, urlPath, bodyToUpdate, function( result ) {
+                            console.log( "Value Updated : " + result);
+                        });
+                    }
+                    else{
+                        speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                    }
+                    
                 }
                 if( promoCount > 1 ){
                     speech = 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
