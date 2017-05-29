@@ -23,6 +23,7 @@ module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
             responseString += data;
         });
         resx.on('end', function() {
+            callback(responseString);
             speech = "Value has been updated.";
 		    return res.json({
                 speech: speech,
