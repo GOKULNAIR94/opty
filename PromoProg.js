@@ -73,6 +73,7 @@ module.exports = function PromoProg( req, res, callback ) {
                     speech: speech,
                     displayText: speech,
                     //source: 'webhook-OSC-oppty'
+                    "contextOut": [{"name":"attribute", "lifespan":2, "PPattributes":{ogAttribute}}]
                 })
             });
         }
