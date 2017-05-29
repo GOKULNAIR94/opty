@@ -55,7 +55,7 @@ module.exports = function PromoProg( req, res, callback ) {
                 }
 
                 if( promoCount == 1 ){
-                    speech = ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                    speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
                 }
                 if( promoCount > 1 ){
                     speech = 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
