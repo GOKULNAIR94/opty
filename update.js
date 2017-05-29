@@ -13,7 +13,8 @@ module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
         data: bodyToUpdate,
         method: 'PATCH',
         headers: {
-            'Authorization': 'Basic ' + new Buffer(uname + ':' + pword).toString('base64')
+            'Authorization': 'Basic ' + new Buffer(uname + ':' + pword).toString('base64'),
+            'Content-Type': 'application/vnd.oracle.adf.resourceitem+json'
         }
     };
 
