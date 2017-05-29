@@ -21,7 +21,17 @@ module.exports = function query( req, res, urlPath, callback ) {
         resx.on('end', function() {
             resObj = JSON.parse(responseString);
             console.log("resObj : " + resObj);
-            callback(resObj);
+            speech = "";
+            if( resObj.count == 0 ){
+                speech = "No results found";
+                res.json({
+                    speech: speech,
+                    displayText: speech,
+                    //source: 'webhook-OSC-oppty'
+                })
+            }
+            else
+                callback(resObj);
         });
         resx.on('error', function(e) {
             console.log("Got error: " + e.message);
