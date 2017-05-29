@@ -1,6 +1,8 @@
 module.exports = function PromoProg( req, res, callback ) {
     
     var Query = require( "./query" );
+    var Update = require( "./update" );
+    
     var actionType = "";
     var titleName = '';
     var objectName = '';
@@ -9,7 +11,8 @@ module.exports = function PromoProg( req, res, callback ) {
     var attributeName = '';
     var speech = '';
     var ogAttribute = '';
-
+    
+    
     var pId = '';
     var pName = '';
 
@@ -36,12 +39,24 @@ module.exports = function PromoProg( req, res, callback ) {
             urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored;
             Query( req, res, urlPath, function( result ) {
                 console.log( "result : " + result);
-                speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
-                res.json({
-                    speech: speech,
-                    displayText: speech,
-                    //source: 'webhook-OSC-oppty'
-                })
+                if( actionType == "update" ){
+                    var bodyToUpdate = {};
+                    var newValue = req.body.result.parameters.newValue;
+                    bodyToUpdate[attributeName] = newValue;
+                    urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c/' + result.items[0].Id;
+                    Update( req, res, urlPath, bodyToUpdate, function( result ) {
+                        console.log( "Value Updated : " + result);
+                    });
+                }
+                else{
+                    speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                    res.json({
+                        speech: speech,
+                        displayText: speech,
+                        //source: 'webhook-OSC-oppty'
+                    })
+                }
+                
             });
         }
         else{
