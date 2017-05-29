@@ -13,14 +13,14 @@ module.exports = function PromoProg( req, res, callback ) {
     var pId = '';
     var pName = '';
 
-    //titleName = req.body.result.contexts[0].parameters["titleName.original"];
-    titleName = req.body.result.parameters["titleName"];
+    titleName = req.body.result.contexts[0].parameters["titleName.original"];
+    //titleName = req.body.result.parameters["titleName"];
     territoryStored = req.body.result.parameters.Territory;
     objectName = req.body.result.parameters.object;
     actionType = req.body.result.parameters.actionType;
     attributeName = req.body.result.parameters.PPattributes;
-    //ogAttribute = req.body.result.contexts[0].parameters["PPattributes.original"];
-    ogAttribute = req.body.result.parameters["PPattributes"];
+    ogAttribute = req.body.result.contexts[0].parameters["PPattributes.original"];
+    //ogAttribute = req.body.result.parameters["PPattributes"];
 
 
     console.log( "titleName : " + titleName );
@@ -73,7 +73,7 @@ module.exports = function PromoProg( req, res, callback ) {
                     speech: speech,
                     displayText: speech,
                     //source: 'webhook-OSC-oppty'
-                    "contextOut": [{"name":"attribute", "lifespan":2, "PPattributes":{ogAttribute}}]
+                    //"contextOut": [{"name":"attribute", "lifespan":2, "PPattributes":{ogAttribute}}]
                 })
             });
         }
