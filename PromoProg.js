@@ -23,6 +23,7 @@ module.exports = function PromoProg( req, res, callback ) {
         
         if( promoCount > 1 ){
             speech = 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
+            console.log( "In If  speech : " + speech);
             for (var i = 0; i < promoCount; i++) {
                 pId = result.items[i].Id;
                 pName = result.items[i].RecordName;
