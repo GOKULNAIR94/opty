@@ -18,7 +18,7 @@ module.exports = function PromoProg( req, res, callback ) {
         var pName = '';
 
         if( promoCount == 1 ){
-            speech = ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+            speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
             res.json({
 	            speech: speech,
 	            displayText: speech,
