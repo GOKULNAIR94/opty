@@ -1,6 +1,8 @@
 module.exports = function PromoProg( req, res, callback ) {
     
     var Query = require( "./query" );
+    var Update = require( "./update" );
+    
     var actionType = "";
     var titleName = '';
     var objectName = '';
@@ -9,18 +11,19 @@ module.exports = function PromoProg( req, res, callback ) {
     var attributeName = '';
     var speech = '';
     var ogAttribute = '';
-
+    
+    
     var pId = '';
     var pName = '';
 
-    //titleName = req.body.result.contexts[0].parameters["titleName.original"];
-    titleName = req.body.result.parameters["titleName"];
+    titleName = req.body.result.contexts[0].parameters["titleName.original"];
+    //titleName = req.body.result.parameters["titleName"];
     territoryStored = req.body.result.parameters.Territory;
     objectName = req.body.result.parameters.object;
     actionType = req.body.result.parameters.actionType;
     attributeName = req.body.result.parameters.PPattributes;
-    //ogAttribute = req.body.result.contexts[0].parameters["PPattributes.original"];
-    ogAttribute = req.body.result.parameters["PPattributes"];
+    ogAttribute = req.body.result.contexts[0].parameters["PPattributes.original"];
+    //ogAttribute = req.body.result.parameters["PPattributes"];
 
 
     console.log( "titleName : " + titleName );
@@ -35,13 +38,25 @@ module.exports = function PromoProg( req, res, callback ) {
             console.log( "Territory not null: " + territoryStored );
             urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored;
             Query( req, res, urlPath, function( result ) {
-                console.log( "result : " + result);
-                speech = ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
-                res.json({
-                    speech: speech,
-                    displayText: speech,
-                    //source: 'webhook-OSC-oppty'
-                })
+                console.log( "actionType : " + actionType);
+                if( actionType == "update" ){
+                    var bodyToUpdate = {};
+                    var newValue = req.body.result.parameters.newValue;
+                    bodyToUpdate[attributeName] = newValue;
+                    urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c/' + result.items[0].Id;
+                    Update( req, res, urlPath, bodyToUpdate, function( result ) {
+                        console.log( "Value Updated : " + result);
+                    });
+                }
+                else{
+                    speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                    res.json({
+                        speech: speech,
+                        displayText: speech,
+                        //source: 'webhook-OSC-oppty'
+                    })
+                }
+                
             });
         }
         else{
@@ -55,7 +70,19 @@ module.exports = function PromoProg( req, res, callback ) {
                 }
 
                 if( promoCount == 1 ){
-                    speech = ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                    if( actionType == "update" ){
+                        var bodyToUpdate = {};
+                        var newValue = req.body.result.parameters.newValue;
+                        bodyToUpdate[attributeName] = newValue;
+                        urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c/' + result.items[0].Id;
+                        Update( req, res, urlPath, bodyToUpdate, function( result ) {
+                            console.log( "Value Updated : " + result);
+                        });
+                    }
+                    else{
+                        speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                    }
+                    
                 }
                 if( promoCount > 1 ){
                     speech = 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
@@ -73,6 +100,7 @@ module.exports = function PromoProg( req, res, callback ) {
                     speech: speech,
                     displayText: speech,
                     //source: 'webhook-OSC-oppty'
+                    //"contextOut": [{"name":"attribute", "lifespan":2, "PPattributes":{ogAttribute}}]
                 })
             });
         }
