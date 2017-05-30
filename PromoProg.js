@@ -49,12 +49,7 @@ module.exports = function PromoProg( req, res, callback ) {
                     });
                 }
                 else{
-                    speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
-                    res.json({
-                        speech: speech,
-                        displayText: speech,
-                        //source: 'webhook-OSC-oppty'
-                    })
+                    callback( result );
                 }
                 
             });
@@ -65,10 +60,7 @@ module.exports = function PromoProg( req, res, callback ) {
                 var promoCount = result.count;
                 console.log("promoCount : " + promoCount);
                 speech = "";
-                if( promoCount == 0 ){
-                    speech = 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName;
-                }
-
+                
                 if( promoCount == 1 ){
                     if( actionType == "update" ){
                         var bodyToUpdate = {};
@@ -80,7 +72,7 @@ module.exports = function PromoProg( req, res, callback ) {
                         });
                     }
                     else{
-                        speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                        callback( result );
                     }
                     
                 }
