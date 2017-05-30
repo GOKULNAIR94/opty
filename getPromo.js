@@ -27,7 +27,7 @@ module.exports = function getPromo( req, res, callback ) {
         console.log( "result : " + result);
         tNumber = result.items[0].TitleNumber_c;
         console.log("tNumber : " + tNumber);
-        urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored;
+        urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TerritoryStored_c=' + territoryStored + ';TitleNumberStored_c=' + tNumber;
         Query( req, res, urlPath, function( result ) {
             var promoCount = result.count;
             console.log("promoCount : " + promoCount);
