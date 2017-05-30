@@ -34,7 +34,7 @@ module.exports = function getPromo( req, res, callback ) {
             speech = "";
             
             if( promoCount == 1 ){
-                if( actionType == "update" ){
+                if( actionType == "update" && req.body.result.parameters.objectName == "__ORACO__PromotionProgram_c" ){
                     var bodyToUpdate = {};
                     var newValue = req.body.result.parameters.newValue;
                     bodyToUpdate[attributeName] = newValue;
