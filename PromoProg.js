@@ -12,6 +12,7 @@ module.exports = function PromoProg( req, res, callback ) {
         console.log( "result : " + result);
         var speech = "";
         var promoCount = result.count;
+        console.log( "promoCount  final : " + promoCount);
 
         var pId = '';
         var pName = '';
