@@ -8,6 +8,10 @@ module.exports = function(req, res) {
 
     var ogAttribute = req.body.result.parameters["PPattributes"];
     var attributeName = req.body.result.parameters.PPattributes;
+    var titleName = req.body.result.contexts[0].parameters["titleName.original"];
+
+    var pId = '';
+    var pName = '';
 
     objectName = req.body.result.parameters.objectName;
     console.log( "objectName : " + objectName);
