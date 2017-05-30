@@ -49,7 +49,7 @@ module.exports = function getPromo( req, res, callback ) {
             });
         }
         else{
-            urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored;
+            urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber  + ';TerritoryStored_c=' + territoryStored + '&fields=RecordName,Id,' +attributeName;
             Query( req, res, urlPath, function( result ) {
                 var promoCount = result.count;
                 console.log("promoCount : " + promoCount);
