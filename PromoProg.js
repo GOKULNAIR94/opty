@@ -33,11 +33,13 @@ module.exports = function PromoProg( req, res, callback ) {
                 else
                     speech = speech + ",";
             }
+            console.log( "Our of FOR... ");
         }
         res.json({
             speech: speech,
             displayText: speech,
             //source: 'webhook-OSC-oppty'
         });
+            console.log( "Res.json... ");
     });
 }
