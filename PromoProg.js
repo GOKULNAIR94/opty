@@ -38,6 +38,6 @@ module.exports = function PromoProg( req, res, callback ) {
             speech: speech,
             displayText: speech,
             //source: 'webhook-OSC-oppty'
-        })
+        });
     });
 }
