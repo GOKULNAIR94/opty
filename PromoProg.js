@@ -27,19 +27,17 @@ module.exports = function PromoProg( req, res, callback ) {
             for (var i = 0; i < promoCount; i++) {
                 pId = result.items[i].Id;
                 pName = result.items[i].RecordName;
-                speech = speech + "\n\n" + parseInt(i + 1, 10) + ". " + pId + " - " + pName;
+                speech = speech + "\n\n" + parseInt(i + 1, 10) + " - " + pName;
                 if (i == promoCount - 1)
                     speech = speech + ".";
                 else
                     speech = speech + ",";
             }
-            console.log( "Our of FOR... ");
         }
         res.json({
             speech: speech,
             displayText: speech,
             //source: 'webhook-OSC-oppty'
         });
-            console.log( "Res.json... ");
     });
 }
