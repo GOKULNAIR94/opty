@@ -10,8 +10,7 @@ module.exports = function(req, res) {
     var attributeName = req.body.result.parameters.PPattributes;
     var titleName = req.body.result.contexts[0].parameters["titleName.original"];
 
-    var pId = '';
-    var pName = '';
+
 
     objectName = req.body.result.parameters.objectName;
     console.log( "objectName : " + objectName);
@@ -22,6 +21,9 @@ module.exports = function(req, res) {
                 console.log( "result : " + result);
                 var speech = "";
                 var promoCount = result.count;
+
+                var pId = '';
+                var pName = '';
 
                 if( promoCount == 1 ){
                     speech = ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
