@@ -41,6 +41,7 @@ module.exports = function PromoProg( req, res, callback ) {
             res.json({
 	            speech: speech,
 	            displayText: speech,
+	            contextOut: [{"name":"Territory", "lifespan":2, "parameters":{"Territory":"Global"}}]
 	            //source: 'webhook-OSC-oppty'
 	        });
         }
