@@ -10,7 +10,7 @@ module.exports = function PromoProg( req, res, callback ) {
 
     getPromo( req, res, function( result ) {
         console.log( "result : " + result);
-        var speech = "";
+        var speech = " hi";
         var promoCount = result.count;
         console.log( "promoCount  final : " + promoCount);
 
@@ -19,6 +19,11 @@ module.exports = function PromoProg( req, res, callback ) {
 
         if( promoCount == 1 ){
             speech = ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+            res.json({
+	            speech: speech,
+	            displayText: speech,
+	            //source: 'webhook-OSC-oppty'
+	        });
         }
         
         if( promoCount > 1 ){
@@ -33,12 +38,13 @@ module.exports = function PromoProg( req, res, callback ) {
                 else
                     speech = speech + ",";
             }
+            res.json({
+	            speech: speech,
+	            displayText: speech,
+	            //source: 'webhook-OSC-oppty'
+	        });
         }
         console.log( "In If  speech : " + speech);
-        res.json({
-            speech: speech,
-            displayText: speech,
-            //source: 'webhook-OSC-oppty'
-        });
+        
     });
 }
