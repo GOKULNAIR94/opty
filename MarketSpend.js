@@ -45,27 +45,7 @@ module.exports = function MarketSpend( req, res, callback ) {
                 var promoCount = result.count;
                 console.log("promoCount : " + promoCount);
                 speech = "";
-
-                if( promoCount == 1 ){
-                    callback( result );
-                }
-                if( promoCount > 1 ){
-                    speech = 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
-                    for (var i = 0; i < promoCount; i++) {
-                        pId = result.items[i].Id;
-                        pName = result.items[i].RecordName;
-                        speech = speech + "\n\n" + parseInt(i + 1, 10) + ". " + pId + " - " + pName;
-                        if (i == promoCount - 1)
-                            speech = speech + ".";
-                        else
-                            speech = speech + ",";
-                    }
-                }
-                res.json({
-                    speech: speech,
-                    displayText: speech,
-                    //source: 'webhook-OSC-oppty'
-                })
+                callback( result );
             });
         }
     });
