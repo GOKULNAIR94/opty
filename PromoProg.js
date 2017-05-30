@@ -23,17 +23,18 @@ module.exports = function PromoProg( req, res, callback ) {
         
         if( promoCount > 1 ){
             speech = 'There are ' + promoCount + ' promotion(s) for the Title ' + titleName + "\n Please select a region of the Promotion of the Title";
-            console.log( "In If  speech : " + speech);
+            
             for (var i = 0; i < promoCount; i++) {
                 pId = result.items[i].Id;
                 pName = result.items[i].RecordName;
-                //speech = speech + "\n\n" + parseInt(i + 1, 10) + ". " + pId + " - " + pName;
+                speech = speech + "\n\n" + parseInt(i + 1, 10) + " - " + pName;
                 if (i == promoCount - 1)
                     speech = speech + ".";
                 else
                     speech = speech + ",";
             }
         }
+        console.log( "In If  speech : " + speech);
         res.json({
             speech: speech,
             displayText: speech,
