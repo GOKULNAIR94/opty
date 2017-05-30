@@ -38,6 +38,8 @@ module.exports = function PromoProg( req, res, callback ) {
                 else
                     speech = speech + ",";
             }
+            console.log( " final titleName : " + titleName);
+            console.log( "  final ogAttribute: " + ogAttribute);
             res.json({
 	            speech: speech,
 	            displayText: speech,
