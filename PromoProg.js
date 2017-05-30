@@ -37,5 +37,5 @@ module.exports = function PromoProg( req, res, callback ) {
             displayText: speech,
             //source: 'webhook-OSC-oppty'
         })
-});
+    });
 }

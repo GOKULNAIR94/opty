@@ -27,12 +27,13 @@ module.exports = function getPromo( req, res, callback ) {
         console.log( "result : " + result);
         tNumber = result.items[0].TitleNumber_c;
         console.log("tNumber : " + tNumber);
-        
-        if( territoryStored != null && territoryStored != "" ){
-            console.log( "Territory not null: " + territoryStored );
-            urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored;
-            Query( req, res, urlPath, function( result ) {
-                console.log( "actionType : " + actionType);
+        urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber + ';TerritoryStored_c=' + territoryStored;
+        Query( req, res, urlPath, function( result ) {
+            var promoCount = result.count;
+            console.log("promoCount : " + promoCount);
+            speech = "";
+            
+            if( promoCount == 1 ){
                 if( actionType == "update" ){
                     var bodyToUpdate = {};
                     var newValue = req.body.result.parameters.newValue;
@@ -46,34 +47,11 @@ module.exports = function getPromo( req, res, callback ) {
                     callback( result );
                 }
                 
-            });
-        }
-        else{
-            urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c?onlyData=true&q=TitleNumberStored_c=' + tNumber  + '&fields=RecordName,Id';
-            Query( req, res, urlPath, function( result ) {
-                var promoCount = result.count;
-                console.log("promoCount : " + promoCount);
-                speech = "";
-                
-                if( promoCount == 1 ){
-                    if( actionType == "update" ){
-                        var bodyToUpdate = {};
-                        var newValue = req.body.result.parameters.newValue;
-                        bodyToUpdate[attributeName] = newValue;
-                        urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c/' + result.items[0].Id;
-                        Update( req, res, urlPath, bodyToUpdate, function( result ) {
-                            console.log( "Value Updated : " + result);
-                        });
-                    }
-                    else{
-                        callback( result );
-                    }
-                    
-                }
-                if( promoCount > 1 ){
-                    callback( result );
-                }
-            });
-        }
+            }
+            if( promoCount > 1 ){
+                callback( result );
+            }
+        });
+        
     });
 }
