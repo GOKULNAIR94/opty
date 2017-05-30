@@ -49,12 +49,7 @@ module.exports = function PromoProg( req, res, callback ) {
                     });
                 }
                 else{
-                    speech = ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
-                    res.json({
-                        speech: speech,
-                        displayText: speech,
-                        //source: 'webhook-OSC-oppty'
-                    })
+                    callback( result );
                 }
                 
             });
@@ -77,12 +72,7 @@ module.exports = function PromoProg( req, res, callback ) {
                         });
                     }
                     else{
-                        speech = ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
-                        res.json({
-                            speech: speech,
-                            displayText: speech,
-                            //source: 'webhook-OSC-oppty'
-                        })
+                        callback( result );
                     }
                     
                 }
