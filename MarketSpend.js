@@ -7,7 +7,7 @@ module.exports = function MarketSpend( req, res, callback ) {
     var attributeName = req.body.result.parameters.MSAttributes;
     var titleName = req.body.result.contexts[0].parameters["titleName.original"];
     var ogAttribute = req.body.result.contexts[0].parameters["MSAttributes.original"];
-    var 
+    
     
     var msId;
     var msName;
