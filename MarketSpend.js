@@ -31,7 +31,7 @@ module.exports = function MarketSpend( req, res, callback ) {
                 if( msCount == 1 ){
                     msId = result.items[0].Id;
                     msName = result.items[0].RecordName;
-                    speech = attributeName + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                    speech = ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
                 }
 
                 if( msCount > 1 ){

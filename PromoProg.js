@@ -3,11 +3,11 @@ module.exports = function PromoProg( req, res, callback ) {
     var getPromo = require( "./getPromo" );
 
     var speech = "";
-    var ogAttribute = req.body.result.parameters["PPattributes"];
+    //var ogAttribute = req.body.result.parameters["PPattributes"];
     var attributeName = req.body.result.parameters.PPattributes;
-    var titleName = req.body.result.parameters.titleName;
-    //var titleName = req.body.result.contexts[0].parameters["titleName.original"];
-    //var ogAttribute = req.body.result.contexts[0].parameters["PPattributes.original"];
+    //var titleName = req.body.result.parameters.titleName;
+    var titleName = req.body.result.contexts[0].parameters["titleName.original"];
+    var ogAttribute = req.body.result.contexts[0].parameters["PPattributes.original"];
 
     getPromo( req, res, function( result ) {
         console.log( "result : " + result);

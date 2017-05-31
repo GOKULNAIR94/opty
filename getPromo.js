@@ -12,8 +12,8 @@ module.exports = function getPromo( req, res, callback ) {
     var speech = '';
     
 
-    //titleName = req.body.result.contexts[0].parameters["titleName.original"];
-    titleName = req.body.result.parameters["titleName"];
+    titleName = req.body.result.contexts[0].parameters["titleName.original"];
+    //titleName = req.body.result.parameters["titleName"];
     territoryStored = req.body.result.parameters.Territory;
     objectName = req.body.result.parameters.object;
     actionType = req.body.result.parameters.actionType;
