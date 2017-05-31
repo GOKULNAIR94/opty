@@ -1,5 +1,6 @@
 module.exports = function getObject( pId, req, res, callback ) {
     var Query = require( "./query" );
+    var Update = require( "./update" );
     
     var actionType = "";
     var titleName = '';
