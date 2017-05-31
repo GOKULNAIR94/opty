@@ -33,7 +33,7 @@ module.exports = function MarketSpend( req, res, callback ) {
                     msName = result.items[0].RecordName;
                     console.log( "RecordName : " + msName);
                     console.log( "attributeName : " + attributeName);
-                    speech = ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                    speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
                 }
 
                 if( msCount > 1 ){
