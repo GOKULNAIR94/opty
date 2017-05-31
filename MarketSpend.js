@@ -4,9 +4,9 @@ module.exports = function MarketSpend( req, res, callback ) {
     var getObject = require( "./getObject" );
     var speech = "";
     //var ogAttribute = req.body.result.parameters["PPattributes"];
-    var attributeName = req.body.result.parameters.PPattributes;
+    var attributeName = req.body.result.parameters.MSAttributes;
     var titleName = req.body.result.contexts[0].parameters["titleName.original"];
-    var ogAttribute = req.body.result.contexts[0].parameters["PPattributes.original"];
+    var ogAttribute = req.body.result.contexts[0].parameters["MSAttributes.original"];
     
     var msId;
     var msName;
@@ -25,6 +25,7 @@ module.exports = function MarketSpend( req, res, callback ) {
             getObject( pId, req, res, function( result ) {
                 
                 var msCount = result.count;
+                console.log( "msCount : " + msCount);
                 if( msCount == 1 ){
                     msId = result.items[0].Id;
                     msName = result.items[0].RecordName;
@@ -50,7 +51,6 @@ module.exports = function MarketSpend( req, res, callback ) {
 //                    //source: 'webhook-OSC-oppty'
 //                })
             });
-            speech = ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
         }
         
         if( promoCount > 1 ){
