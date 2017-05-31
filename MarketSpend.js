@@ -30,7 +30,7 @@ module.exports = function MarketSpend( req, res, callback ) {
                 if( msCount == 1 ){
                     msId = result.items[0].Id;
                     msName = result.items[0].RecordName;
-                    speech = ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                    speech = attributeName + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
                 }
 
                 if( msCount > 1 ){
@@ -39,7 +39,7 @@ module.exports = function MarketSpend( req, res, callback ) {
                     for (var i = 0; i < msCount; i++) {
                         msId = result.items[i].Id;
                         msName = result.items[i].RecordName;
-                        speech = speech + "\n\n" + parseInt(i + 1, 10) + msName;
+                        speech = speech + "\n\n" + parseInt(i + 1, 10) + " - "+ msName;
                         if (i == msCount - 1)
                             speech = speech + ".";
                         else
