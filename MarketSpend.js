@@ -39,7 +39,7 @@ module.exports = function MarketSpend( req, res, callback ) {
                         msId = result.items[i].Id;
                         msName = result.items[i].RecordName;
                         speech = speech + "\n\n" + parseInt(i + 1, 10) + msName;
-                        if (i == promoCount - 1)
+                        if (i == msCount - 1)
                             speech = msCount + ".";
                         else
                             speech = speech + ",";
