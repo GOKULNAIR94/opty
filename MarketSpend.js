@@ -26,6 +26,7 @@ module.exports = function MarketSpend( req, res, callback ) {
                 
                 var msCount = result.count;
                 console.log( "msCount : " + msCount);
+                
                 if( msCount == 1 ){
                     msId = result.items[0].Id;
                     msName = result.items[0].RecordName;
@@ -45,11 +46,11 @@ module.exports = function MarketSpend( req, res, callback ) {
                             speech = speech + ",";
                     }
                 }
-//                res.json({
-//                    speech: speech,
-//                    displayText: speech,
-//                    //source: 'webhook-OSC-oppty'
-//                })
+                res.json({
+                    speech: speech,
+                    displayText: speech,
+                    //source: 'webhook-OSC-oppty'
+                })
             });
         }
         
@@ -64,12 +65,13 @@ module.exports = function MarketSpend( req, res, callback ) {
                 else
                     speech = speech + ",";
             }
+            res.json({
+                speech: speech,
+                displayText: speech,
+                //source: 'webhook-OSC-oppty'
+            })
         }
-        res.json({
-            speech: speech,
-            displayText: speech,
-            //source: 'webhook-OSC-oppty'
-        })
+        
     });
     
 }
