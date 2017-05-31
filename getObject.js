@@ -23,11 +23,11 @@ module.exports = function getObject( pId, req, res, callback ) {
         speech = "";
 
         if( promoCount == 1 ){
-            if( actionType == "update" && req.body.result.parameters.objectName == "__ORACO__PromotionProgram_c" ){
+            if( actionType == "update" && req.body.result.parameters.objectName == "MarketSpend_c" ){
                 var bodyToUpdate = {};
                 var newValue = req.body.result.parameters.newValue;
                 bodyToUpdate[attributeName] = newValue;
-                urlPath = '/salesApi/resources/latest/__ORACO__PromotionProgram_c/' + result.items[0].Id;
+                urlPath = '/salesApi/resources/latest/MarketSpend_c/' + result.items[0].Id;
                 Update( req, res, urlPath, bodyToUpdate, function( result ) {
                     console.log( "Value Updated : " + result);
                 });
