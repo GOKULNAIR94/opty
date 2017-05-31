@@ -26,6 +26,13 @@ module.exports = function getObject( pId, req, res, callback ) {
                 urlPath = '/salesApi/resources/latest/MarketSpend_c/' + result.items[0].Id;
                 Update( req, res, urlPath, bodyToUpdate, function( result ) {
                     console.log( "Value Updated : " + result);
+                    speech = "Value has been updated";
+                    res.json({
+                        speech: speech,
+                        displayText: speech,
+                        contextOut: [{"name":"action2", "lifespan":1, "parameters":{"titleName.original": titleName, "MSAttributes.original" :ogAttribute }}]
+                        //source: 'webhook-OSC-oppty'
+                    })
                 });
             }
             else{
