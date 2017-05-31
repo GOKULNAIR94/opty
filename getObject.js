@@ -14,8 +14,9 @@ module.exports = function getObject( pId, req, res, callback ) {
     objectName = req.body.result.parameters.object;
     actionType = req.body.result.parameters.actionType;
     attributeName = req.body.result.parameters.PPattributes;
+    var MSRecordName = req.body.result.parameters.recordName;
     
-    urlPath = "/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + "&fields=Id,RecordName";
+    urlPath = "/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + ";recordName=" + MSRecordName + "&fields=Id,RecordName";
     Query( req, res, urlPath, function( result ) {
         var promoCount = result.count;
         console.log("promoCount : " + promoCount);
