@@ -24,9 +24,9 @@ module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
             responseString += data;
         });
         resx.on('end', function() {
-            callback(responseString);
-            var resObj = JSON.parse(responseString);
+
             try{
+                var resObj = JSON.parse(responseString);
                 if( resObj.items[i].Id == null ){
                    speech = "Value has been updated.";
                     return res.json({
@@ -45,7 +45,7 @@ module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
                     })
             }
             
-            
+            callback(responseString);
         });
         resx.on('error', function(e) {
             console.log("Got error: " + e.message);
