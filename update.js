@@ -25,12 +25,27 @@ module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
         });
         resx.on('end', function() {
             callback(responseString);
-            speech = "Value has been updated.";
-		    return res.json({
-                speech: speech,
-                displayText: speech,
-                //source: 'webhook-OSC-oppty'
-            })
+            var resObj = JSON.parse(responseString);
+            try{
+                if( resObj.items[i].Id == null ){
+                   speech = "Value has been updated.";
+                    return res.json({
+                        speech: speech,
+                        displayText: speech,
+                        //source: 'webhook-OSC-oppty'
+                    })
+                }
+            }
+            catch{
+                speech = "Error Occured";
+                return res.json({
+                        speech: speech,
+                        displayText: speech,
+                        //source: 'webhook-OSC-oppty'
+                    })
+            }
+            
+            
         });
         resx.on('error', function(e) {
             console.log("Got error: " + e.message);
