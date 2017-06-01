@@ -40,7 +40,8 @@ module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
                 }
             }
             catch(error){
-                speech = "Enter a valid Value.";
+                speech = "Enter a valid Value. " + error;
+                console.log( "error : " + error);
                 return res.json({
                         speech: speech,
                         displayText: speech,
