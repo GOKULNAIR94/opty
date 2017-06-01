@@ -3,14 +3,12 @@ module.exports = function getObject( pId, req, res, callback ) {
     var Update = require( "./update" );
     
     var actionType = "";
-    var actionType1 = "";
     var objectName = '';
     var attributeName = '';
     var speech = '';
     
     objectName = req.body.result.parameters.object;
     actionType = req.body.result.parameters.actionType;
-    actionType1 = req.body.result.parameters.actionType1;
     attributeName = req.body.result.parameters.MSAttributes;
     var MSRecordName = req.body.result.parameters.recordName;
     
@@ -21,7 +19,7 @@ module.exports = function getObject( pId, req, res, callback ) {
         speech = "";
 
         if( promoCount == 1 ){
-            if( actionType1 == "update" && req.body.result.parameters.objectName == "MarketSpend_c" ){
+            if( actionType == "update" && req.body.result.parameters.objectName == "MarketSpend_c" ){
                 var bodyToUpdate = {};
                 var newValue = req.body.result.parameters.newValue;
                 bodyToUpdate[attributeName] = newValue;
