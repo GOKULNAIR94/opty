@@ -36,7 +36,7 @@ module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
                     })
                 }
             }
-            catch{
+            catch(error){
                 speech = "Error Occured";
                 return res.json({
                         speech: speech,
