@@ -26,6 +26,8 @@ module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
         resx.on('end', function() {
 
             try{
+                console.log("responseString : " + responseString);
+                console.log( "resObj : " + resObj);
                 var resObj = JSON.parse(responseString);
                 if( resObj.items[i].Id == null ){
                    speech = "Value has been updated.";
