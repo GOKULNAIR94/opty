@@ -30,7 +30,7 @@ module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
                 
                 var resObj = JSON.parse(responseString);
                 console.log( "resObj : " + resObj);
-                if( resObj.items[i].Id == null ){
+                if( resObj.items[0].Id == null ){
                    speech = "Value has been updated.";
                     return res.json({
                         speech: speech,
@@ -40,7 +40,7 @@ module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
                 }
             }
             catch(error){
-                speech = "Error Occured";
+                speech = "Enter a valid Value.";
                 return res.json({
                         speech: speech,
                         displayText: speech,
