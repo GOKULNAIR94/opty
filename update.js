@@ -30,7 +30,7 @@ module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
                 
                 var resObj = JSON.parse(responseString);
                 console.log( "resObj : " + resObj);
-                if( resObj.items[0].Id == null ){
+                if( resObj.Id != null ){
                    speech = "Value has been updated.";
                     return res.json({
                         speech: speech,
