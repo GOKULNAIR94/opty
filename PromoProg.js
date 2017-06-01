@@ -23,6 +23,7 @@ module.exports = function PromoProg( req, res, callback ) {
             res.json({
 	            speech: speech,
 	            displayText: speech,
+                contextOut: [{"name":"action2", "lifespan":1, "parameters":{"titleName.original": titleName , "PPattributes.original" :ogAttribute }}]
 	            //source: 'webhook-OSC-oppty'
 	        });
         }
