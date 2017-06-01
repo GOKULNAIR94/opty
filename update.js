@@ -6,7 +6,7 @@ module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
     
     console.log("Update");
     console.log("urlPath : " + urlPath);
-    console.log("bodyToUpdate -" + bodyToUpdate.toString());
+    console.log("bodyToUpdate -" + bodyToUpdate.stringify());
     options = {
         host: 'cbhs-test.crm.us2.oraclecloud.com',
         path: urlPath,
