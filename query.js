@@ -42,7 +42,7 @@ module.exports = function query( req, res, urlPath, callback ) {
 //                    displayText: speech,
 //                    //source: 'webhook-OSC-oppty'
 //                })
-            }
+//            }
         });
         resx.on('error', function(e) {
             console.log("Got error: " + e.message);
