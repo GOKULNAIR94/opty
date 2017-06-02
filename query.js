@@ -1,7 +1,7 @@
 module.exports = function query( req, res, urlPath, callback ) {
     var http = require('https');
     
-    var uname = 'Kaamana'; //'gokuln';
+    var uname = 'kaamana'; //'gokuln';
     var pword = 'Oracle1234';  //'Goklnt@1';
     
     console.log("urlPath : " + urlPath);
