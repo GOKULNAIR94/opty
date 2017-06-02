@@ -1,8 +1,8 @@
 module.exports = function query( req, res, urlPath, callback ) {
     var http = require('https');
     
-    var uname = 'gokuln';
-    var pword = 'Goklnt@1';
+    var uname = 'Kaamana'; //'gokuln';
+    var pword = 'Oracle1234';  //'Goklnt@1';
     
     console.log("urlPath : " + urlPath);
     options = {
@@ -19,7 +19,7 @@ module.exports = function query( req, res, urlPath, callback ) {
             responseString += data;
         });
         resx.on('end', function() {
-            //try{
+            try{
                 resObj = JSON.parse(responseString);
                 console.log("resObj : " + resObj);
                 speech = "";
@@ -33,16 +33,16 @@ module.exports = function query( req, res, urlPath, callback ) {
                 }
                 else
                     callback(resObj);
-//            }
-//            catch(error){
-//                speech = "Oh No! Something went wrong!";
-//                console.log( "Error : " + error);
-//                return res.json({
-//                    speech: speech,
-//                    displayText: speech,
-//                    //source: 'webhook-OSC-oppty'
-//                })
-//            }
+            }
+            catch(error){
+                speech = "Oh No! Something went wrong!";
+                console.log( "Error : " + error);
+                return res.json({
+                    speech: speech,
+                    displayText: speech,
+                    //source: 'webhook-OSC-oppty'
+                })
+            }
         });
         resx.on('error', function(e) {
             console.log("Got error: " + e.message);

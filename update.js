@@ -1,8 +1,8 @@
 module.exports = function update( req, res, urlPath, bodyToUpdate, callback ) {
     var http = require('https');
     
-    var uname = 'gokuln';
-    var pword = 'Goklnt@1';
+    var uname = 'Kaamana'; //'gokuln';
+    var pword = 'Oracle1234';  //'Goklnt@1';
     
     console.log("Update");
     console.log("urlPath : " + urlPath);
