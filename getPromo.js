@@ -14,7 +14,11 @@ module.exports = function getPromo( req, res, callback ) {
 
     titleName = req.body.result.contexts[0].parameters["titleName.original"];
     //titleName = req.body.result.parameters["titleName"];
-    territoryStored = req.body.result.parameters.Territory;
+    
+    
+    if( req.body.result.parameters.Territory != "" && req.body.result.parameters.Territory != null)
+        territoryStored = encodeURIComponent( req.body.result.parameters.Territory );
+    
     objectName = req.body.result.parameters.object;
     actionType = req.body.result.parameters.actionType;
     attributeName = req.body.result.parameters.PPattributes;

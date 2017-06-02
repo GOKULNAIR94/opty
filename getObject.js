@@ -6,13 +6,16 @@ module.exports = function getObject( pId, req, res, callback ) {
     var objectName = '';
     var attributeName = '';
     var speech = '';
-    
+    var MSRecordName = "";
     objectName = req.body.result.parameters.object;
     actionType = req.body.result.parameters.actionType;
     attributeName = req.body.result.parameters.MSAttributes;
-    var MSRecordName = req.body.result.parameters.recordName;
     
-    urlPath = "/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + ";RecordName=" + encodeURIComponent(MSRecordName);
+    if( req.body.result.parameters.recordName != "" && req.body.result.parameters.recordName != null)
+        MSRecordName = encodeURIComponent( req.body.result.parameters.recordName );
+    
+    
+    urlPath = "/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + ";RecordName=" + MSRecordName;
     Query( req, res, urlPath, function( result ) {
         var promoCount = result.count;
         console.log("promoCount : " + promoCount);
