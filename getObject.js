@@ -12,7 +12,7 @@ module.exports = function getObject( pId, req, res, callback ) {
     attributeName = req.body.result.parameters.MSAttributes;
     var MSRecordName = req.body.result.parameters.recordName;
     
-    urlPath = "/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + ";RecordName=" + MSRecordName;
+    urlPath = "/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + ";RecordName=" + encodeURIComponent(MSRecordName);
     Query( req, res, urlPath, function( result ) {
         var promoCount = result.count;
         console.log("promoCount : " + promoCount);
