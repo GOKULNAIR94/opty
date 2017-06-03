@@ -44,6 +44,7 @@ module.exports = function PromoProg( req, res, callback ) {
             res.json({
 	            speech: speech,
 	            displayText: speech,
+                contextOut: [{"name":"msAction1", "lifespan":1, "parameters":{"titleName.original": titleName, "MSAttributes.original" :"TEst1" }}]
 	            //source: 'webhook-OSC-oppty'
 	        });
         }

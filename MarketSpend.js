@@ -4,7 +4,7 @@ module.exports = function MarketSpend( req, res, callback ) {
     var getObject = require( "./getObject" );
     var speech = "";
     //var ogAttribute = req.body.result.parameters["PPattributes"];
-    var attributeName = req.body.result.parameters.MSAttributes;
+    var attributeName = req.body.result.contexts[0].parameters.MSAttributes;
     var titleName = "";
     //titleName = req.body.result.parameters["titleName"];
     titleName = req.body.result.contexts[0].parameters["titleName.original"];
@@ -44,7 +44,7 @@ module.exports = function MarketSpend( req, res, callback ) {
                     res.json({
                         speech: speech,
                         displayText: speech,
-                        contextOut: [{"name":"msAction2", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes.original" : ogAttribute }}]
+                        contextOut: [{"name":"msAction2", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes" : attributeName, "MSAttributes.original" : ogAttribute }}]
                         //source: 'webhook-OSC-oppty'
                     })
                 }
@@ -64,7 +64,7 @@ module.exports = function MarketSpend( req, res, callback ) {
                     res.json({
                         speech: speech,
                         displayText: speech,
-                        contextOut: [{"name":"msAction1", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes.original" : ogAttribute }}]
+                        contextOut: [{"name":"msAction1", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes" : attributeName, "MSAttributes.original" : ogAttribute }}]
                         //source: 'webhook-OSC-oppty'
                     })  
                 }
@@ -86,7 +86,7 @@ module.exports = function MarketSpend( req, res, callback ) {
             res.json({
                 speech: speech,
                 displayText: speech,
-                contextOut: [{"name":"msAction1", "lifespan":1, "parameters":{"titleName.original": titleName, "MSAttributes.original" :"TEst1" }}]
+                contextOut: [{"name":"msAction1", "lifespan":1, "parameters":{"titleName.original": titleName, "MSAttributes" : attributeName, "MSAttributes.original" : ogAttribute }}]
                 //source: 'webhook-OSC-oppty'
             })
         }

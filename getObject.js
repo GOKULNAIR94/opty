@@ -9,7 +9,7 @@ module.exports = function getObject( pId, req, res, callback ) {
     var MSRecordName = "";
     objectName = req.body.result.parameters.object;
     actionType = req.body.result.parameters.actionType;
-    attributeName = req.body.result.parameters.MSAttributes;
+    attributeName = req.body.result.contexts[0].parameters.MSAttributes;
     
     if( req.body.result.parameters.recordName != "" && req.body.result.parameters.recordName != null)
         MSRecordName = encodeURIComponent( req.body.result.parameters.recordName );
