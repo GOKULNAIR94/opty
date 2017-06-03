@@ -6,12 +6,12 @@ module.exports = function MarketSpend( req, res, callback ) {
     //var ogAttribute = req.body.result.parameters["PPattributes"];
     var attributeName = req.body.result.parameters.MSAttributes;
     var titleName = "";
-    titleName = req.body.result.parameters["titleName"];
-    //titleName = req.body.result.contexts[0].parameters["titleName.original"];
+    //titleName = req.body.result.parameters["titleName"];
+    titleName = req.body.result.contexts[0].parameters["titleName.original"];
     
     var ogAttribute = "";
-    ogAttribute = req.body.result.parameters["MSAttributes"];
-    //ogAttribute = req.body.result.contexts[0].parameters["MSAttributes.original"];
+    //ogAttribute = req.body.result.parameters["MSAttributes"];
+    ogAttribute = req.body.result.contexts[0].parameters["MSAttributes.original"];
     
     
     var msId;
@@ -57,7 +57,7 @@ module.exports = function MarketSpend( req, res, callback ) {
                 res.json({
                     speech: speech,
                     displayText: speech,
-                    contextOut: [{"name":"action2", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes.original" :ogAttribute }}]
+                    contextOut: [{"name":"msAction2", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes.original" :ogAttribute }}]
                     //source: 'webhook-OSC-oppty'
                 })
             });
@@ -77,7 +77,7 @@ module.exports = function MarketSpend( req, res, callback ) {
             res.json({
                 speech: speech,
                 displayText: speech,
-                contextOut: [{"name":"action2", "lifespan":1, "parameters":{"titleName.original": titleName, "MSAttributes.original" :ogAttribute }}]
+                contextOut: [{"name":"msAction1", "lifespan":1, "parameters":{"titleName.original": titleName, "MSAttributes.original" :ogAttribute }}]
                 //source: 'webhook-OSC-oppty'
             })
         }

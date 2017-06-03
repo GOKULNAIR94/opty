@@ -33,7 +33,6 @@ module.exports = function getObject( pId, req, res, callback ) {
                     res.json({
                         speech: speech,
                         displayText: speech,
-                        contextOut: [{"name":"action2", "lifespan":1, "parameters":{}}]
                         //source: 'webhook-OSC-oppty'
                     })
                 });
