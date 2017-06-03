@@ -31,8 +31,18 @@ module.exports = function query( req, res, urlPath, callback ) {
                         //source: 'webhook-OSC-oppty'
                     })
                 }
-                else
-                    callback(resObj);
+                else{
+                    if( resObj.count > 24 ){
+                        speech = "Too many records";
+                        res.json({
+                            speech: speech,
+                            displayText: speech,
+                            //source: 'webhook-OSC-oppty'
+                        })
+                    }
+                    else
+                        callback(resObj);
+                }
             }
             catch(error){
                 speech = "Oh No! Something went wrong!";
