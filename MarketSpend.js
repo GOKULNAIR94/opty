@@ -14,8 +14,8 @@ module.exports = function MarketSpend( req, res, callback ) {
     ogAttribute = req.body.result.contexts[0].parameters["MSAttributes.original"];
     
     var context = "";
-    ogAttribute = req.body.result.contexts[0].name;
-    
+    context = req.body.result.contexts[0].name;
+    console.log( "context : " + context )
     var msId;
     var msName;
 
