@@ -39,6 +39,12 @@ module.exports = function MarketSpend( req, res, callback ) {
                     console.log( "RecordName : " + msName);
                     console.log( "attributeName : " + attributeName);
                     speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                    res.json({
+                        speech: speech,
+                        displayText: speech,
+                        contextOut: [{"name":"msAction2", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes.original" : ogAttribute }}]
+                        //source: 'webhook-OSC-oppty'
+                    })
                 }
 
                 if( msCount > 1 ){
@@ -53,13 +59,14 @@ module.exports = function MarketSpend( req, res, callback ) {
                         else
                             speech = speech + ",";
                     }
+                    res.json({
+                        speech: speech,
+                        displayText: speech,
+                        contextOut: [{"name":"msAction1", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes.original" : ogAttribute }}]
+                        //source: 'webhook-OSC-oppty'
+                    })  
                 }
-                res.json({
-                    speech: speech,
-                    displayText: speech,
-                    contextOut: [{"name":"msAction2", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes.original" : ogAttribute }}]
-                    //source: 'webhook-OSC-oppty'
-                })
+                
             });
         }
         

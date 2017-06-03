@@ -17,11 +17,11 @@ module.exports = function getObject( pId, req, res, callback ) {
     
     urlPath = "/salesApi/resources/latest/MarketSpend_c?onlyData=true&q=PromotionName_Id_c=" + pId + ";RecordName=" + MSRecordName;
     Query( req, res, urlPath, function( result ) {
-        var promoCount = result.count;
-        console.log("promoCount : " + promoCount);
+        var recordCount = result.count;
+        console.log( "recordCount : " + recordCount );
         speech = "";
 
-        if( promoCount == 1 ){
+        if( recordCount == 1 ){
             if( actionType == "update" && req.body.result.parameters.objectName == "MarketSpend_c" ){
                 var bodyToUpdate = {};
                 var newValue = req.body.result.parameters.newValue;
@@ -42,7 +42,7 @@ module.exports = function getObject( pId, req, res, callback ) {
             }
 
         }
-        if( promoCount > 1 ){
+        if( recordCount > 1 ){
             callback( result );
         }
     });
