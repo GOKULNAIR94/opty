@@ -57,7 +57,7 @@ module.exports = function MarketSpend( req, res, callback ) {
                 res.json({
                     speech: speech,
                     displayText: speech,
-                    contextOut: [{"name":"msAction2", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes.original" :ogAttribute }}]
+                    contextOut: [{"name":"msAction2", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes.original" :"Test" }}]
                     //source: 'webhook-OSC-oppty'
                 })
             });
