@@ -41,10 +41,16 @@ module.exports = function MarketSpend( req, res, callback ) {
                     console.log( "RecordName : " + msName);
                     console.log( "attributeName : " + attributeName);
                     speech = "The " + ogAttribute + " of " + result.items[0].RecordName + " : " + result.items[0][attributeName];
+                    var varLifeSpan;
+                    if( ogAttribute != null && result.items[0].RecordName != null && result.items[0][attributeName] != null ){
+                       varLifeSpan = 1;
+                    }
+                    else
+                        varLifeSpan = 0;
                     res.json({
                         speech: speech,
                         displayText: speech,
-                        contextOut: [{"name":"msAction2", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes" : attributeName, "MSAttributes.original" : ogAttribute }}]
+                        contextOut: [{"name":"msAction2", "lifespan": varLifeSpan, "parameters":{ "titleName.original": titleName, "MSAttributes" : attributeName, "MSAttributes.original" : ogAttribute }}]
                         //source: 'webhook-OSC-oppty'
                     })
                 }
