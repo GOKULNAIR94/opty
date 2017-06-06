@@ -34,6 +34,7 @@ module.exports = function getObject( pId, req, res, callback ) {
                         speech: speech,
                         displayText: speech,
                         //source: 'webhook-OSC-oppty'
+                        contextOut: [{"name":"msAction2", "lifespan":1, "parameters":{ "titleName.original": titleName, "MSAttributes" : attributeName, "MSAttributes.original" : ogAttribute }}]
                     })
                 });
             }
