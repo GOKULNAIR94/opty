@@ -29,6 +29,7 @@ module.exports = function query( req, res, urlPath, callback ) {
                         speech: speech,
                         displayText: speech,
                         //source: 'webhook-OSC-oppty'
+                        contextOut: [{"name":"msAction2", "lifespan":0, "parameters":{ "titleName.original": titleName, "MSAttributes" : attributeName, "MSAttributes.original" : ogAttribute }}]
                     })
                 }
                 else{
@@ -51,6 +52,7 @@ module.exports = function query( req, res, urlPath, callback ) {
                     speech: speech,
                     displayText: speech,
                     //source: 'webhook-OSC-oppty'
+                    contextOut: [{"name":"msAction2", "lifespan":0, "parameters":{ "titleName.original": titleName, "MSAttributes" : attributeName, "MSAttributes.original" : ogAttribute }}]
                 })
             }
         });
