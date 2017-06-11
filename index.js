@@ -40,7 +40,11 @@ module.exports = function(req, res) {
         console.log("Content :" + JSON.stringify(content) );
         content = JSON.stringify( content, null, 2);
         fs.writeFile('login.json', content, function(){
-          console.log("All set...");
+          speech = "Logged in";
+            return res.json({
+              speech: speech,
+              displayText: speech
+            })
         });
     }
     else{

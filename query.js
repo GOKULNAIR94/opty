@@ -1,8 +1,13 @@
 module.exports = function query( req, res, urlPath, callback ) {
     var http = require('https');
     
-    var uname = 'kaamana'; //'gokuln';
-    var pword = 'Oracle1234';  //'Goklnt@1';
+    var fs = require('fs');
+    var sessionId = req.body.sessionId;
+    content = fs.readFileSync('login.json', 'utf8');
+    content = JSON.parse(content);
+
+    var uname = content.items.OSC[sessionId].username; //'gokuln'; kaamana
+    var pword = content.items.OSC[sessionId].password;  //'Goklnt@1'; Oracle1234
     
     console.log("urlPath : " + urlPath);
     options = {
