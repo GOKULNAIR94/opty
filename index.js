@@ -31,10 +31,12 @@ module.exports = function(req, res) {
         var username = req.body.result.parameters['username'];
         var password = req.body.result.parameters['password'];
 
-        content.items.OSC[sessionId] = sessionId;
-        content.items.OSC[sessionId]["username"] = username;
-        content.items.OSC[sessionId]["password"] = password;
-
+        var jsonMap = {
+            "username" : username,
+            "password" : password
+        }
+        content.items.OSC[sessionId] = jsonMap;
+        
         console.log("Content :" + JSON.stringify(content) );
         content = JSON.stringify( content, null, 2);
         fs.writeFile('login.json', content, function(){
