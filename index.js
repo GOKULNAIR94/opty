@@ -34,7 +34,7 @@ module.exports = function(req, res) {
         var http = require('https');
         options = {
             host: 'cbhs-test.crm.us2.oraclecloud.com',
-            path: urlPath,
+            path: "/crmCommonApi/resources/latest/accounts",
             headers: {
                 'Authorization': 'Basic ' + new Buffer(username + ':' + password).toString('base64')
             }
