@@ -31,20 +31,22 @@ module.exports = function(req, res) {
         var username = req.body.result.parameters['username'];
         var password = req.body.result.parameters['password'];
 
-        var jsonMap = {
-            "username" : username,
-            "password" : password
-        }
-        content.items.OSC[sessionId] = jsonMap;
-        
-        console.log("Content :" + JSON.stringify(content) );
-        content = JSON.stringify( content, null, 2);
-        fs.writeFile('login.json', content, function(){
-          speech = "Logged in";
-            return res.json({
-              speech: speech,
-              displayText: speech
-            })
+        Query( req, res, urlPath, function( result ) {
+            var jsonMap = {
+                "username" : username,
+                "password" : password
+            }
+            content.items.OSC[sessionId] = jsonMap;
+            
+            console.log("Content :" + JSON.stringify(content) );
+            content = JSON.stringify( content, null, 2);
+            fs.writeFile('login.json', content, function(){
+              speech = "Logged in";
+                return res.json({
+                  speech: speech,
+                  displayText: speech
+                })
+            });
         });
     }
     else{
