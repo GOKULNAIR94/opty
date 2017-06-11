@@ -31,23 +31,51 @@ module.exports = function(req, res) {
         var username = req.body.result.parameters['username'];
         var password = req.body.result.parameters['password'];
 
-        Query( req, res, urlPath, function( result ) {
-            var jsonMap = {
-                "username" : username,
-                "password" : password
+        var http = require('https');
+        options = {
+            host: 'cbhs-test.crm.us2.oraclecloud.com',
+            path: urlPath,
+            headers: {
+                'Authorization': 'Basic ' + new Buffer(username + ':' + password).toString('base64')
             }
-            content.items.OSC[sessionId] = jsonMap;
+        };
+        var request = http.get(options, function(resx) {
+        resx.on('data', function(data) {
             
-            console.log("Content :" + JSON.stringify(content) );
-            content = JSON.stringify( content, null, 2);
-            fs.writeFile('login.json', content, function(){
-              speech = "Logged in";
-                return res.json({
-                  speech: speech,
-                  displayText: speech
-                })
-            });
         });
+        resx.on('end', function() {
+            try{
+                var jsonMap = {
+                    "username" : username,
+                    "password" : password
+                }
+                content.items.OSC[sessionId] = jsonMap;
+                
+                console.log("Content :" + JSON.stringify(content) );
+                content = JSON.stringify( content, null, 2);
+                fs.writeFile('login.json', content, function(){
+                  speech = "Logged in";
+                    return res.json({
+                      speech: speech,
+                      displayText: speech
+                    })
+                });
+            }
+            catch(error){
+                speech = "Log in error!";
+                console.log( "Error : " + error);
+                return res.json({
+                    speech: speech,
+                    displayText: speech,
+                    //source: 'webhook-OSC-oppty'
+                    contextOut: [{"name":"msAction2", "lifespan":0, "parameters":{ }}]
+                })
+            }
+        });
+        resx.on('error', function(e) {
+            console.log("Got error: " + e.message);
+        });
+    });
     }
     else{
         console.log("Not Login Intent");
