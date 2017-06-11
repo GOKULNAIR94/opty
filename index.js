@@ -8,6 +8,7 @@ module.exports = function(req, res) {
 
     var fs = require('fs');
     var sessionId = req.body.sessionId;
+    console.log( "sessionId : " + sessionId);
     var content;
 
     var speech = "";
@@ -21,27 +22,26 @@ module.exports = function(req, res) {
     }
 
     content = fs.readFileSync('login.json', 'utf8');
-        console.log( "Content : " + content);
-        content = JSON.parse(content);
+    console.log( "Content : " + content);
+    content = JSON.parse(content);
 
     if( req.body.result.metadata.intentName == "Login" ){
+        console.log("Login Intent");
         var username = req.body.result.contexts[0].parameters['username.original'];
         var password = req.body.result.contexts[0].parameters['password.original'];
 
         content.items.OSC[sessionId].username = username;
         content.items.OSC[sessionId].password = password;
 
+        console.log("COntent :" + JSON.stringify(content) );
         content = JSON.stringify( content, null, 2);
         fs.writeFile('login.json', content, function(){
           console.log("All set...");
         });
     }
     else{
-        
-        
-        
-        
-
+        console.log("Not Login Intent");
+        console.log("COntent :" + JSON.stringify(content.items) );
         if( content.items.OSC[sessionId] != null ){
             var username = content.items.OSC[sessionId].username;
             var password = content.items.OSC[sessionId].password;
@@ -49,7 +49,7 @@ module.exports = function(req, res) {
             console.log( "password : " + password);
         }
         else{
-            speech = "I will need your Sales CLoud Credentials. Try saying: I am Gokul and password is Oracle 123";
+            speech = "I will need your Sales Cloud Credentials. Try saying: I am Gokul and password is Oracle 123";
             return res.json({
               speech: speech,
               displayText: speech
