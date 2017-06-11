@@ -11,7 +11,7 @@ module.exports = function(req, res) {
     var content;
 
     var speech = "";
-    
+
     if( req.body.result.metadata.intentName == "Default Welcome Intent" ){
         speech = "";
         return res.json({
@@ -40,10 +40,11 @@ module.exports = function(req, res) {
         
         
         
-        var username = content.items.OSC[sessionId].username;
-        var password = content.items.OSC[sessionId].password;
+        
 
-        if( username != null ){
+        if( content.items.OSC[sessionId] != null ){
+            var username = content.items.OSC[sessionId].username;
+            var password = content.items.OSC[sessionId].password;
             console.log( "username : " + username);
             console.log( "password : " + password);
         }
