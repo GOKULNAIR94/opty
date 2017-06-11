@@ -39,7 +39,7 @@ module.exports = function(req, res) {
                 'Authorization': 'Basic ' + new Buffer(username + ':' + password).toString('base64')
             }
         };
-        var responseString;
+        var responseString = '';
         var request = http.get(options, function(resx) {
         resx.on('data', function(data) {
             responseString += data;
