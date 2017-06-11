@@ -32,7 +32,7 @@ module.exports = function(req, res) {
         var password = req.body.result.parameters['password'];
 
         var http = require('https');
-        options = {
+        var options = {
             host: 'cbhs-test.crm.us2.oraclecloud.com',
             path: "/crmCommonApi/resources/latest/accounts",
             headers: {
@@ -51,7 +51,7 @@ module.exports = function(req, res) {
                 }
                 content.items.OSC[sessionId] = jsonMap;
                 
-                console.log("Content :" + JSON.stringify(content) );
+                console.log(" Log in Content :" + JSON.stringify(content) );
                 content = JSON.stringify( content, null, 2);
                 fs.writeFile('login.json', content, function(){
                   speech = "Logged in";
