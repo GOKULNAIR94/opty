@@ -24,7 +24,8 @@ module.exports = function(req, res) {
     content = fs.readFileSync('login.json', 'utf8');
     console.log( "Content : " + content);
     content = JSON.parse(content);
-
+    
+    console.log( "intentName : " + req.body.result.metadata.intentName );
     if( req.body.result.metadata.intentName == "Login" ){
         console.log("Login Intent");
         var username = req.body.result.contexts[0].parameters['username.original'];
