@@ -28,13 +28,13 @@ module.exports = function(req, res) {
     console.log( "intentName : " + req.body.result.metadata.intentName );
     if( req.body.result.metadata.intentName == "Login" ){
         console.log("Login Intent");
-        var username = req.body.result.contexts[0].parameters['username.original'];
-        var password = req.body.result.contexts[0].parameters['password.original'];
+        var username = req.body.result.parameters['username'];
+        var password = req.body.result.parameters['password'];
 
         content.items.OSC[sessionId].username = username;
         content.items.OSC[sessionId].password = password;
 
-        console.log("COntent :" + JSON.stringify(content) );
+        console.log("Content :" + JSON.stringify(content) );
         content = JSON.stringify( content, null, 2);
         fs.writeFile('login.json', content, function(){
           console.log("All set...");
@@ -42,7 +42,7 @@ module.exports = function(req, res) {
     }
     else{
         console.log("Not Login Intent");
-        console.log("COntent :" + JSON.stringify(content.items) );
+        console.log("Content :" + JSON.stringify(content.items) );
         if( content.items.OSC[sessionId] != null ){
             var username = content.items.OSC[sessionId].username;
             var password = content.items.OSC[sessionId].password;
