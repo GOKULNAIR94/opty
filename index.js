@@ -31,8 +31,9 @@ module.exports = function(req, res) {
         var username = req.body.result.parameters['username'];
         var password = req.body.result.parameters['password'];
 
-        content.items.OSC[sessionId][username] = username;
-        content.items.OSC[sessionId][password] = password;
+        content.items.OSC[sessionId] = sessionId;
+        content.items.OSC[sessionId]["username"] = username;
+        content.items.OSC[sessionId]["password"] = password;
 
         console.log("Content :" + JSON.stringify(content) );
         content = JSON.stringify( content, null, 2);
