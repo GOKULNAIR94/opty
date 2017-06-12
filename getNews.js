@@ -5,7 +5,7 @@ module.exports = function(req, res, callback ) {
     GoogleNews = require('google-news');
     googleNews = new GoogleNews();
 
-    track = 'Life of Pi';
+    track = 'Microsoft';
 
     googleNews.stream(track, function(stream) {
         var news = "";
