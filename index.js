@@ -5,6 +5,7 @@ module.exports = function(req, res) {
     var PromoProg = require( "./PromoProg" );
     var MarketSpend = require( "./MarketSpend" );
     console.log( "In Query!" );
+    var getPromo = require( "./getNews" );
 
     var fs = require('fs');
     var sessionId = req.body.sessionId;
@@ -14,34 +15,11 @@ module.exports = function(req, res) {
     var speech = "";
 
     if( req.body.result.metadata.intentName == "Default Welcome Intent" ){
-        
-        var GoogleNews, googleNews, track;
-
-        GoogleNews = require('google-news');
-        googleNews = new GoogleNews();
-
-        track = 'Life of Pi';
-
-        googleNews.stream(track, function(stream) {
-            var news = "";
-
-          stream.on(GoogleNews.DATA, function(data) {
-            news = news + data.title;
-            //console.log('Data Event received... ' + data.title);
-          });
-          stream.on(END, function() {
-              console.log('Stringify ' + JSON.stringify(data));
-              console.log('News :  ' + news );
-          });
-
-          stream.on(GoogleNews.ERROR, function(error) {
-            console.log('Error Event received... ' + error);
-          });
+        var GetNews = require( "./getNews" );
+        GetNews( req, res, function( result ) {
+            speech = "News : " + result;
         });
-
-
-
-        speech = "";
+        //speech = "";
         return res.json({
           speech: speech,
           displayText: speech
