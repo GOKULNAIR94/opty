@@ -20,7 +20,7 @@ module.exports = function(req, res) {
         GoogleNews = require('google-news');
         googleNews = new GoogleNews();
 
-        track = 'Salam';
+        track = 'Life of Pi';
 
         googleNews.stream(track, function(stream) {
             var news = "";
@@ -29,7 +29,7 @@ module.exports = function(req, res) {
             news = news + data.title;
             //console.log('Data Event received... ' + data.title);
           });
-          stream.on(GoogleNews.END, function(data) {
+          stream.on(END, function(data) {
               console.log('Stringify ' + JSON.stringify(data));
               console.log('News :  ' + news );
           });
