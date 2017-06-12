@@ -14,6 +14,27 @@ module.exports = function(req, res) {
     var speech = "";
 
     if( req.body.result.metadata.intentName == "Default Welcome Intent" ){
+        
+        var GoogleNews, googleNews, track;
+
+        GoogleNews = require('google-news');
+        googleNews = new GoogleNews();
+
+        track = 'Volvo';
+
+        googleNews.stream(track, function(stream) {
+
+          stream.on(GoogleNews.DATA, function(data) {
+            console.log('Data Event received... ' + data.title);
+          });
+
+          stream.on(GoogleNews.ERROR, function(error) {
+            console.log('Error Event received... ' + error);
+          });
+        });
+
+
+
         speech = "";
         return res.json({
           speech: speech,
