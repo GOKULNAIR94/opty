@@ -18,10 +18,6 @@ module.exports = function(req, res) {
         var GetNews = require( "./getNews" );
         GetNews( req, res, function( result ) {
             speech = "News : " + result;
-            return res.json({
-              speech: speech,
-              displayText: speech
-            })
         });
         //speech = "";
 //        return res.json({

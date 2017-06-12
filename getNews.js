@@ -13,7 +13,12 @@ module.exports = function(req, res, callback ) {
         stream.on(GoogleNews.DATA, function(data) {
             console.log('Stringify ' + JSON.stringify(data));
             //console.log('Data Event received... ' + data.title);
-            callback( data.title );
+            //callback( data.title );
+            var speech = data.title;
+            return res.json({
+              speech: speech,
+              displayText: speech
+            })
         });
 
         stream.on(GoogleNews.ERROR, function(error) {
