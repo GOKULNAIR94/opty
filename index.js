@@ -20,7 +20,7 @@ module.exports = function(req, res) {
         GoogleNews = require('google-news');
         googleNews = new GoogleNews();
 
-        track = 'Volvo';
+        track = 'Salam';
 
         googleNews.stream(track, function(stream) {
 
