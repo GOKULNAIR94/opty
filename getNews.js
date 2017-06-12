@@ -1,4 +1,4 @@
-module.exports = function(req, res) {
+module.exports = function(req, res, callback ) {
 
     var GoogleNews, googleNews, track;
 
