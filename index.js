@@ -29,7 +29,7 @@ module.exports = function(req, res) {
             news = news + data.title;
             //console.log('Data Event received... ' + data.title);
           });
-          stream.on(GoogleNews.END, function() {
+          stream.on(END, function() {
               console.log('Stringify ' + JSON.stringify(data));
               console.log('News :  ' + news );
           });
