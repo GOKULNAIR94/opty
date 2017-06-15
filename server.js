@@ -207,7 +207,7 @@ restService.post('/oppty', function(req, res)
 
 								  })
 								}).on('error', function(e){
-								  speech = "Error occured!";
+								  speech = "Error occured! : " + e;
 									return res.json({
 									  speech: speech,
 									  displayText: speech
