@@ -176,7 +176,7 @@ restService.post('/oppty', function(req, res)
 								var toSend = { "key" : "value" };
 								toSend["track"] = resObj.items[0].TargetPartyName;
 								toSend["intentName"] = req.body.result.metadata.intentName;
-								console.log( "toSend : " + toSend );
+								console.log( "toSend : " + JSON.stringify(toSend) );
 								var newoptions = {
 								  host: varHost,
 								  path: varPath,
