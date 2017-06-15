@@ -112,12 +112,12 @@ restService.post('/oppty', function(req, res)
                             {
                             	rev= '$' + resObj.items[0].Revenue/1000000 + 'M';
                             	optyOther= '$' + resObj.items[0].ExpectAmount/1000000 + 'M';
-                    			speech= 'Current Revenue for Opportunity ' + oName + ' is ' + rev + '. The expected amount for this opportunity is ' + optyOther;
+                    			speech= 'Current Revenue for Opportunity ' + oName + ' is ' + rev + '. The expected amount for this opportunity is ' + optyOther + "\n Would you like to know what's going on with " + resObj.items[0].TargetPartyName;
                     		}
                         	else if(oAttrib == 'WinProb')
                         	{
                         		rev= resObj.items[0].WinProb;
-                        		speech= 'Opportunity ' + oName + ' is ' + rev + '% probable to Win'
+                        		speech= 'Opportunity ' + oName + ' is ' + rev + "% probable to Win.\n Would you like to know what's going on with " + resObj.items[0].TargetPartyName;
                         	}
                         	else if(oAttrib == 'LastUpdatedBy')
                         	{
@@ -131,7 +131,7 @@ restService.post('/oppty', function(req, res)
                         	{
                         		rev= resObj.items[0].SalesStage;
                         		optyOther= resObj.items[0].AverageDaysAtStage;
-                        		speech= 'Opportunity ' + oName + ' is currently in Stage' + rev + '. On an average an opportunity stays in this stage for ' + optyOther + ' days.'
+                        		speech= 'Opportunity ' + oName + ' is currently in Stage' + rev + '. On an average an opportunity stays in this stage for ' + optyOther + " days.\n Would you like to know what's going on with " + resObj.items[0].TargetPartyName;
                         	}
                             else if(oAttrib == 'TargetPartyName')
                         	{
@@ -197,9 +197,7 @@ restService.post('/oppty', function(req, res)
 
 								  response.on('end', function() {
 									  responseObject = JSON.parse(body);
-									  console.log(" JSON1 : " + JSON.stringify(body));
 									  speech = responseObject;
-									  console.log(" JSON2 : " + JSON.stringify(responseObject));
 									  return res.json({
 										speech: speech,
 										displayText: speech
