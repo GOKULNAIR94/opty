@@ -171,7 +171,7 @@ restService.post('/oppty', function(req, res)
 							try
 							{
 								var varHost = 'vikinews.herokuapp.com';								
-								var varPath = '/getNewsApi';
+								var varPath = '/inputmsg';
 								var tracker = resObj.items[0].TargetPartyName;
 								var newoptions = {
 								  host: varHost,
