@@ -173,7 +173,10 @@ restService.post('/oppty', function(req, res)
 							{
 								var varHost = 'vikinews.herokuapp.com';								
 								var varPath = '/inputmsg';
-								
+								var toSend = {
+									"track" : resObj.items[0].TargetPartyName,
+									"intentName" : req.body.result.metadata.intentName
+								}
 								var newoptions = {
 								  host: varHost,
 								  path: varPath,
@@ -194,13 +197,13 @@ restService.post('/oppty', function(req, res)
 
 								  response.on('end', function() {
 									  responseObject = JSON.parse(body);
-									  console.log(" JSON : " + JSON.stringify(body));
+									  console.log(" JSON1 : " + JSON.stringify(body));
 									  speech = responseObject;
-									  console.log(" JSON : " + JSON.stringify(responseObject));
+									  console.log(" JSON2 : " + JSON.stringify(responseObject));
 									  return res.json({
-									  speech: speech,
-									  displayText: speech
-									})
+										speech: speech,
+										displayText: speech
+									  })
 
 								  })
 								}).on('error', function(e){
