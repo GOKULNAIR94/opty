@@ -173,7 +173,7 @@ restService.post('/oppty', function(req, res)
 							{
 								var varHost = 'vikinews.herokuapp.com';								
 								var varPath = '/inputmsg';
-								var toSend = {:};
+								var toSend = { "key" : "value" };
 								toSend["track"] = resObj.items[0].TargetPartyName;
 								toSend["intentName"] = req.body.result.metadata.intentName;
 								
