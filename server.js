@@ -37,7 +37,8 @@ var now = new Date();
 var today = mydate(now, "yyyy-mm-dd");
 
 restService.post('/oppty', function(req, res) 
-{
+{console.log("Req  : " + JSON.stringify(req.body));
+	
     oNumber = req.body.result.parameters.opptyNumber;
     var prob = req.body.result.parameters.Probability;
     var actionType = req.body.result.parameters.actionType;
