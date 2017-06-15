@@ -167,12 +167,54 @@ restService.post('/oppty', function(req, res)
                         console.log('$'+rev+'M');
                         console.log(opty);
                         //console.log('$'+resObj.Revenue);
-                        return res.json
-                        ({
-                            speech: speech ,
-                            displayText: speech,
-                            source: 'webhook-OSC-oppty'
-                        });
+						if( req.body.result.metadata.intentName == oppty - News ){
+							try
+							{
+								var varHost = 'vikinews.herokuapp.com';								
+								var varPath = '/inputmsg';
+								var tracker = resObj.items[0].TargetPartyName;
+								var newoptions = {
+								  host: varHost,
+								  path: varPath,
+								  data: tracker,
+								  method:'POST',
+								  headers: {
+									'Content-Type': 'application/json'
+								  }
+								};
+
+								var post_req = http.request(newoptions, function(response) {
+								  response.on('data', function (chunk) {
+								  });
+
+								  response.on('end', function() {
+
+								  })
+								}).on('error', function(e){
+								  speech = "Error occured!";
+									return res.json({
+									  speech: speech,
+									  displayText: speech
+									})
+								});
+								post_req.write(JSON.stringify(tracker));
+								post_req.end();
+							  
+							}
+							catch(e)
+							{
+								console.log("Error : " + e );
+							}
+						}
+						else{
+							return res.json
+							({
+								speech: speech ,
+								displayText: speech,
+								source: 'webhook-OSC-oppty'
+							});
+
+						}
             
                 })
             
