@@ -18,6 +18,7 @@
   "homepage": "https://github.com/GOKULNAIR94/gbot#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
+    "dateformat": "^2.0.0",
     "express": "^4.15.3",
     "google-news": "^1.4.6",
     "request": "^2.76.0"
