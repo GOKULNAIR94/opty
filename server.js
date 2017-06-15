@@ -173,14 +173,14 @@ restService.post('/oppty', function(req, res)
 							{
 								var varHost = 'vikinews.herokuapp.com';								
 								var varPath = '/inputmsg';
-								var toSend = {
-									"track" : resObj.items[0].TargetPartyName,
-									"intentName" : req.body.result.metadata.intentName
-								}
+								var toSend = {:};
+								toSend["track"] = resObj.items[0].TargetPartyName;
+								toSend["intentName"] = req.body.result.metadata.intentName;
+								
 								var newoptions = {
 								  host: varHost,
 								  path: varPath,
-								  data: tracker,
+								  data: toSend,
 								  method:'POST',
 								  headers: {
 									'Content-Type': 'application/json'
@@ -213,8 +213,8 @@ restService.post('/oppty', function(req, res)
 									  displayText: speech
 									})
 								});
-								//post_req.write(JSON.stringify(tracker));
-								post_req.write(tracker);
+								post_req.write(JSON.stringify(toSend));
+								//post_req.write(tracker);
 								post_req.end();
 							  
 							}
@@ -224,13 +224,12 @@ restService.post('/oppty', function(req, res)
 							}
 						}
 						else{
-							var tracker = resObj.items[0].TargetPartyName;
+							
 							return res.json
 							({
 								speech: speech ,
 								displayText: speech,
-								source: 'webhook-OSC-oppty',
-								contextOut: [{"name":"oppty-followup", "lifespan":2, "parameters":{ "track" : tracker }}]
+								source: 'webhook-OSC-oppty'
 							});
 
 						}
