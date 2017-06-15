@@ -167,7 +167,7 @@ restService.post('/oppty', function(req, res)
                         console.log('$'+rev+'M');
                         console.log(opty);
                         //console.log('$'+resObj.Revenue);
-						if( req.body.result.metadata.intentName == oppty - News ){
+						if( req.body.result.metadata.intentName == "oppty - News" ){
 							try
 							{
 								var varHost = 'vikinews.herokuapp.com';								
@@ -197,7 +197,8 @@ restService.post('/oppty', function(req, res)
 									  displayText: speech
 									})
 								});
-								post_req.write(JSON.stringify(tracker));
+								//post_req.write(JSON.stringify(tracker));
+								post_req.write(tracker);
 								post_req.end();
 							  
 							}
