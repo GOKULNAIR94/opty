@@ -172,7 +172,8 @@ restService.post('/oppty', function(req, res)
 							{
 								var varHost = 'vikinews.herokuapp.com';								
 								var varPath = '/inputmsg';
-								var tracker = resObj.items[0].TargetPartyName;
+								//var tracker = resObj.items[0].TargetPartyName;
+								req.body.tracker = resObj.items[0].TargetPartyName;
 								var newoptions = {
 								  host: varHost,
 								  path: varPath,
@@ -197,8 +198,8 @@ restService.post('/oppty', function(req, res)
 									  displayText: speech
 									})
 								});
-								//post_req.write(JSON.stringify(tracker));
-								post_req.write(tracker);
+								post_req.write(JSON.stringify(req));
+								//post_req.write();
 								post_req.end();
 							  
 							}
