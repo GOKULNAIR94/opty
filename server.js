@@ -183,12 +183,24 @@ restService.post('/oppty', function(req, res)
 									'Content-Type': 'application/json'
 								  }
 								};
-
+								
+								var body = "";
+								var responseObject;
+								
 								var post_req = http.request(newoptions, function(response) {
 								  response.on('data', function (chunk) {
+									  body += chunk;
 								  });
 
 								  response.on('end', function() {
+									  responseObject = JSON.parse(body);
+									  console.log(" JSON : " + JSON.stringify(body));
+									  speech = responseObject;
+									  console.log(" JSON : " + JSON.stringify(responseObject));
+									  return res.json({
+									  speech: speech,
+									  displayText: speech
+									})
 
 								  })
 								}).on('error', function(e){
