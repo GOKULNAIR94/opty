@@ -173,7 +173,7 @@ restService.post('/oppty', function(req, res)
 							{
 								var varHost = 'vikinews.herokuapp.com';								
 								var varPath = '/inputmsg';
-								var tracker = resObj.items[0].TargetPartyName;
+								
 								var newoptions = {
 								  host: varHost,
 								  path: varPath,
@@ -209,11 +209,13 @@ restService.post('/oppty', function(req, res)
 							}
 						}
 						else{
+							var tracker = resObj.items[0].TargetPartyName;
 							return res.json
 							({
 								speech: speech ,
 								displayText: speech,
-								source: 'webhook-OSC-oppty'
+								source: 'webhook-OSC-oppty',
+								contextOut: [{"name":"oppty-followup", "lifespan":0, "parameters":{ "track" : tracker }}]
 							});
 
 						}
