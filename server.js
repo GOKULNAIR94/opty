@@ -215,7 +215,7 @@ restService.post('/oppty', function(req, res)
 								speech: speech ,
 								displayText: speech,
 								source: 'webhook-OSC-oppty',
-								contextOut: [{"name":"oppty-followup", "lifespan":0, "parameters":{ "track" : tracker }}]
+								contextOut: [{"name":"getNews", "lifespan":2, "parameters":{ "track" : tracker }}]
 							});
 
 						}
