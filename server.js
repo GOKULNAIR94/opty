@@ -392,7 +392,7 @@ restService.post('/oppty', function(req, res)
                                 var contactEmail=resObj.PrimaryContactEmailAddress;
                                 var contactPhone=resObj.PrimaryFormattedPhoneNumber;
                                 var AccountName = resObj.AccountName;
-                                speech = 'Here are the details for Activity: '+activityNumber+'\n\r Subject: '+subject+'\n\r Status: '+status+'\n\r Start Date: '+startDate+'\n\r End Date: '+endDate+'\n\r Opportunity Associated: '+optyName+'\n\r Customer Name: '+contactName+'\n\r Phone: '+contactPhone+'\n\r Email: '+contactEmail +'\n\r Account: '+ AccountName + " days.\n Would you like to know what's going on with " + resObj.items[0].AccountName+ "?";;
+                                speech = 'Here are the details for Activity: '+activityNumber+'\n\r Subject: '+subject+'\n\r Status: '+status+'\n\r Start Date: '+startDate+'\n\r End Date: '+endDate+'\n\r Opportunity Associated: '+optyName+'\n\r Customer Name: '+contactName+'\n\r Phone: '+contactPhone+'\n\r Email: '+contactEmail +'\n\r Account: '+ AccountName + " days.\n Would you like to know what's going on with " + AccountName+ "?";;
                             /*}
                             catch (error)
                             {
