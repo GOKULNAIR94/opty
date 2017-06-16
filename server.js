@@ -380,29 +380,72 @@ restService.post('/oppty', function(req, res)
                                 
                                 console.log('Got ERROR');
                             }
-                            
-                            try
-                            {
-                                var subject=resObj.Subject;
-                                var status=resObj.StatusCode;
-                                var startDate=resObj.ActivityStartDate;
-                                var endDate=resObj.ActivityEndDate;
-                                var optyName=resObj.OpportunityName;
-                                var contactName=resObj.PrimaryContactName;
-                                var contactEmail=resObj.PrimaryContactEmailAddress;
-                                var contactPhone=resObj.PrimaryFormattedPhoneNumber;
+                            try{
                                 var AccountName = resObj.AccountName;
-                                speech = 'Here are the details for Activity: '+activityNumber+'\n\r Subject: '+subject+'\n\r Status: '+status+'\n\r Start Date: '+startDate+'\n\r End Date: '+endDate+'\n\r Opportunity Associated: '+optyName+'\n\r Customer Name: '+contactName+'\n\r Phone: '+contactPhone+'\n\r Email: '+contactEmail +'\n\r Account: '+ AccountName + " days.\n Would you like to know what's going on with " + AccountName+ "?";;
+                                if( req.body.result.metadata.intentName == "oppty - News" ){
+                                    var varHost = 'vikinews.herokuapp.com';								
+                                    var varPath = '/inputmsg';
+                                    var toSend = { "key" : "value" };
+                                    toSend["track"] = resObj.AccountName;
+                                    toSend["intentName"] = req.body.result.metadata.intentName;
+                                    console.log( "toSend : " + JSON.stringify(toSend) );
+                                    var newoptions = {
+                                      host: varHost,
+                                      path: varPath,
+                                      data: toSend,
+                                      method:'POST',
+                                      headers: {
+                                        'Content-Type': 'application/json'
+                                      }
+                                    };
+                                    var body = "";
+								    var responseObject;
+								
+								    var post_req = http.request(newoptions, function(response) {
+                                      response.on('data', function (chunk) {
+                                          body += chunk;
+                                      });
+
+                                      response.on('end', function() {
+                                          responseObject = JSON.parse(body);
+                                          speech = responseObject;
+                                          return res.json({
+                                            speech: speech,
+                                            displayText: speech
+                                          })
+
+                                      })
+                                    }).on('error', function(e){
+                                      speech = "Error occured! : " + e;
+                                        return res.json({
+                                          speech: speech,
+                                          displayText: speech
+                                        })
+                                    });
+                                    post_req.write(JSON.stringify(toSend));
+                                    //post_req.write(tracker);
+                                    post_req.end();
+                                }
+                                else{
+                                    var subject=resObj.Subject;
+                                    var status=resObj.StatusCode;
+                                    var startDate=resObj.ActivityStartDate;
+                                    var endDate=resObj.ActivityEndDate;
+                                    var optyName=resObj.OpportunityName;
+                                    var contactName=resObj.PrimaryContactName;
+                                    var contactEmail=resObj.PrimaryContactEmailAddress;
+                                    var contactPhone=resObj.PrimaryFormattedPhoneNumber;
+
+                                    speech = 'Here are the details for Activity: '+activityNumber+'\n\r Subject: '+subject+'\n\r Status: '+status+'\n\r Start Date: '+startDate+'\n\r End Date: '+endDate+'\n\r Opportunity Associated: '+optyName+'\n\r Customer Name: '+contactName+'\n\r Phone: '+contactPhone+'\n\r Email: '+contactEmail +'\n\r Account: '+ AccountName + " days.\n Would you like to know what's going on with " + AccountName+ "?";
+                                }
                             }
-                            catch (error)
-                            {
-                               console.log('Got ERROR');
+                            
+                            catch(e){
+                                console.log('Got ERROR');
                                 return res.json
                                 ({
                                     speech: 'Incorrect Activity Number'
                                 })
-                                
-                             
                             }
                            
                             return res.json
