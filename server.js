@@ -41,17 +41,10 @@ var today = mydate(now, "yyyy-mm-dd");
 
 restService.post('/oppty', function(req, res) 
 {
-    //console.log("Req  : " + JSON.stringify(req.body));
-	var sessionId = req.body.sessionId;
-    console.log("sessionId : " + sessionId);
-    var content;
-
-    content = fs.readFileSync('login.json', 'utf8');
-    console.log("Content : " + content);
-    content = JSON.parse(content);
-    
-    uname = content.items.OSC[sessionId].username;// 'Akashdeep';
-    pword = content.items.OSC[sessionId].password;// 'lntLNT2K16_1';
+    console.log("Req  : " + JSON.stringify(req.body));
+	
+    uname = req.body.username;// 'Akashdeep';
+    pword = req.body.password;// 'lntLNT2K16_1';
 
     oNumber = req.body.result.parameters.opptyNumber;
     var prob = req.body.result.parameters.Probability;
