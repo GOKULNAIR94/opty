@@ -11,13 +11,7 @@ restService.use(bodyParser.urlencoded({
 
 restService.use(bodyParser.json());
 
-var sessionId = req.body.sessionId;
-console.log("sessionId : " + sessionId);
-var content;
 
-content = fs.readFileSync('login.json', 'utf8');
-console.log("Content : " + content);
-content = JSON.parse(content);
 
 
 var oNumber = '';
@@ -48,7 +42,14 @@ var today = mydate(now, "yyyy-mm-dd");
 restService.post('/oppty', function(req, res) 
 {
     //console.log("Req  : " + JSON.stringify(req.body));
-	
+	var sessionId = req.body.sessionId;
+    console.log("sessionId : " + sessionId);
+    var content;
+
+    content = fs.readFileSync('login.json', 'utf8');
+    console.log("Content : " + content);
+    content = JSON.parse(content);
+    
     oNumber = req.body.result.parameters.opptyNumber;
     var prob = req.body.result.parameters.Probability;
     var actionType = req.body.result.parameters.actionType;
