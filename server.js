@@ -11,14 +11,23 @@ restService.use(bodyParser.urlencoded({
 
 restService.use(bodyParser.json());
 
+var sessionId = req.body.sessionId;
+console.log("sessionId : " + sessionId);
+var content;
+
+content = fs.readFileSync('login.json', 'utf8');
+console.log("Content : " + content);
+content = JSON.parse(content);
+
+
 var oNumber = '';
 var oName = '';
 var oAttrib = '';
 var oType = '';    
 var oName2=oName+'Test';
 var oNumber2=oNumber + 'Testing';
-var uname = 'Akashdeep';
-var pword = 'lntLNT2K16_1';
+var uname = content.items.OSC[sessionId].username;// 'Akashdeep';
+var pword = content.items.OSC[sessionId].password;// 'lntLNT2K16_1';
 var speech = oNumber;
 var http = require('https');
 var options='';
