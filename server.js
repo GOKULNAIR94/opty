@@ -20,8 +20,8 @@ var oAttrib = '';
 var oType = '';    
 var oName2=oName+'Test';
 var oNumber2=oNumber + 'Testing';
-var uname = content.items.OSC[sessionId].username;// 'Akashdeep';
-var pword = content.items.OSC[sessionId].password;// 'lntLNT2K16_1';
+var uname = "";
+var pword = "";
 var speech = oNumber;
 var http = require('https');
 var options='';
@@ -50,6 +50,9 @@ restService.post('/oppty', function(req, res)
     console.log("Content : " + content);
     content = JSON.parse(content);
     
+    uname = content.items.OSC[sessionId].username;// 'Akashdeep';
+    pword = content.items.OSC[sessionId].password;// 'lntLNT2K16_1';
+
     oNumber = req.body.result.parameters.opptyNumber;
     var prob = req.body.result.parameters.Probability;
     var actionType = req.body.result.parameters.actionType;
