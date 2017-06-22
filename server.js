@@ -195,7 +195,7 @@ restService.post('/oppty', function(req, res)
 								};
 								
 								var body = "";
-								var responseObject;
+								//var responseObject;
 								
 								var post_req = http.request(newoptions, function(response) {
 								  response.on('data', function (chunk) {
@@ -203,8 +203,8 @@ restService.post('/oppty', function(req, res)
 								  });
 
 								  response.on('end', function() {
-									  responseObject = JSON.parse(body);
-									  speech = responseObject;
+									  //responseObject = JSON.parse(body);
+									  speech = body;
 									  return res.json({
 										speech: speech,
 										displayText: speech
