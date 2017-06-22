@@ -11,14 +11,17 @@ restService.use(bodyParser.urlencoded({
 
 restService.use(bodyParser.json());
 
+
+
+
 var oNumber = '';
 var oName = '';
 var oAttrib = '';
 var oType = '';    
 var oName2=oName+'Test';
 var oNumber2=oNumber + 'Testing';
-var uname = 'Akashdeep';
-var pword = 'lntLNT2K16_1';
+var uname = "";
+var pword = "";
 var speech = oNumber;
 var http = require('https');
 var options='';
@@ -37,8 +40,12 @@ var now = new Date();
 var today = mydate(now, "yyyy-mm-dd");
 
 restService.post('/oppty', function(req, res) 
-{console.log("Req  : " + JSON.stringify(req.body));
+{
+    console.log("Req  : " + JSON.stringify(req.body));
 	
+    uname = req.body.username;// 'Akashdeep';
+    pword = req.body.password;// 'lntLNT2K16_1';
+
     oNumber = req.body.result.parameters.opptyNumber;
     var prob = req.body.result.parameters.Probability;
     var actionType = req.body.result.parameters.actionType;
