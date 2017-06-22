@@ -203,6 +203,7 @@ restService.post('/oppty', function(req, res)
 								  });
 
 								  response.on('end', function() {
+									  console.log("End : " + body);
 									  //responseObject = JSON.parse(body);
 									  speech = body;
 									  return res.json({
