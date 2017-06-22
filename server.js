@@ -206,10 +206,7 @@ restService.post('/oppty', function(req, res)
 									  //responseObject = JSON.parse(body);
 									  console.log("Speeeech : " + speech);
 									  speech = body;
-									  return res.json({
-										speech: speech,
-										displayText: speech
-									  })
+									  return res.json({speech})
 
 								  })
 								}).on('error', function(e){
