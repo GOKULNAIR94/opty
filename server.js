@@ -43,10 +43,15 @@ restService.post('/oppty', function(req, res)
 {
     console.log("Req  : " + JSON.stringify(req.body));
 	
-    //uname = req.body.username;// 'Akashdeep';
-    //pword = req.body.password;// 'lntLNT2K16_1';
+   
 
 	var loginEncoded = req.body.loginEncoded;
+	if( req.body.loginEncoded != null )
+		loginEncoded = req.body.loginEncoded;
+	else{
+		uname = 'Akashdeep';
+		pword = 'lntLNT2K16_1';
+	}
 	
     oNumber = req.body.result.parameters.opptyNumber;
     var prob = req.body.result.parameters.Probability;
