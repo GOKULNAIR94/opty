@@ -51,7 +51,7 @@ restService.post('/oppty', function(req, res)
 	else{
 		uname = 'Akashdeep';
 		pword = 'lntLNT2K16_1';
-		loginEncoded = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
+		loginEncoded = 'Basic ' + new Buffer(uname + ':' + pword).toString('base64');
 	}
 	
     oNumber = req.body.result.parameters.opptyNumber;
