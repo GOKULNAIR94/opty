@@ -211,10 +211,12 @@ restService.post('/oppty', function(req, res)
 								  });
 
 								  response.on('end', function() {
-									  console.log("End : " + body);
-									  //responseObject = JSON.parse(body);
-									  speech = body;
-									  return res.json(speech)
+									  responseObject = JSON.parse(body);
+									  speech = responseObject;
+									  return res.json({
+									    speech: speech,
+									    displayText: speech
+									  })
 
 								  })
 								}).on('error', function(e){
