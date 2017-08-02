@@ -203,7 +203,7 @@ restService.post('/oppty', function(req, res)
 								};
 								
 								var body = "";
-								//var responseObject;
+								var responseObject;
 								
 								var post_req = http.request(newoptions, function(response) {
 								  response.on('data', function (chunk) {
