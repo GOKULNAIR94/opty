@@ -42,7 +42,7 @@ var UserAuth = '';
 uname = 'Akashdeep';
 pword = 'lntLNT2K16_1';
 
-function getAuth(req){
+function getAuth(req,callback){
     try {
         if (req.body.originalRequest != null) {
             if (req.body.originalRequest.source == "slack_testbot") {
@@ -75,7 +75,7 @@ function getAuth(req){
                         console.log("UserAuth : " + UserAuth);
                     }
                     
-                    return UserAuth;
+                    callback(UserAuth);
                     
                 } catch (error) {
                     console.log("Error: " + error);
@@ -105,7 +105,7 @@ restService.post('/oppty', function(req, res) {
     console.log("loginEncoded2 : " + loginEncoded2);
 
     
-    getAuth(req, function( UserAuth ){
+    getAuth( req, function( UserAuth ){
         console.log(" UserAuth returned : " + UserAuth);
         console.log("Req  after return: " + JSON.stringify(req.body));
             
