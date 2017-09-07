@@ -67,7 +67,7 @@ restService.post('/oppty', function(req, res) {
             resx.on('data', function(data) {
                 responseString += data;
             });
-            resx.on('end', function() {
+            resx.on('end', function(req, res) {
                 try {
                     resObj = JSON.parse(responseString);
                     var rowCount = resObj.count;
