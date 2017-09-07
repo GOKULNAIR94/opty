@@ -149,6 +149,7 @@ console.log( "varPath Login : " + varPath );
                     
                     try
                     {
+                        console.log("responseString : " + responseString );
                         resObj=JSON.parse(responseString);
                     }
                     catch (error)
