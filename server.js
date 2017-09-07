@@ -46,7 +46,7 @@ function getAuth( req, res, callback){
     try {
         if (req.body.originalRequest != null) {
             if (req.body.originalRequest.source == "slack") {
-                var userid = req.body.originalRequest.data.user;
+                var userid = req.body.originalRequest.data.event.user;
                 console.log("userid : " + userid);
             }
         }
