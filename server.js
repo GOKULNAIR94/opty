@@ -88,13 +88,14 @@ console.log( "varPath Login : " + varPath );
     }
 
 	var loginEncoded = req.body.loginEncoded;
+    var loginEncoded2;
 	if( req.body.loginEncoded != null )
 		loginEncoded = req.body.loginEncoded;
 	else{
 		uname = 'Akashdeep';
 		pword = 'lntLNT2K16_1';
 		loginEncoded = 'Basic ' + new Buffer( 'LNT001:Lnt@123' ).toString('base64');
-        var loginEncoded2 = 'Basic ' + UserAuth;
+        loginEncoded2 = 'Basic ' + UserAuth;
 	}
 	console.log("loginEncoded : " + loginEncoded );
     
