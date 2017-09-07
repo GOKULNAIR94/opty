@@ -70,7 +70,7 @@ restService.post('/oppty', function(req, res)
                         var UserAuth = resObj.items[0].OSCAuth_c;
                         console.log( "UserAuth : " + UserAuth);
                     }
-                    speech = rowCount;
+                    speech = UserAuth;
                     return res.json
                         ({
                             speech: speech ,
