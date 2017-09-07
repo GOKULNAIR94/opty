@@ -42,7 +42,7 @@ var UserAuth = '';
 uname = 'Akashdeep';
 pword = 'lntLNT2K16_1';
 
-function getAuth(req,callback){
+function getAuth( req, res, callback){
     try {
         if (req.body.originalRequest != null) {
             if (req.body.originalRequest.source == "slack_testbot") {
