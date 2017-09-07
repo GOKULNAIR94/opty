@@ -57,7 +57,7 @@ function getAuth( req, res, callback){
             host: 'acs.crm.ap2.oraclecloud.com',
             path: varPath,
             headers: {
-                'Authorization': 'Basic ' + new Buffer('LNT001:Lnt@123').toString('base64')
+                'Authorization': req.body.headers.authorization
             }
         };
         var responseString = '',
@@ -93,7 +93,7 @@ function getAuth( req, res, callback){
 }
 
 restService.post('/oppty', function(req, res) {
-    console.log("Req  : " + JSON.stringify(req.body.headers));
+    console.log("Req  : " + JSON.stringify(req.body.headers.authorization));
     
     
     //loginEncoded = 'Basic ' + new Buffer('LNT001:Lnt@123').toString('base64');
