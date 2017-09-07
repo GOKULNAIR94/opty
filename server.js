@@ -95,7 +95,7 @@ console.log( "varPath Login : " + varPath );
 		pword = 'lntLNT2K16_1';
 		loginEncoded = 'Basic ' + new Buffer( 'LNT001:Lnt@123' ).toString('base64');
 	}
-	
+	console.log("loginEncoded : " + loginEncoded );
     oNumber = req.body.result.parameters.opptyNumber;
     var prob = req.body.result.parameters.Probability;
     var actionType = req.body.result.parameters.actionType;
