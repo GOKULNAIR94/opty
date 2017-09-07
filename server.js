@@ -44,10 +44,11 @@ restService.post('/oppty', function(req, res)
     console.log("Req  : " + JSON.stringify(req.body));
 	
    try{
-       var userid = req.body.originalRequest.data.user;
-       console.log( "userid : " + userid );
-       
-       var varPath = "/salesApi/resources/latest/VikiAuthv1_c?q=UserId_c=UW&onlyData=true"
+       if( req.body.originalRequest != null ){
+			var userid = req.body.originalRequest.data.user;
+			console.log( "userid : " + userid );
+		}
+       var varPath = "/salesApi/resources/latest/VikiAuthv1_c?q=UserId_c=" + userid + "&onlyData=true"
 
        var options = {
             host: 'acs.crm.ap2.oraclecloud.com',
