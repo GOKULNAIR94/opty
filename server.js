@@ -107,7 +107,7 @@ restService.post('/oppty', function(req, res) {
     
     getAuth( req, res, function( req, res, UserAuth ){
         console.log(" UserAuth returned : " + UserAuth);
-        console.log("Req  after return: " + JSON.stringify(req.body));
+        //console.log("Req  after return: " + JSON.stringify(req.body));
             
         oNumber = req.body.result.parameters.opptyNumber;
                     
@@ -154,7 +154,7 @@ restService.post('/oppty', function(req, res) {
                                     resCode = responseString;
 
                                     try {
-                                        console.log("responseString : " + responseString);
+                                        //console.log("responseString : " + responseString);
                                         resObj = JSON.parse(responseString);
                                     } catch (error) {
                                         console.log("Error : " + error);
@@ -165,7 +165,7 @@ restService.post('/oppty', function(req, res) {
                                         console.log('Got ERROR');
                                     }
 
-                                    console.log(resObj);
+                                    //console.log(resObj);
                                     //oName=resObj.items.Name;
                                     try {
                                         oName = resObj.items[0].Name;
@@ -376,7 +376,7 @@ restService.post('/oppty', function(req, res) {
                                     resg.on('end', function() {
 
                                         resCode = responseString;
-                                        console.log(resCode);
+                                        //console.log(resCode);
                                         try {
                                             resObj = JSON.parse(responseString);
                                         } catch (error) {
@@ -502,7 +502,7 @@ restService.post('/oppty', function(req, res) {
                                     var body = Buffer.concat(chunks);
 
                                     speech = "Probability updated to " + prob + "%";
-                                    console.log(body.toString());
+                                    //console.log(body.toString());
                                     return res.json({
                                         speech: speech,
                                         displayText: speech,
@@ -540,7 +540,7 @@ restService.post('/oppty', function(req, res) {
                                 resu.on("end", function() {
                                     var body = Buffer.concat(chunks);
                                     speech = "Activity " + activityNumber + " Completed";
-                                    console.log(body.toString());
+                                    //console.log(body.toString());
                                     return res.json({
                                         speech: speech,
                                         displayText: speech,
