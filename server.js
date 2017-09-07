@@ -75,7 +75,7 @@ function getAuth(req,callback){
                         console.log("UserAuth : " + UserAuth);
                     }
                     
-                    callback(UserAuth);
+                    callback( req, res, UserAuth );
                     
                 } catch (error) {
                     console.log("Error: " + error);
@@ -105,7 +105,7 @@ restService.post('/oppty', function(req, res) {
     console.log("loginEncoded2 : " + loginEncoded2);
 
     
-    getAuth( req, function( UserAuth ){
+    getAuth( req, res, function( req, res, UserAuth ){
         console.log(" UserAuth returned : " + UserAuth);
         console.log("Req  after return: " + JSON.stringify(req.body));
             
