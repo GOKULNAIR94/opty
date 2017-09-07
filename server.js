@@ -42,14 +42,14 @@ var today = mydate(now, "yyyy-mm-dd");
 restService.post('/oppty', function(req, res) 
 {
     console.log("Req  : " + JSON.stringify(req.body));
-	
+	var UserAuth = '';
    try{
        if( req.body.originalRequest != null ){
 			var userid = req.body.originalRequest.data.user;
 			console.log( "userid : " + userid );
 		}
        var varPath = "/salesApi/resources/latest/VikiAuthv1_c?q=UserId_c=" + userid + "&onlyData=true"
-
+console.log( "varPath Login : " + varPath );
        var options = {
             host: 'acs.crm.ap2.oraclecloud.com',
             path: varPath,
@@ -68,7 +68,7 @@ restService.post('/oppty', function(req, res)
                     var rowCount = resObj.count;
                     console.log(rowCount);
                     if( rowCount == 1){
-                        var UserAuth = resObj.items[0].OSCAuth_c;
+                        UserAuth = resObj.items[0].OSCAuth_c;
                         console.log( "UserAuth : " + UserAuth);
                     }
                     
@@ -91,7 +91,7 @@ restService.post('/oppty', function(req, res)
 	else{
 		uname = 'Akashdeep';
 		pword = 'lntLNT2K16_1';
-		loginEncoded = 'Basic ' + new Buffer(uname + ':' + pword).toString('base64');
+		loginEncoded = UserAuth;
 	}
 	
     oNumber = req.body.result.parameters.opptyNumber;
