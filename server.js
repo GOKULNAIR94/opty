@@ -106,7 +106,9 @@ restService.post('/oppty', function(req, res) {
 
     
     getAuth(req, function( UserAuth ){
-        
+        console.log(" UserAuth returned : " + UserAuth);
+        console.log("Req  after return: " + JSON.stringify(req.body));
+            
         oNumber = req.body.result.parameters.opptyNumber;
                     
                     var prob = req.body.result.parameters.Probability;
