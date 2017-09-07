@@ -38,11 +38,11 @@ var resCode = '';
 var mydate = require('dateformat');
 var now = new Date();
 var today = mydate(now, "yyyy-mm-dd");
-
+var UserAuth = '';
 restService.post('/oppty', function(req, res) 
 {
     console.log("Req  : " + JSON.stringify(req.body));
-	var UserAuth = '';
+	
    try{
        if( req.body.originalRequest != null ){
            if( req.body.originalRequest.source == "slack_testbot" ){
