@@ -41,6 +41,7 @@ var today = mydate(now, "yyyy-mm-dd");
 var UserAuth = '';
 uname = 'Akashdeep';
 pword = 'lntLNT2K16_1';
+var loginEncoded;
 
 function getAuth( req, res, callback){
     try {
@@ -94,16 +95,16 @@ function getAuth( req, res, callback){
 restService.post('/oppty', function(req, res) {
     console.log("Req  : " + JSON.stringify(req.body));
     
-    var loginEncoded;
+    
+    //loginEncoded = 'Basic ' + new Buffer('LNT001:Lnt@123').toString('base64');
 
-    loginEncoded = 'Basic ' + new Buffer('LNT001:Lnt@123').toString('base64');
-
-    console.log("loginEncoded : " + loginEncoded);
+    //console.log("loginEncoded : " + loginEncoded);
 
 
     
     getAuth( req, res, function( req, res, UserAuth ){
-        console.log(" UserAuth returned : " + UserAuth);
+        console.log(" UserAuth returned : " + UserAuth;);
+        loginEncoded = 'Basic ' + UserAuth;
         //console.log("Req  after return: " + JSON.stringify(req.body));
             
         oNumber = req.body.result.parameters.opptyNumber;
