@@ -92,7 +92,7 @@ function getAuth( req, res, callback){
 }
 
 restService.post('/oppty', function(req, res) {
-    console.log("Req  : " + JSON.stringify(req.body));
+    console.log("Req  : " + JSON.stringify(req));
     
     var loginEncoded;
     var loginEncoded2;
