@@ -45,8 +45,10 @@ restService.post('/oppty', function(req, res)
 	var UserAuth = '';
    try{
        if( req.body.originalRequest != null ){
-			var userid = req.body.originalRequest.data.user;
-			console.log( "userid : " + userid );
+           if( req.body.originalRequest.source == "slack_testbot" ){
+               var userid = req.body.originalRequest.data.user;
+               console.log( "userid : " + userid );
+           }
 		}
        var varPath = "/salesApi/resources/latest/VikiAuthv1_c?q=UserId_c=" + userid + "&onlyData=true"
 console.log( "varPath Login : " + varPath );
