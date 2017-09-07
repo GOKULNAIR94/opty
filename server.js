@@ -92,17 +92,14 @@ function getAuth( req, res, callback){
 }
 
 restService.post('/oppty', function(req, res) {
-    console.log("Req  : " + JSON.stringify(req));
+    console.log("Req  : " + JSON.stringify(req.headers));
     
     var loginEncoded;
-    var loginEncoded2;
 
     loginEncoded = 'Basic ' + new Buffer('LNT001:Lnt@123').toString('base64');
-    loginEncoded2 = 'Basic ' + UserAuth;
 
     console.log("loginEncoded : " + loginEncoded);
 
-    console.log("loginEncoded2 : " + loginEncoded2);
 
     
     getAuth( req, res, function( req, res, UserAuth ){
