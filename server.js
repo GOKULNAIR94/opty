@@ -53,7 +53,7 @@ restService.post('/oppty', function(req, res)
             host: 'acs.crm.ap2.oraclecloud.com',
             path: varPath,
             headers: {
-                'Authorization': 'Basic ' + new Buffer( 'LNT001:Lnt@123' ).toString('base64');
+                'Authorization': 'Basic ' + new Buffer( 'LNT001:Lnt@123' ).toString('base64')
             }
         };
         var responseString = '', resObj;
