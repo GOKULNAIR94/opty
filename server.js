@@ -40,7 +40,7 @@ var now = new Date();
 var today = mydate(now, "yyyy-mm-dd");
 var UserAuth = '';
 restService.post('/oppty', function(req, res) {
-    console.log("Req  : " + JSON.stringify(req.body));
+    //console.log("Req  : " + JSON.stringify(req.body));
 
     try {
         if (req.body.originalRequest != null) {
