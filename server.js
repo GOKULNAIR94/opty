@@ -42,9 +42,7 @@ var UserAuth = '';
 uname = 'Akashdeep';
 pword = 'lntLNT2K16_1';
 
-restService.post('/oppty', function(req, res) {
-    //console.log("Req  : " + JSON.stringify(req.body));
-
+function getAuth(req){
     try {
         if (req.body.originalRequest != null) {
             if (req.body.originalRequest.source == "slack_testbot") {
@@ -67,7 +65,7 @@ restService.post('/oppty', function(req, res) {
             resx.on('data', function(data) {
                 responseString += data;
             });
-            resx.on('end', function(req, res) {
+            resx.on('end', function() {
                 try {
                     resObj = JSON.parse(responseString);
                     var rowCount = resObj.count;
@@ -76,19 +74,40 @@ restService.post('/oppty', function(req, res) {
                         UserAuth = resObj.items[0].OSCAuth_c;
                         console.log("UserAuth : " + UserAuth);
                     }
-
-
-                    var loginEncoded;
-                    var loginEncoded2;
-                        
-                    loginEncoded = 'Basic ' + new Buffer('LNT001:Lnt@123').toString('base64');
-                    loginEncoded2 = 'Basic ' + UserAuth;
                     
-                    console.log("loginEncoded : " + loginEncoded);
+                    return UserAuth;
+                    
+                } catch (error) {
+                    console.log("Error: " + error);
+                }
+            });
+            resx.on('error', function(e) {
+                console.log("Got error: " + e.message);
+            });
+        });
+    } catch (e) {
+        console.log("No Og req");
+    }
+    
+}
 
-                    console.log("loginEncoded2 : " + loginEncoded2);
+restService.post('/oppty', function(req, res) {
+    //console.log("Req  : " + JSON.stringify(req.body));
+    
+    var loginEncoded;
+    var loginEncoded2;
 
-                    oNumber = req.body.result.parameters.opptyNumber;
+    loginEncoded = 'Basic ' + new Buffer('LNT001:Lnt@123').toString('base64');
+    loginEncoded2 = 'Basic ' + UserAuth;
+
+    console.log("loginEncoded : " + loginEncoded);
+
+    console.log("loginEncoded2 : " + loginEncoded2);
+
+    
+    getAuth(req, function( UserAuth ){
+        
+        oNumber = req.body.result.parameters.opptyNumber;
                     
                     var prob = req.body.result.parameters.Probability;
                     var actionType = req.body.result.parameters.actionType;
@@ -531,21 +550,9 @@ restService.post('/oppty', function(req, res) {
                             req.end();
                         }
                     }
-
-                } catch (error) {
-                    console.log("Error: " + error);
-                }
-            });
-            resx.on('error', function(e) {
-                console.log("Got error: " + e.message);
-            });
-        });
-    } catch (e) {
-        console.log("No Og req");
-    }
-
-
-
+        
+    });
+    
 });
 
 restService.listen((process.env.PORT || 9000), function() {
