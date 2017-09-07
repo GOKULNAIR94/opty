@@ -46,6 +46,47 @@ restService.post('/oppty', function(req, res)
    try{
        var userid = req.body.originalRequest.data.user;
        console.log( "userid : " + userid );
+       
+       var varPath = "/salesApi/resources/latest/VikiAuthv1_c?q=UserId_c=UW&onlyData=true"
+
+       var options = {
+            host: 'acs.crm.ap2.oraclecloud.com',
+            path: varPath,
+            headers: {
+                'Authorization': 'Basic ' + new Buffer( 'LNT001:Lnt@123' ).toString('base64');
+            }
+        };
+        var responseString = '', resObj;
+        var request = http.get(options, function(resx) {
+            resx.on('data', function(data) {
+                responseString += data;
+            });
+            resx.on('end', function() {
+                try {
+                   resObj = JSON.parse(responseString);
+                    var rowCount = resObj.count;
+                    console.log(rowCount);
+                    if( rowCount == 1){
+                        var UserAuth = resObj.items[0].OSCAuth_c;
+                        console.log( "UserAuth : " + UserAuth);
+                    }
+                    speech = rowCount;
+                    return res.json
+                        ({
+                            speech: speech ,
+                            displayText: speech,
+                            source: 'webhook-OSC-oppty'
+                        });
+                                    
+                                    
+                } catch (error) {
+                    
+                }
+            });
+            resx.on('error', function(e) {
+                console.log("Got error: " + e.message);
+            });
+        });
    }
     catch(e){
         console.log("No Og req");
