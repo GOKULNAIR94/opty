@@ -124,6 +124,7 @@ console.log( "varPath Login : " + varPath );
             {
                 urlPath = '/salesApi/resources/latest/opportunities?q=Name=' + oName + '&onlyData=true';//&fields=Name,' + oAttrib + ',OptyNumber'
             }
+           console.log("urlPath : " + urlPath );
             options = 
             {
                     //ca: fs.readFileSync('MyCert'),
@@ -152,6 +153,7 @@ console.log( "varPath Login : " + varPath );
                     }
                     catch (error)
                     {
+                        console.log("Error : " + error );
                         return res.json
                         ({
                             speech: 'Incorrect Opportunity number'
