@@ -93,7 +93,7 @@ function getAuth( req, res, callback){
 }
 
 restService.post('/oppty', function(req, res) {
-    console.log("Req  : " + JSON.stringify(req.headers.vikiAuth));
+    console.log("Req  : " + JSON.stringify(req.headers));
     
     
     //loginEncoded = 'Basic ' + new Buffer('LNT001:Lnt@123').toString('base64');
