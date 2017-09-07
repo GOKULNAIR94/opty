@@ -43,7 +43,13 @@ restService.post('/oppty', function(req, res)
 {
     console.log("Req  : " + JSON.stringify(req.body));
 	
-   
+   try{
+       var userid = req.body.originalRequest.data.user;
+       console.log( "userid : " + userid );
+   }
+    catch(e){
+        console.log("No Og req");
+    }
 
 	var loginEncoded = req.body.loginEncoded;
 	if( req.body.loginEncoded != null )
