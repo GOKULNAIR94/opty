@@ -39,6 +39,9 @@ var mydate = require('dateformat');
 var now = new Date();
 var today = mydate(now, "yyyy-mm-dd");
 var UserAuth = '';
+uname = 'Akashdeep';
+pword = 'lntLNT2K16_1';
+
 restService.post('/oppty', function(req, res) {
     //console.log("Req  : " + JSON.stringify(req.body));
 
@@ -75,16 +78,12 @@ restService.post('/oppty', function(req, res) {
                     }
 
 
-                    var loginEncoded = req.body.loginEncoded;
+                    var loginEncoded;
                     var loginEncoded2;
-                    if (req.body.loginEncoded != null)
-                        loginEncoded = req.body.loginEncoded;
-                    else {
-                        uname = 'Akashdeep';
-                        pword = 'lntLNT2K16_1';
-                        loginEncoded = 'Basic ' + new Buffer('LNT001:Lnt@123').toString('base64');
-                        loginEncoded2 = 'Basic ' + UserAuth;
-                    }
+                        
+                    loginEncoded = 'Basic ' + new Buffer('LNT001:Lnt@123').toString('base64');
+                    loginEncoded2 = 'Basic ' + UserAuth;
+                    
                     console.log("loginEncoded : " + loginEncoded);
 
                     console.log("loginEncoded2 : " + loginEncoded2);
