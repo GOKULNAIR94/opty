@@ -88,9 +88,6 @@ restService.post('/oppty', function(req, res) {
 
                     console.log("loginEncoded2 : " + loginEncoded2);
 
-                    console.log("WTF");
-                    console.log(req.body.result.parameters.opptyNumber);
-                    console.log("WTF2");
                     oNumber = req.body.result.parameters.opptyNumber;
                     
                     var prob = req.body.result.parameters.Probability;
@@ -453,7 +450,8 @@ restService.post('/oppty', function(req, res) {
                         res.on('error', function(e) {
                             console.log('Got error: ' + e.message);
                         });
-                    } else if (actionType == 'update') {
+                    } 
+                    else if (actionType == 'update') {
                         console.log(req.body.result.contexts[0].parameters.objType);
                         oNumber = req.body.result.contexts[0].parameters.opptyNumber;
                         activityNumber = req.body.result.contexts[0].parameters.activityNumber;
@@ -535,7 +533,7 @@ restService.post('/oppty', function(req, res) {
                     }
 
                 } catch (error) {
-
+                    console.log("Error: " + error);
                 }
             });
             resx.on('error', function(e) {
