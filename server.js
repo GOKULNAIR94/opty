@@ -89,8 +89,10 @@ restService.post('/oppty', function(req, res) {
                     console.log("loginEncoded2 : " + loginEncoded2);
 
                     console.log("WTF");
+                    console.log(req.body.result.parameters.opptyNumber);
+                    console.log("WTF2");
                     oNumber = req.body.result.parameters.opptyNumber;
-                    console.log("req.body.result.parameters.opptyNumber");
+                    
                     var prob = req.body.result.parameters.Probability;
                     var actionType = req.body.result.parameters.actionType;
                     
