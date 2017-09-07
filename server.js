@@ -93,9 +93,9 @@ console.log( "varPath Login : " + varPath );
 	else{
 		uname = 'Akashdeep';
 		pword = 'lntLNT2K16_1';
-		loginEncoded = 'Basic ' + new Buffer( 'LNT001:Lnt@123' ).toString('base64');
+		loginEncoded = 'Basic ' + UserAuth;
 	}
-	console.log("loginEncoded : " + loginEncoded );
+	
     oNumber = req.body.result.parameters.opptyNumber;
     var prob = req.body.result.parameters.Probability;
     var actionType = req.body.result.parameters.actionType;
