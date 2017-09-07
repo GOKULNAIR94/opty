@@ -91,7 +91,9 @@ restService.post('/oppty', function(req, res) {
                     oNumber = req.body.result.parameters.opptyNumber;
                     var prob = req.body.result.parameters.Probability;
                     var actionType = req.body.result.parameters.actionType;
+                    
                     console.log(actionType);
+                    
                     if (actionType != 'update') {
                         oName = req.body.result.parameters.opptyName;
                         oAttrib = req.body.result.parameters.optyAttribut;
