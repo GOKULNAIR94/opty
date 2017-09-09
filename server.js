@@ -504,7 +504,8 @@ restService.post('/oppty', function(req, res) {
 
                                 resu.on("end", function() {
                                     var body = Buffer.concat(chunks);
-
+                                    
+                                    console.log( "Status code : : " + res.statusCode);
                                     speech = "Probability updated to " + prob + "%";
                                     //console.log(body.toString());
                                     return res.json({
