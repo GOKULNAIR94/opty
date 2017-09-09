@@ -42,14 +42,20 @@ var UserAuth = '';
 uname = 'Akashdeep';
 pword = 'lntLNT2K16_1';
 var loginEncoded;
+var userid; 
 
 function getAuth( req, res, callback){
     try {
         if (req.body.originalRequest != null) {
-            //if (req.body.originalRequest.source == "slack") {
-                var userid = req.body.originalRequest.data.event.user;
-                console.log("userid : " + userid);
-            //}
+            if (req.body.originalRequest.source == "slack") {
+                userid = req.body.originalRequest.data.event.user;
+                console.log("Slack userid : " + userid);
+            }
+            if (req.body.originalRequest.source == "google") {
+                userid = req.body.originalRequest.data.user.userId;
+                console.log("Google userid : " + userid);
+            }
+
         }
         var varPath = "/salesApi/resources/latest/VikiAuthv1_c?q=UserId_c=" + userid + "&onlyData=true"
         console.log("varPath Login : " + varPath);
