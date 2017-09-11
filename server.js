@@ -47,6 +47,10 @@ var userid;
 function getAuth( req, res, callback){
     try {
         if (req.body.originalRequest != null) {
+            if (req.body.originalRequest.source == "skype") {
+                userid = req.body.originalRequest.data.address.user.id;
+                console.log("skype userid : " + userid);
+            }
             if (req.body.originalRequest.source == "slack") {
                 userid = req.body.originalRequest.data.event.user;
                 console.log("Slack userid : " + userid);
