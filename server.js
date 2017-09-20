@@ -184,10 +184,10 @@ restService.post('/oppty', function(req, res) {
                                         if (oAttrib == 'Revenue') {
                                             rev = '$' + resObj.items[0].Revenue / 1000000 + 'M';
                                             optyOther = '$' + resObj.items[0].ExpectAmount / 1000000 + 'M';
-                                            speech = 'Current Revenue for Opportunity ' + oName + ' is ' + rev + '. The expected amount for this opportunity is ' + optyOther + "\n Would you like to know what's going on with " + resObj.items[0].TargetPartyName + "?";
+                                            speech = 'Current Revenue for Opportunity ' + oName + ' is ' + rev + '. The expected amount for this opportunity is ' + optyOther + ".\n Would you like to know what's going on with " + resObj.items[0].TargetPartyName + "?";
                                         } else if (oAttrib == 'WinProb') {
                                             rev = resObj.items[0].WinProb;
-                                            speech = 'Opportunity ' + oName + ' is ' + rev + "% probable to Win.\n Would you like to know what's going on with " + resObj.items[0].TargetPartyName + "?";
+                                            speech = 'Opportunity ' + oName + ' is ' + rev + "% probable to Win.";
                                         } else if (oAttrib == 'LastUpdatedBy') {
                                             console.log("Caught " + oAttrib)
                                             rev = resObj.items[0].LastUpdatedBy;
@@ -455,7 +455,7 @@ restService.post('/oppty', function(req, res) {
                                                 var contactEmail = resObj.PrimaryContactEmailAddress;
                                                 var contactPhone = resObj.PrimaryFormattedPhoneNumber;
 
-                                                speech = 'Here are the details for Activity: ' + activityNumber + '\n\r Subject: ' + subject + '\n\r Status: ' + status + '\n\r Start Date: ' + startDate + '\n\r End Date: ' + endDate + '\n\r Opportunity Associated: ' + optyName + '\n\r Customer Name: ' + contactName + '\n\r Phone: ' + contactPhone + '\n\r Email: ' + contactEmail + '\n\r Account: ' + AccountName + ".\n Would you like to know what's going on with " + AccountName + "?";
+                                                speech = 'Here are the details for Activity: ' + activityNumber + ',\n\r Subject: ' + subject + ',\n\r Status: ' + status + ',\n\r Start Date: ' + mydate( startDate, "yyyy-mm-dd") + ',\n\r End Date: ' + mydate( endDate, "yyyy-mm-dd") + ',\n\r Opportunity Associated: ' + optyName + ',\n\r Customer Name: ' + contactName + ',\n\r Phone: ' + contactPhone + ',\n\r Email: ' + contactEmail + ',\n\r Account: ' + AccountName + ".\n Would you like to know what's going on with " + AccountName + "?";
                                                 return res.json({
                                                     speech: speech,
                                                     displayText: speech,
