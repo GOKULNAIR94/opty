@@ -319,9 +319,10 @@ restService.post('/oppty', function(req, res) {
                                     resg.on('data', function(data) {
                                         responseString += data;
                                     });
-									var suggestions = [];
-									var returnJson;
+									
                                     resg.on('end', function() {
+										var suggestions = [];
+										var returnJson;
 
                                         resCode = responseString;
 
