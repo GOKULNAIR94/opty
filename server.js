@@ -319,10 +319,9 @@ restService.post('/oppty', function(req, res) {
                                     resg.on('data', function(data) {
                                         responseString += data;
                                     });
-									
+									var suggestions = [];
+									var returnJson;
                                     resg.on('end', function() {
-										var suggestions = [];
-										var returnJson;
 
                                         resCode = responseString;
 
@@ -356,7 +355,7 @@ restService.post('/oppty', function(req, res) {
                                                     speech = speech + 'Activity Number: ' + resObj.items[i].ActivityNumber + ', Subject: ' + resObj.items[i].Subject + ';\r\n';
                                                     console.log(speech);
 													if( resObj.items[i].ActivityNumber != null )
-														suggestions.push( {"title": resObj.items[i].ActivityNumber });
+														suggestions.add( {"title": resObj.items[i].ActivityNumber });
                                                 } else {
 
                                                 }
@@ -364,17 +363,17 @@ restService.post('/oppty', function(req, res) {
 
                                             }
                                         } catch (error) {
-                                            console.log('Got ERROR : ' + error);
-											return res.json({
+                                            return res.json({
                                                 speech: 'User has no Activities listed'
                                             })
 
-                                            
+                                            console.log('Got ERROR');
                                         }
 										
 										if (req.body.originalRequest.source == "google") {
 											returnJson = {
-												
+												speech: speech,
+												displayText: speech,
 												data : {
 													google: {
 														'expectUserResponse': true,
@@ -383,8 +382,8 @@ restService.post('/oppty', function(req, res) {
 														'richResponse': {
 															'items': [{
 																	'simpleResponse': {
-																		'textToSpeech': speech,
-																		'displayText': speech
+																		'textToSpeech': 'Hi! My name is VIKI (Virtual Interactive Kinetic Intelligence) and I am here to help! Please click the below button to Login!',
+																		'displayText': 'Hi! My name is VIKI (Virtual Interactive Kinetic Intelligence) and I am here to help!'
 																	}
 																}
 															],
@@ -392,21 +391,18 @@ restService.post('/oppty', function(req, res) {
 														}
 													}
 												}
-											};
-											console.log( "Google 1 : " + JSON.stringify(returnJson));
-											return res.json(returnJson);
-
+											}
+											console.log( "Google : " + JSON.stringify(returnJson));
 										}
 										else{
 											returnJson = {
 												speech: speech,
 												displayText: speech
-											};
-											return res.json(returnJson);
-
+											}
 										}
 										
-										
+										return res.json(returnJson);
+
                                     })
 
                                     resg.on('error', function(e) {
