@@ -394,16 +394,19 @@ restService.post('/oppty', function(req, res) {
 												}
 											}
 											console.log( "Google : " + JSON.stringify(returnJson));
+											return res.json(returnJson);
+
 										}
 										else{
 											returnJson = {
 												speech: speech,
 												displayText: speech
 											}
+											return res.json(returnJson);
+
 										}
 										
-										return res.json(returnJson);
-
+										
                                     })
 
                                     resg.on('error', function(e) {
