@@ -355,7 +355,7 @@ restService.post('/oppty', function(req, res) {
                                                     speech = speech + 'Activity Number: ' + resObj.items[i].ActivityNumber + ', Subject: ' + resObj.items[i].Subject + ';\r\n';
                                                     console.log(speech);
 													if( resObj.items[i].ActivityNumber != null )
-														suggestions[i] = {"title": resObj.items[i].ActivityNumber };
+														suggestions.add( {"title": resObj.items[i].ActivityNumber });
                                                 } else {
 
                                                 }
