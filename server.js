@@ -320,6 +320,7 @@ restService.post('/oppty', function(req, res) {
                                         responseString += data;
                                     });
 									var suggestions = [];
+									var returnJson;
                                     resg.on('end', function() {
 
                                         resCode = responseString;
@@ -367,7 +368,7 @@ restService.post('/oppty', function(req, res) {
 
                                             console.log('Got ERROR');
                                         }
-										var returnJson;
+										
 										if (req.body.originalRequest.source == "google") {
 											returnJson = {
 												speech: speech,
