@@ -391,7 +391,7 @@ restService.post('/oppty', function(req, res) {
 													}
 												}
 											}
-											console.log( "Google : " + JSON.stringify(returnJson););
+											console.log( "Google : " + JSON.stringify(returnJson));
 										}
 										else{
 											returnJson = {
