@@ -363,11 +363,12 @@ restService.post('/oppty', function(req, res) {
 
                                             }
                                         } catch (error) {
-                                            return res.json({
+                                            console.log('Got ERROR : ' + error);
+											return res.json({
                                                 speech: 'User has no Activities listed'
                                             })
 
-                                            console.log('Got ERROR');
+                                            
                                         }
 										
 										if (req.body.originalRequest.source == "google") {
