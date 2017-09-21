@@ -392,7 +392,7 @@ restService.post('/oppty', function(req, res) {
 														}
 													}
 												}
-											}
+											};
 											console.log( "Google 1 : " + JSON.stringify(returnJson));
 											return res.json(returnJson);
 
@@ -401,7 +401,7 @@ restService.post('/oppty', function(req, res) {
 											returnJson = {
 												speech: speech,
 												displayText: speech
-											}
+											};
 											return res.json(returnJson);
 
 										}
