@@ -319,6 +319,7 @@ restService.post('/oppty', function(req, res) {
                                     resg.on('data', function(data) {
                                         responseString += data;
                                     });
+									var suggestions = [];
                                     resg.on('end', function() {
 
                                         resCode = responseString;
@@ -352,6 +353,7 @@ restService.post('/oppty', function(req, res) {
                                                 if (today <= endDate && today >= startDate) {
                                                     speech = speech + 'Activity Number: ' + resObj.items[i].ActivityNumber + ', Subject: ' + resObj.items[i].Subject + ';\r\n';
                                                     console.log(speech);
+													suggestions[i] = {"title": resObj.items[i].ActivityNumber };
                                                 } else {
 
                                                 }
@@ -365,12 +367,38 @@ restService.post('/oppty', function(req, res) {
 
                                             console.log('Got ERROR');
                                         }
-
-                                        return res.json({
-                                            speech: speech,
-                                            displayText: speech,
-                                            source: 'webhook-OSC-oppty'
-                                        });
+										var returnJson;
+										if (req.body.originalRequest.source == "google") {
+											returnJson = {
+												speech: speech,
+												displayText: speech,
+												data : {
+													google: {
+														'expectUserResponse': true,
+														'isSsml': false,
+														'noInputPrompts': [],
+														'richResponse': {
+															'items': [{
+																	'simpleResponse': {
+																		'textToSpeech': 'Hi! My name is VIKI (Virtual Interactive Kinetic Intelligence) and I am here to help! Please click the below button to Login!',
+																		'displayText': 'Hi! My name is VIKI (Virtual Interactive Kinetic Intelligence) and I am here to help!'
+																	}
+																}
+															],
+															"suggestions" : suggestions
+														}
+													}
+												}
+											}
+										}
+										else{
+											returnJson = {
+												speech: speech,
+												displayText: speech
+											}
+										}
+										
+										return res.json(returnJson);
 
                                     })
 
