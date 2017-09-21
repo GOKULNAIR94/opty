@@ -319,8 +319,6 @@ restService.post('/oppty', function(req, res) {
                                     resg.on('data', function(data) {
                                         responseString += data;
                                     });
-									var suggestions = [];
-									var returnJson;
                                     resg.on('end', function() {
 
                                         resCode = responseString;
@@ -354,8 +352,6 @@ restService.post('/oppty', function(req, res) {
                                                 if (today <= endDate && today >= startDate) {
                                                     speech = speech + 'Activity Number: ' + resObj.items[i].ActivityNumber + ', Subject: ' + resObj.items[i].Subject + ';\r\n';
                                                     console.log(speech);
-													if( resObj.items[i].ActivityNumber != null )
-														suggestions.add( {"title": resObj.items[i].ActivityNumber });
                                                 } else {
 
                                                 }
@@ -369,39 +365,12 @@ restService.post('/oppty', function(req, res) {
 
                                             console.log('Got ERROR');
                                         }
-										
-										if (req.body.originalRequest.source == "google") {
-											returnJson = {
-												speech: speech,
-												displayText: speech,
-												data : {
-													google: {
-														'expectUserResponse': true,
-														'isSsml': false,
-														'noInputPrompts': [],
-														'richResponse': {
-															'items': [{
-																	'simpleResponse': {
-																		'textToSpeech': 'Hi! My name is VIKI (Virtual Interactive Kinetic Intelligence) and I am here to help! Please click the below button to Login!',
-																		'displayText': 'Hi! My name is VIKI (Virtual Interactive Kinetic Intelligence) and I am here to help!'
-																	}
-																}
-															],
-															"suggestions" : suggestions
-														}
-													}
-												}
-											}
-											console.log( "Google : " + JSON.stringify(returnJson));
-										}
-										else{
-											returnJson = {
-												speech: speech,
-												displayText: speech
-											}
-										}
-										
-										return res.json(returnJson);
+
+                                        return res.json({
+                                            speech: speech,
+                                            displayText: speech,
+                                            source: 'webhook-OSC-oppty'
+                                        });
 
                                     })
 
