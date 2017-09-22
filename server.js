@@ -170,7 +170,7 @@ restService.post('/oppty', function(req, res) {
                                         resObj = JSON.parse(responseString);
                                     } catch (error) {
                                         console.log("Error : " + error);
-                                        return res.json({
+                                        res.json({
                                             speech: 'Incorrect Opportunity number'
                                         })
 
@@ -214,7 +214,7 @@ restService.post('/oppty', function(req, res) {
                                             speech = 'The primary contact for opportunity ' + oName + ' is ' + rev + '. Phone Number: ' + optyOther + '. Email Address: ' + optyOther2;
                                         };
                                     } catch (error) {
-                                        return res.json({
+                                        res.json({
                                             speech: 'Please check the Opportunity number or name you entered'
                                         })
 
@@ -256,7 +256,7 @@ restService.post('/oppty', function(req, res) {
                                                 response.on('end', function() {
                                                     responseObject = JSON.parse(body);
                                                     speech = responseObject;
-                                                    return res.json({
+                                                    res.json({
                                                         speech: speech,
                                                         displayText: speech
                                                     })
@@ -264,7 +264,7 @@ restService.post('/oppty', function(req, res) {
                                                 })
                                             }).on('error', function(e) {
                                                 speech = "Error occured! : " + e;
-                                                return res.json({
+                                                res.json({
                                                     speech: speech,
                                                     displayText: speech
                                                 })
@@ -278,7 +278,7 @@ restService.post('/oppty', function(req, res) {
                                         }
                                     } else {
 
-                                        return res.json({
+                                        res.json({
                                             speech: speech,
                                             displayText: speech,
                                             source: 'webhook-OSC-oppty'
@@ -326,7 +326,7 @@ restService.post('/oppty', function(req, res) {
                                         try {
                                             resObj = JSON.parse(responseString);
                                         } catch (error) {
-                                            return res.json({
+                                            res.json({
                                                 speech: 'No Active Activities'
                                             })
 
@@ -359,14 +359,14 @@ restService.post('/oppty', function(req, res) {
 
                                             }
                                         } catch (error) {
-                                            return res.json({
+                                            res.json({
                                                 speech: 'User has no Activities listed'
                                             })
 
                                             console.log('Got ERROR');
                                         }
 
-                                        return res.json({
+                                        res.json({
                                             speech: speech,
                                             displayText: speech,
                                             source: 'webhook-OSC-oppty'
@@ -392,7 +392,7 @@ restService.post('/oppty', function(req, res) {
                                         try {
                                             resObj = JSON.parse(responseString);
                                         } catch (error) {
-                                            return res.json({
+                                            res.json({
                                                 speech: 'No Such Activity'
                                             })
 
@@ -429,7 +429,7 @@ restService.post('/oppty', function(req, res) {
                                                     response.on('end', function() {
                                                         responseObject = JSON.parse(body);
                                                         speech = responseObject;
-                                                        return res.json({
+                                                        res.json({
                                                             speech: speech,
                                                             displayText: speech
                                                         })
@@ -437,7 +437,7 @@ restService.post('/oppty', function(req, res) {
                                                     })
                                                 }).on('error', function(e) {
                                                     speech = "Error occured! : " + e;
-                                                    return res.json({
+                                                    res.json({
                                                         speech: speech,
                                                         displayText: speech
                                                     })
@@ -456,7 +456,7 @@ restService.post('/oppty', function(req, res) {
                                                 var contactPhone = resObj.PrimaryFormattedPhoneNumber;
 
                                                 speech = 'Here are the details for Activity: ' + activityNumber + ',\n\r Subject: ' + subject + ',\n\r Status: ' + status + ',\n\r Start Date: ' + mydate( startDate, "yyyy-mm-dd") + ',\n\r End Date: ' + mydate( endDate, "yyyy-mm-dd") + ',\n\r Opportunity Associated: ' + optyName + ',\n\r Customer Name: ' + contactName + ',\n\r Phone: ' + contactPhone + ',\n\r Email: ' + contactEmail + ',\n\r Account: ' + AccountName + ".\n Would you like to know what's going on with " + AccountName + "?";
-                                                return res.json({
+                                                res.json({
                                                     speech: speech,
                                                     displayText: speech,
                                                     source: 'webhook-OSC-oppty'
@@ -464,7 +464,7 @@ restService.post('/oppty', function(req, res) {
                                             }
                                         } catch (e) {
                                             console.log('Got ERROR');
-                                            return res.json({
+                                            res.json({
                                                 speech: 'Incorrect Activity Number'
                                             })
                                         }
@@ -516,7 +516,7 @@ restService.post('/oppty', function(req, res) {
                                     console.log( "Status code : : " + res.statusCode);
                                     speech = "Probability updated to " + prob + "%";
                                     //console.log(body.toString());
-                                    return res.json({
+                                    res.json({
                                         speech: speech,
                                         displayText: speech,
                                         source: 'webhook-OSC-oppty'
@@ -554,7 +554,7 @@ restService.post('/oppty', function(req, res) {
                                     var body = Buffer.concat(chunks);
                                     speech = "Activity " + activityNumber + " Completed";
                                     //console.log(body.toString());
-                                    return res.json({
+                                    res.json({
                                         speech: speech,
                                         displayText: speech,
                                         source: 'webhook-OSC-oppty'
