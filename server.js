@@ -117,7 +117,7 @@ restService.post('/oppty', function(req, res) {
 
 
     getAuth(req, res, function(req, res, UserAuth) {
-        console.log("Req  : " + JSON.stringify(req.body));
+        console.log("Req  Source: " + req.body.originalRequest.source);
         console.log(" UserAuth returned : " + UserAuth);
         loginEncoded = 'Basic ' + UserAuth;
         //console.log("Req  after return: " + JSON.stringify(req.body));
