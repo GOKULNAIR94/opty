@@ -261,11 +261,8 @@ restService.post('/oppty', function(req, res) {
                                     response.on('end', function() {
                                         try {
                                             responseObject = JSON.parse(body);
-                                            speech = responseObject;
-                                            res.json({
-                                                speech: speech,
-                                                displayText: speech
-                                            })
+                                            res.json(responseObject);
+                                            
                                         } catch (error) {
                                             res.json({
                                                 speech: 'Something went wrong! Please try again later!'
@@ -464,11 +461,7 @@ restService.post('/oppty', function(req, res) {
                                         response.on('end', function() {
                                             try {
                                                 responseObject = JSON.parse(body);
-                                                speech = responseObject;
-                                                res.json({
-                                                    speech: speech,
-                                                    displayText: speech
-                                                })
+                                                res.json(responseObject);
                                             } catch (error) {
                                                 res.json({
                                                     speech: 'Something went wrong! Please try again later!'
