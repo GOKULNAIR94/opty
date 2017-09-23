@@ -235,7 +235,8 @@ restService.post('/oppty', function(req, res) {
                                 };
                                 toSend["track"] = resObj.items[0].TargetPartyName;
                                 toSend["intentName"] = req.body.result.metadata.intentName;
-                                toSend["originalRequest"]["source"] = req.body.originalRequest.source;
+                                toSend["originalRequest"] = { "source" : req.body.originalRequest.source};
+                                
                                 console.log("toSend : " + JSON.stringify(toSend));
                                 var newoptions = {
                                     host: varHost,
@@ -427,7 +428,8 @@ restService.post('/oppty', function(req, res) {
                                     };
                                     toSend["track"] = resObj.AccountName;
                                     toSend["intentName"] = req.body.result.metadata.intentName;
-                                    toSend["originalRequest"]["source"] = req.body.originalRequest.source;
+                                    toSend["originalRequest"] = { "source" : req.body.originalRequest.source};
+                                    
                                     
                                     console.log("toSend : " + JSON.stringify(toSend));
                                     var newoptions = {
