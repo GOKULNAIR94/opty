@@ -320,6 +320,8 @@ restService.post('/oppty', function(req, res) {
                             responseString += data;
                         });
                         resg.on('end', function() {
+                            
+                            var suggests = [];
 
                             resCode = responseString;
 
@@ -351,6 +353,9 @@ restService.post('/oppty', function(req, res) {
                                     console.log("Today: "+today); */
                                     if (today <= endDate && today >= startDate) {
                                         speech = speech + 'Activity Number: ' + resObj.items[i].ActivityNumber + ', Subject: ' + resObj.items[i].Subject + ';\r\n';
+                                        if( resObj.items[i].ActivityNumber != null && resObj.items[i].ActivityNumber != "" ){
+                                           suggests.push( '{ "title": "' + resObj.items[i].ActivityNumber +'"}')
+                                        }
                                         console.log(speech);
                                     }
 
@@ -371,19 +376,7 @@ restService.post('/oppty', function(req, res) {
                                                         'displayText': speech
                                                     }
                                                 }],
-                                                "suggestions": [{
-                                                        "title": "0"
-                                                    },
-                                                    {
-                                                        "title": "42"
-                                                    },
-                                                    {
-                                                        "title": "100"
-                                                    },
-                                                    {
-                                                        "title": "Never mind"
-                                                    }
-                                                ]
+                                                "suggestions": suggests
                                             }
                                         }
                                     }
