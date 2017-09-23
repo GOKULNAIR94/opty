@@ -174,7 +174,7 @@ restService.post('/oppty', function(req, res) {
                                 speech: 'Incorrect Opportunity number'
                             })
 
-                            console.log('Got ERROR');
+                            console.log('Got ERROR : ' + error);
                         }
 
                         //console.log(resObj);
@@ -218,7 +218,7 @@ restService.post('/oppty', function(req, res) {
                                 speech: 'Please check the Opportunity number or name you entered'
                             })
 
-                            console.log('Got ERROR');
+                            console.log('Got ERROR : ' + error);
                         }
                         console.log(oName);
                         console.log(oNumber);
@@ -333,7 +333,7 @@ restService.post('/oppty', function(req, res) {
                                     speech: 'No Active Activities'
                                 })
 
-                                console.log('Got ERROR');
+                                console.log('Got ERROR : ' + error);
                             }
 
                             //console.log(resObj);
@@ -387,7 +387,7 @@ restService.post('/oppty', function(req, res) {
                                     speech: 'User has no Activities listed'
                                 })
 
-                                console.log('Got ERROR');
+                                console.log('Got ERROR : ' + error);
                             }
 
                         })
@@ -414,7 +414,7 @@ restService.post('/oppty', function(req, res) {
                                     speech: 'No Such Activity'
                                 })
 
-                                console.log('Got ERROR');
+                                console.log('Got ERROR : ' + error );
                             }
                             try {
                                 var AccountName = resObj.AccountName;
@@ -483,7 +483,7 @@ restService.post('/oppty', function(req, res) {
                                     });
                                 }
                             } catch (e) {
-                                console.log('Got ERROR');
+                                console.log('Got ERROR : ' + e);
                                 res.json({
                                     speech: 'Incorrect Activity Number'
                                 })
