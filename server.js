@@ -450,12 +450,19 @@ restService.post('/oppty', function(req, res) {
                                         });
 
                                         response.on('end', function() {
-                                            responseObject = JSON.parse(body);
-                                            speech = responseObject;
-                                            res.json({
-                                                speech: speech,
-                                                displayText: speech
+                                            try {
+                                                responseObject = JSON.parse(body);
+                                                speech = responseObject;
+                                                res.json({
+                                                    speech: speech,
+                                                    displayText: speech
+                                                })
+                                            } catch (error) {
+                                                res.json({
+                                                    speech: 'Something went wrong! Please try again later!'
                                             })
+                                            
+                                            
 
                                         })
                                     }).on('error', function(e) {
