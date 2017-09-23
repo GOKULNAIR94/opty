@@ -235,8 +235,10 @@ restService.post('/oppty', function(req, res) {
                                 };
                                 toSend["track"] = resObj.items[0].TargetPartyName;
                                 toSend["intentName"] = req.body.result.metadata.intentName;
-                                toSend["originalRequest"] = { "source" : req.body.originalRequest.source};
-                                
+                                toSend["originalRequest"] = {
+                                    "source": req.body.originalRequest.source
+                                };
+
                                 console.log("toSend : " + JSON.stringify(toSend));
                                 var newoptions = {
                                     host: varHost,
@@ -258,16 +260,17 @@ restService.post('/oppty', function(req, res) {
 
                                     response.on('end', function() {
                                         try {
-                                                responseObject = JSON.parse(body);
-                                                speech = responseObject;
-                                                res.json({
-                                                    speech: speech,
-                                                    displayText: speech
-                                                })
-                                            } catch (error) {
-                                                res.json({
-                                                    speech: 'Something went wrong! Please try again later!'
+                                            responseObject = JSON.parse(body);
+                                            speech = responseObject;
+                                            res.json({
+                                                speech: speech,
+                                                displayText: speech
                                             })
+                                        } catch (error) {
+                                            res.json({
+                                                speech: 'Something went wrong! Please try again later!'
+                                            })
+                                        }
 
                                     })
                                 }).on('error', function(e) {
@@ -328,7 +331,7 @@ restService.post('/oppty', function(req, res) {
                             responseString += data;
                         });
                         resg.on('end', function() {
-                            
+
                             var suggests = [];
 
                             resCode = responseString;
@@ -361,8 +364,10 @@ restService.post('/oppty', function(req, res) {
                                     console.log("Today: "+today); */
                                     if (today <= endDate && today >= startDate) {
                                         speech = speech + 'Activity Number: ' + resObj.items[i].ActivityNumber + ', Subject: ' + resObj.items[i].Subject + ';\r\n';
-                                        if( resObj.items[i].ActivityNumber != null && resObj.items[i].ActivityNumber != "" ){
-                                           suggests.push( { "title" : resObj.items[i].ActivityNumber })
+                                        if (resObj.items[i].ActivityNumber != null && resObj.items[i].ActivityNumber != "") {
+                                            suggests.push({
+                                                "title": resObj.items[i].ActivityNumber
+                                            })
                                         }
                                         console.log(speech);
                                     }
@@ -421,7 +426,7 @@ restService.post('/oppty', function(req, res) {
                                     speech: 'No Such Activity'
                                 })
 
-                                console.log('Got ERROR : ' + error );
+                                console.log('Got ERROR : ' + error);
                             }
                             try {
                                 var AccountName = resObj.AccountName;
@@ -433,9 +438,11 @@ restService.post('/oppty', function(req, res) {
                                     };
                                     toSend["track"] = resObj.AccountName;
                                     toSend["intentName"] = req.body.result.metadata.intentName;
-                                    toSend["originalRequest"] = { "source" : req.body.originalRequest.source};
-                                    
-                                    
+                                    toSend["originalRequest"] = {
+                                        "source": req.body.originalRequest.source
+                                    };
+
+
                                     console.log("toSend : " + JSON.stringify(toSend));
                                     var newoptions = {
                                         host: varHost,
@@ -465,9 +472,9 @@ restService.post('/oppty', function(req, res) {
                                             } catch (error) {
                                                 res.json({
                                                     speech: 'Something went wrong! Please try again later!'
-                                            })
-                                            
-                                            
+                                                })
+                                            }
+
 
                                         })
                                     }).on('error', function(e) {
