@@ -1,4 +1,4 @@
-module.exports = function ( qString, req, resp, callback){ 
+module.exports = function ( qString, loginEncoded, req, resp, callback){ 
     var http = require("https");
 
     var options = {
@@ -7,7 +7,7 @@ module.exports = function ( qString, req, resp, callback){
       "port": null,
       "path": qString, //customFields.CO.Serial_Number%3D'C355'%20AND%20statusWithType.status.lookupName%3D'Solved'
       "headers": {
-        "authorization": "Basic cHBhdGthcjpsbnRMTlQxMjM0",
+        "authorization": loginEncoded,
         "cache-control": "no-cache"
       }
     };

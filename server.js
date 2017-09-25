@@ -569,51 +569,65 @@ restService.post('/oppty', function(req, res) {
                 else{
                     if( oName != null && oName != ""){
                         qString = "/salesApi/resources/latest/opportunities?q=Name=" + encodeURIComponent(oName)
-                        Query( qString, req, res, function( result ){
+                        Query( qString, loginEncoded, req, res, function( result ){
 
-                            //Start
-                            urlPath = '/salesApi/resources/latest/opportunities/' + result.items[0].OptyNumber;
-                            console.log(urlPath);
-                            options = {
-                                "method": "PATCH",
-                                "hostname": "acs.crm.ap2.oraclecloud.com",
-                                "port": null,
-                                "path": urlPath,
-                                "headers": {
-                                    "content-type": "application/vnd.oracle.adf.resourceitem+json",
-                                    'Authorization': loginEncoded
-                                }
-                            };
-                            console.log(options);
-                            var req = http.request(options, function(resu) {
-                                var chunks = [];
+                            if( result.items.length >0 ){
+                                
+                                //Start
+                                urlPath = '/salesApi/resources/latest/opportunities/' + result.items[0].OptyNumber;
+                                console.log(urlPath);
+                                options = {
+                                    "method": "PATCH",
+                                    "hostname": "acs.crm.ap2.oraclecloud.com",
+                                    "port": null,
+                                    "path": urlPath,
+                                    "headers": {
+                                        "content-type": "application/vnd.oracle.adf.resourceitem+json",
+                                        'Authorization': loginEncoded
+                                    }
+                                };
+                                console.log(options);
+                                var req = http.request(options, function(resu) {
+                                    var chunks = [];
 
-                                resu.on("data", function(chunk) {
-                                    chunks.push(chunk);
-                                });
+                                    resu.on("data", function(chunk) {
+                                        chunks.push(chunk);
+                                    });
 
-                                resu.on("end", function() {
-                                    var body = Buffer.concat(chunks);
+                                    resu.on("end", function() {
+                                        var body = Buffer.concat(chunks);
 
-                                    console.log("Status code : : " + res.statusCode);
-                                    speech = "Probability updated to " + prob + "%";
-                                    //console.log(body.toString());
-                                    res.json({
-                                        speech: speech,
-                                        displayText: speech,
-                                        source: 'webhook-OSC-oppty'
+                                        console.log("Status code : : " + res.statusCode);
+                                        speech = "Probability updated to " + prob + "%";
+                                        //console.log(body.toString());
+                                        res.json({
+                                            speech: speech,
+                                            displayText: speech,
+                                            source: 'webhook-OSC-oppty'
+                                        });
                                     });
                                 });
-                            });
-                            //var prob=93;
-                            var probi = '{"WinProb":' + prob + '}';
-                            req.write(probi);
-                            req.end();
+                                //var prob=93;
+                                var probi = '{"WinProb":' + prob + '}';
+                                req.write(probi);
+                                req.end();
 
-                            //End
+                                //End
+                                
+                                
+                            }
+                            else{
+                                speech = "Please check the Opportunity number or name!";
+                                res.json({
+                                    speech: speech,
+                                    displayText: speech,
+                                    source: 'webhook-OSC-oppty'
+                                });
+                            }
                         });
                     }
                     else{
+                        speech = "Please enter a valid Opportunity number or name!";
                         res.json({
                             speech: speech,
                             displayText: speech,
