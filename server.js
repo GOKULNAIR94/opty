@@ -12,7 +12,7 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 
-
+var QueryOpty = require("./query");
 
 var oNumber = '';
 var oName = '';
@@ -521,46 +521,107 @@ restService.post('/oppty', function(req, res) {
         } else if (actionType == 'update') {
             console.log(req.body.result.contexts[0].parameters.objType);
             oNumber = req.body.result.contexts[0].parameters.opptyNumber;
+            oName = req.body.result.contexts[0].parameters.opptyName;
             activityNumber = req.body.result.contexts[0].parameters.activityNumber;
             if (req.body.result.contexts[0].parameters.objType == 'opportunities') {
                 console.log(actionType);
-                urlPath = '/salesApi/resources/latest/opportunities/' + oNumber;
-                console.log(urlPath);
-                options = {
-                    "method": "PATCH",
-                    "hostname": "acs.crm.ap2.oraclecloud.com",
-                    "port": null,
-                    "path": urlPath,
-                    "headers": {
-                        "content-type": "application/vnd.oracle.adf.resourceitem+json",
-                        'Authorization': loginEncoded
-                    }
-                };
-                console.log(options);
-                var req = http.request(options, function(resu) {
-                    var chunks = [];
+                if( oNumber != null && oNumber != ""){
+                    
+                    urlPath = '/salesApi/resources/latest/opportunities/' + result.items[0].OptyNumber;
+                    console.log(urlPath);
+                    options = {
+                        "method": "PATCH",
+                        "hostname": "acs.crm.ap2.oraclecloud.com",
+                        "port": null,
+                        "path": urlPath,
+                        "headers": {
+                            "content-type": "application/vnd.oracle.adf.resourceitem+json",
+                            'Authorization': loginEncoded
+                        }
+                    };
+                    console.log(options);
+                    var req = http.request(options, function(resu) {
+                        var chunks = [];
 
-                    resu.on("data", function(chunk) {
-                        chunks.push(chunk);
+                        resu.on("data", function(chunk) {
+                            chunks.push(chunk);
+                        });
+
+                        resu.on("end", function() {
+                            var body = Buffer.concat(chunks);
+
+                            console.log("Status code : : " + res.statusCode);
+                            speech = "Probability updated to " + prob + "%";
+                            //console.log(body.toString());
+                            res.json({
+                                speech: speech,
+                                displayText: speech,
+                                source: 'webhook-OSC-oppty'
+                            });
+                        });
                     });
+                    //var prob=93;
+                    var probi = '{"WinProb":' + prob + '}';
+                    req.write(probi);
+                    req.end();
+                    
+                }
+                else{
+                    if( oName != null && oName != ""){
+                        qString = "/salesApi/resources/latest/opportunities?q=Name=" + encodeURIComponent(oName)
+                        Query( qString, req, res, function( result ){
 
-                    resu.on("end", function() {
-                        var body = Buffer.concat(chunks);
+                            //Start
+                            urlPath = '/salesApi/resources/latest/opportunities/' + result.items[0].OptyNumber;
+                            console.log(urlPath);
+                            options = {
+                                "method": "PATCH",
+                                "hostname": "acs.crm.ap2.oraclecloud.com",
+                                "port": null,
+                                "path": urlPath,
+                                "headers": {
+                                    "content-type": "application/vnd.oracle.adf.resourceitem+json",
+                                    'Authorization': loginEncoded
+                                }
+                            };
+                            console.log(options);
+                            var req = http.request(options, function(resu) {
+                                var chunks = [];
 
-                        console.log("Status code : : " + res.statusCode);
-                        speech = "Probability updated to " + prob + "%";
-                        //console.log(body.toString());
+                                resu.on("data", function(chunk) {
+                                    chunks.push(chunk);
+                                });
+
+                                resu.on("end", function() {
+                                    var body = Buffer.concat(chunks);
+
+                                    console.log("Status code : : " + res.statusCode);
+                                    speech = "Probability updated to " + prob + "%";
+                                    //console.log(body.toString());
+                                    res.json({
+                                        speech: speech,
+                                        displayText: speech,
+                                        source: 'webhook-OSC-oppty'
+                                    });
+                                });
+                            });
+                            //var prob=93;
+                            var probi = '{"WinProb":' + prob + '}';
+                            req.write(probi);
+                            req.end();
+
+                            //End
+                        });
+                    }
+                    else{
                         res.json({
                             speech: speech,
                             displayText: speech,
                             source: 'webhook-OSC-oppty'
                         });
-                    });
-                });
-                //var prob=93;
-                var probi = '{"WinProb":' + prob + '}';
-                req.write(probi);
-                req.end();
+                    }
+                }
+                
 
             } else if (req.body.result.contexts[0].parameters.objType == 'activities') {
                 console.log(actionType);
