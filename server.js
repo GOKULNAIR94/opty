@@ -571,7 +571,7 @@ restService.post('/oppty', function(req, res) {
                 else{
                     if( oName != null && oName != ""){
                         var qString = "/salesApi/resources/latest/opportunities?q=Name=" + encodeURIComponent(oName)
-                        Query( qString, loginEncoded, req, res, function( result ){
+                        QueryOpty( qString, loginEncoded, req, res, function( result ){
 
                             if( result.items.length >0 ){
                                 
