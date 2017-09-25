@@ -522,12 +522,14 @@ restService.post('/oppty', function(req, res) {
             console.log(req.body.result.contexts[0].parameters.objType);
             oNumber = req.body.result.contexts[0].parameters.opptyNumber;
             oName = req.body.result.contexts[0].parameters.opptyName;
+            console.log( "oNumber : " + oNumber );
+            console.log( "oName : " + oName );
             activityNumber = req.body.result.contexts[0].parameters.activityNumber;
             if (req.body.result.contexts[0].parameters.objType == 'opportunities') {
                 console.log(actionType);
                 if( oNumber != null && oNumber != ""){
                     
-                    urlPath = '/salesApi/resources/latest/opportunities/' + result.items[0].OptyNumber;
+                    urlPath = '/salesApi/resources/latest/opportunities/' + oNumber;
                     console.log(urlPath);
                     options = {
                         "method": "PATCH",
@@ -568,7 +570,7 @@ restService.post('/oppty', function(req, res) {
                 }
                 else{
                     if( oName != null && oName != ""){
-                        qString = "/salesApi/resources/latest/opportunities?q=Name=" + encodeURIComponent(oName)
+                        var qString = "/salesApi/resources/latest/opportunities?q=Name=" + encodeURIComponent(oName)
                         Query( qString, loginEncoded, req, res, function( result ){
 
                             if( result.items.length >0 ){
