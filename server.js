@@ -519,6 +519,8 @@ restService.post('/oppty', function(req, res) {
                 console.log('Got error: ' + e.message);
             });
         } else if (actionType == 'update') {
+            
+            console.log(" Intent : " + req.body.result.metadata.intentName);
             console.log(req.body.result.contexts[0].parameters.objType);
             oNumber = req.body.result.contexts[0].parameters.opptyNumber;
             oName = req.body.result.contexts[0].parameters.opptyName;
