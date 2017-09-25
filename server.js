@@ -107,7 +107,8 @@ function getAuth(req, res, callback) {
 }
 
 restService.post('/oppty', function(req, res) {
-    console.log("Req  : " + JSON.stringify(req.body));
+    //console.log("Req  : " + JSON.stringify(req.body));
+    console.log(" Intent : " + req.body.result.metadata.intentName);
 
 
     //loginEncoded = 'Basic ' + new Buffer('LNT001:Lnt@123').toString('base64');
@@ -520,7 +521,7 @@ restService.post('/oppty', function(req, res) {
             });
         } else if (actionType == 'update') {
             
-            console.log(" Intent : " + req.body.result.metadata.intentName);
+            
             console.log(req.body.result.contexts[0].parameters.objType);
             oNumber = req.body.result.contexts[0].parameters.opptyNumber;
             oName = req.body.result.contexts[0].parameters.opptyName;
