@@ -360,8 +360,9 @@ restService.post('/oppty', function(req, res) {
                                     console.log("End Date: "+endDate);   
                                     console.log("Today: "+today); */
                                     if (today <= endDate && today >= startDate) {
-                                        speech = speech + 'Activity Number: ' + resObj.items[i].ActivityNumber + ', Subject: ' + resObj.items[i].Subject + ';\r\n';
+                                        
                                         if (resObj.items[i].ActivityNumber != null && resObj.items[i].ActivityNumber != "") {
+                                            speech = speech + 'Activity Number: ' + resObj.items[i].ActivityNumber + ', Subject: ' + resObj.items[i].Subject + ';\r\n';
                                             suggests.push({
                                                 "title": resObj.items[i].ActivityNumber
                                             })
