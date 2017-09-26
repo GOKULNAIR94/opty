@@ -107,7 +107,7 @@ function getAuth(req, res, callback) {
 }
 
 restService.post('/oppty', function(req, res) {
-    //console.log("Req  : " + JSON.stringify(req.body));
+    console.log("Req  : " + JSON.stringify(req.body));
     console.log(" Intent : " + req.body.result.metadata.intentName);
 
     //loginEncoded = 'Basic ' + new Buffer('LNT001:Lnt@123').toString('base64');
