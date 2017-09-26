@@ -374,7 +374,7 @@ restService.post('/oppty', function(req, res) {
                                 res.json({
                                     speech: speech,
                                     displayText: speech,
-                                    contextOut : [{"name":"oppty-followup","lifespan":5,"parameters":{"objType":"activities"}}],
+                                    //contextOut : [{"name":"oppty-followup","lifespan":5,"parameters":{"objType":"activities"}}],
                                     data: {
                                         google: {
                                             'expectUserResponse': true,
