@@ -376,27 +376,35 @@ restService.post('/oppty', function(req, res) {
 
 
                                 }
-                                res.json({
-                                    speech: speech,
-                                    displayText: speech,
-                                    //contextOut : [{"name":"oppty-followup","lifespan":5,"parameters":{"objType":"activities"}}],
-                                    data: {
-                                        google: {
-                                            'expectUserResponse': true,
-                                            'isSsml': false,
-                                            'noInputPrompts': [],
-                                            'richResponse': {
-                                                'items': [{
-                                                    'simpleResponse': {
-                                                        'textToSpeech': speech,
-                                                        'displayText': speech
-                                                    }
-                                                }],
-                                                "suggestions": suggests
+                                if (req.body.originalRequest.source == "google") {
+                                    res.json({
+                                        speech: speech,
+                                        displayText: speech,
+                                        //contextOut : [{"name":"oppty-followup","lifespan":5,"parameters":{"objType":"activities"}}],
+                                        data: {
+                                            google: {
+                                                'expectUserResponse': true,
+                                                'isSsml': false,
+                                                'noInputPrompts': [],
+                                                'richResponse': {
+                                                    'items': [{
+                                                        'simpleResponse': {
+                                                            'textToSpeech': speech,
+                                                            'displayText': speech
+                                                        }
+                                                    }],
+                                                    "suggestions": suggests
+                                                }
                                             }
                                         }
-                                    }
-                                });
+                                    });
+                                }else{
+                                    res.json({
+                                        speech: speech,
+                                        displayText: speech
+                                    });
+                                }
+                                    
                             } catch (error) {
                                 res.json({
                                     speech: 'User has no Activities listed'
