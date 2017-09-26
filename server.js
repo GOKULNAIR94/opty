@@ -433,7 +433,7 @@ restService.post('/oppty', function(req, res) {
                             }
                             try {
                                 var AccountName = resObj.AccountName;
-                                if (req.body.result.metadata.intentName == "oppty - News") {
+                                if (req.body.result.metadata.intentName == "Activities - Sales - custom - news") {
                                     var varHost = 'vikinews.herokuapp.com';
                                     var varPath = '/inputmsg';
                                     var toSend = {
