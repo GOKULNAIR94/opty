@@ -321,7 +321,10 @@ restService.post('/oppty', function(req, res) {
 
                 if (!activityNumber) {
                     request = http.get(options, function(resg) {
-                        today = req.body.result.parameters.date;
+                        
+                        if(req.body.result.parameters.date != null && req.body.result.parameters.date != "")
+                            today = req.body.result.parameters.date;
+                        
                         console.log("Today : " + today);
                         responseString = "";
                         resg.on('data', function(data) {
