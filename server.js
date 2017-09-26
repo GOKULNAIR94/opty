@@ -505,11 +505,35 @@ restService.post('/oppty', function(req, res) {
                                     var contactPhone = resObj.PrimaryFormattedPhoneNumber;
 
                                     speech = 'Here are the details for Activity: ' + activityNumber + ',\n\r Subject: ' + subject + ',\n\r Status: ' + status + ',\n\r Start Date: ' + mydate(startDate, "yyyy-mm-dd") + ',\n\r End Date: ' + mydate(endDate, "yyyy-mm-dd") + ',\n\r Opportunity Associated: ' + optyName + ',\n\r Customer Name: ' + contactName + ',\n\r Phone: ' + contactPhone + ',\n\r Email: ' + contactEmail + ',\n\r Account: ' + AccountName + ".\n Would you like to know what's going on with " + AccountName + "?";
-                                    res.json({
-                                        speech: speech,
-                                        displayText: speech,
-                                        source: 'webhook-OSC-oppty'
-                                    });
+                                    
+                                    if (req.body.originalRequest.source == "google") {
+                                        res.json({
+                                            speech: speech,
+                                            displayText: speech,
+                                            //contextOut : [{"name":"oppty-followup","lifespan":5,"parameters":{"objType":"activities"}}],
+                                            data: {
+                                                google: {
+                                                    'expectUserResponse': true,
+                                                    'isSsml': false,
+                                                    'noInputPrompts': [],
+                                                    'richResponse': {
+                                                        'items': [{
+                                                            'simpleResponse': {
+                                                                'textToSpeech': speech,
+                                                                'displayText': speech
+                                                            }
+                                                        }],
+                                                        "suggestions": [{ "title": "Yes" },{ "title": "No" }]
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    }else{
+                                        res.json({
+                                            speech: speech,
+                                            displayText: speech
+                                        });
+                                    }
                                 }
                             } catch (e) {
                                 console.log('Got ERROR : ' + e);
