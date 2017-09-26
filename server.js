@@ -352,6 +352,7 @@ restService.post('/oppty', function(req, res) {
                                 //resObj=JSON.parse(responseString);
                                 var rowCount = resObj.count;
                                 console.log(rowCount);
+                                speech = "";
                                 for (var i = 0; i <= rowCount - 1; i++) {
 
                                     var endDate = resObj.items[i].ActivityEndDate;
