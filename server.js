@@ -226,7 +226,7 @@ restService.post('/oppty', function(req, res) {
                         console.log('$' + rev + 'M');
                         console.log(opty);
                         //console.log('$'+resObj.Revenue);
-                        if (req.body.result.metadata.intentName == "oppty - News") {
+                        if ( req.body.result.metadata.intentName.indexOf( "oppty - News" ) == 0 ) {
                             try {
                                 var varHost = 'vikinews.herokuapp.com';
                                 var varPath = '/inputmsg';
@@ -441,7 +441,7 @@ restService.post('/oppty', function(req, res) {
                             }
                             try {
                                 var AccountName = resObj.AccountName;
-                                if (req.body.result.metadata.intentName == "Activities - Sales - custom - news") {
+                                if ( req.body.result.metadata.intentName.indexOf( "Activities - Sales - custom - news" ) == 0 ) {
                                     var varHost = 'vikinews.herokuapp.com';
                                     var varPath = '/inputmsg';
                                     var toSend = {
