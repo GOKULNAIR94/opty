@@ -227,6 +227,7 @@ restService.post('/oppty', function(req, res) {
                         console.log(opty);
                         //console.log('$'+resObj.Revenue);
                         if ( req.body.result.metadata.intentName.indexOf( "oppty - News" ) == 0 ) {
+                            console.log( " Intent -> " + req.body.result.metadata.intentName);
                             try {
                                 var varHost = 'vikinews.herokuapp.com';
                                 var varPath = '/inputmsg';
