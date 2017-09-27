@@ -238,6 +238,7 @@ restService.post('/oppty', function(req, res) {
                                 toSend["originalRequest"] = {
                                     "source": req.body.originalRequest.source
                                 };
+								toSend["headline"] = req.body.result.parameters.headline;
 
                                 console.log("toSend : " + JSON.stringify(toSend));
                                 var newoptions = {
