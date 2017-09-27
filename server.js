@@ -235,10 +235,11 @@ restService.post('/oppty', function(req, res) {
                                 };
                                 toSend["track"] = resObj.items[0].TargetPartyName;
                                 toSend["intentName"] = req.body.result.metadata.intentName;
-                                toSend["originalRequest"] = {
+                                toSend["headline"] = req.body.result.parameters.headline;
+								toSend["originalRequest"] = {
                                     "source": req.body.originalRequest.source
                                 };
-								toSend["headline"] = req.body.result.parameters.headline;
+								
 
                                 console.log("toSend opty : " + JSON.stringify(toSend));
                                 var newoptions = {
