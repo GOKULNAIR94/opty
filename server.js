@@ -240,7 +240,7 @@ restService.post('/oppty', function(req, res) {
                                 };
 								toSend["headline"] = req.body.result.parameters.headline;
 
-                                console.log("toSend : " + JSON.stringify(toSend));
+                                console.log("toSend opty : " + JSON.stringify(toSend));
                                 var newoptions = {
                                     host: varHost,
                                     path: varPath,
