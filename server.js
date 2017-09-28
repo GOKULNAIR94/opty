@@ -236,10 +236,16 @@ restService.post('/oppty', function(req, res) {
                                 };
                                 toSend["track"] = resObj.items[0].TargetPartyName;
                                 toSend["intentName"] = req.body.result.metadata.intentName;
+                                
                                 for(var i=0; i< req.body.result.contexts.length; i++){
-                                    if( req.body.result.contexts[i].parameters["headline.original"] != null && req.body.result.contexts[i].parameters["headline.original"] != "")
-                                        toSend["headline"] = req.body.result.contexts[i].parameters["headline.original"];
+                                    if( req.body.result.contexts[i].parameters["OPTION"] != null && req.body.result.contexts[i].parameters["OPTION"] != "" ){
+                                        toSend["option"] = req.body.result.contexts[i].parameters["OPTION"];
+                                    }else{
+                                        if( req.body.result.contexts[i].parameters["headline.original"] != null && req.body.result.contexts[i].parameters["headline.original"] != "")
+                                            toSend["headline"] = req.body.result.contexts[i].parameters["headline.original"];
+                                    }
                                 }
+                                
 								toSend["originalRequest"] = {
                                     "source": req.body.originalRequest.source
                                 };
@@ -458,13 +464,17 @@ restService.post('/oppty', function(req, res) {
                                     toSend["originalRequest"] = {
                                         "source": req.body.originalRequest.source
                                     };
-                                    console.log("Context : " + JSON.stringify(req.body.result))
+                                    console.log("Context : " + JSON.stringify(req.body.result));
                                     for(var i=0; i< req.body.result.contexts.length; i++){
-                                        if( req.body.result.contexts[i].parameters["headline.original"] != null && req.body.result.contexts[i].parameters["headline.original"] != "")
-                                            toSend["headline"] = req.body.result.contexts[i].parameters["headline.original"];
+                                        if( req.body.result.contexts[i].parameters["OPTION"] != null && req.body.result.contexts[i].parameters["OPTION"] != "" ){
+                                            toSend["option"] = req.body.result.contexts[i].parameters["OPTION"];
+                                        }else{
+                                            if( req.body.result.contexts[i].parameters["headline.original"] != null && req.body.result.contexts[i].parameters["headline.original"] != "")
+                                                toSend["headline"] = req.body.result.contexts[i].parameters["headline.original"];
+                                        }
                                     }
                                     
-                                    console.log("toSend : " + JSON.stringify(toSend));
+                                    console.log("toSend Activity : " + JSON.stringify(toSend));
                                     var newoptions = {
                                         host: varHost,
                                         path: varPath,
