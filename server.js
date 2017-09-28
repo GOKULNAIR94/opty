@@ -236,7 +236,10 @@ restService.post('/oppty', function(req, res) {
                                 };
                                 toSend["track"] = resObj.items[0].TargetPartyName;
                                 toSend["intentName"] = req.body.result.metadata.intentName;
-                                toSend["headline"] = req.body.result.contexts[0].parameters.headline.original;
+                                for(var i=0; i< req.body.result.contexts.length; i++){
+                                    if( req.body.result.contexts[i].parameters["headline.original"] != null && req.body.result.contexts[i].parameters["headline.original"] != "")
+                                        toSend["headline"] = req.body.result.contexts[i].parameters["headline.original"];
+                                }
 								toSend["originalRequest"] = {
                                     "source": req.body.originalRequest.source
                                 };
@@ -455,10 +458,12 @@ restService.post('/oppty', function(req, res) {
                                     toSend["originalRequest"] = {
                                         "source": req.body.originalRequest.source
                                     };
-                                    toSend["headline"] = req.body.result.contexts[0].parameters.headline.original;
                                     
-
-
+                                    for(var i=0; i< req.body.result.contexts.length; i++){
+                                        if( req.body.result.contexts[i].parameters["headline.original"] != null && req.body.result.contexts[i].parameters["headline.original"] != "")
+                                            toSend["headline"] = req.body.result.contexts[i].parameters["headline.original"];
+                                    }
+                                    
                                     console.log("toSend : " + JSON.stringify(toSend));
                                     var newoptions = {
                                         host: varHost,
