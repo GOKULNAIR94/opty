@@ -236,7 +236,7 @@ restService.post('/oppty', function(req, res) {
                                 };
                                 toSend["track"] = resObj.items[0].TargetPartyName;
                                 toSend["intentName"] = req.body.result.metadata.intentName;
-                                toSend["headline"] = req.body.result.parameters.headline;
+                                toSend["headline"] = req.body.result.contexts[0].parameters.headline.original;
 								toSend["originalRequest"] = {
                                     "source": req.body.originalRequest.source
                                 };
@@ -455,7 +455,7 @@ restService.post('/oppty', function(req, res) {
                                     toSend["originalRequest"] = {
                                         "source": req.body.originalRequest.source
                                     };
-                                    toSend["headline"] = req.body.result.parameters.headline;
+                                    toSend["headline"] = req.body.result.contexts[0].parameters.headline.original;
                                     
 
 
