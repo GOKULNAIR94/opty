@@ -458,7 +458,7 @@ restService.post('/oppty', function(req, res) {
                                     toSend["originalRequest"] = {
                                         "source": req.body.originalRequest.source
                                     };
-                                    
+                                    console.log("Context : " + JSON.stringify(req.body.result))
                                     for(var i=0; i< req.body.result.contexts.length; i++){
                                         if( req.body.result.contexts[i].parameters["headline.original"] != null && req.body.result.contexts[i].parameters["headline.original"] != "")
                                             toSend["headline"] = req.body.result.contexts[i].parameters["headline.original"];
