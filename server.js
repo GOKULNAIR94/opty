@@ -44,6 +44,7 @@ pword = 'lntLNT2K16_1';
 var loginEncoded;
 var userid;
 var intentName = ""; 
+var SendEmail = require("./sendEmail");
 
 function getAuth(req, res, callback) {
     try {
@@ -852,6 +853,12 @@ restService.post('/opptytop', function(req, res) {
             }
         }
     });
+    
+    if( intentName == "opty_top - custom - custom - yes"){
+        SendEmail(req, res, function(result) {
+            console.log("SendEmail Called");
+        });
+    }
 });
 
 restService.listen((process.env.PORT || 9000), function() {
