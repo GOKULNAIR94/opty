@@ -829,7 +829,7 @@ restService.post('/opptytop', function(req, res) {
                                     'richResponse': {
                                         'items': [{
                                             'simpleResponse': {
-                                                'textToSpeech': speech = "Id : " + ;,
+                                                'textToSpeech': speech,
                                                 'displayText': speech
                                             }
                                         }],
