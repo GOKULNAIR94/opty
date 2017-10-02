@@ -32,7 +32,7 @@ module.exports = function(req, res) {
 
     console.log(speech);
     console.log('SMTP Configured');
-    fs.readFile("./customer1.pdf", function(err, data) {
+    fs.readFile("./MikkelMathiasen.pdf", function(err, data) {
         // Message object
         let message = {
             from: 'VIKI <reachme@kaaman.onmicrosoft.com>',
@@ -54,7 +54,7 @@ module.exports = function(req, res) {
 
             //An array of attachments
             attachments: [{
-                'filename': 'customer1.pdf',
+                'filename': 'MikkelMathiasen.pdf',
                 'content': data
             }]
 

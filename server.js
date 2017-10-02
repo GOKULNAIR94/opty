@@ -855,7 +855,7 @@ restService.post('/opptytop', function(req, res) {
         }
     });
     
-    if( intentName == "opty_top - custom - custom - yes"){
+    if( intentName == "opty_top - custom - custom"){
         SendEmail(req, res, function(result) {
             console.log("SendEmail Called");
         });
