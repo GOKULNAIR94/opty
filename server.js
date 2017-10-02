@@ -756,7 +756,7 @@ restService.post('/opptytop', function(req, res) {
         var qString = "/salesApi/resources/latest/opportunities?onlyData=true&orderBy=" + sortBy + ":desc";
         QueryOpty( qString, loginEncoded, req, res, function( result ){
             try{
-                var rowCount = resObj.items.length;
+                var rowCount = result.items.length;
                 console.log( "rowCount : " + rowCount);
                 var suggests = [];
 
