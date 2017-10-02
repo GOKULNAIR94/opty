@@ -844,7 +844,7 @@ restService.post('/opptytop', function(req, res) {
                             displayText: speech
                         });
                     }
-                }
+                });
             }
         }
     });
