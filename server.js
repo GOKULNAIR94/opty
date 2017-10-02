@@ -747,7 +747,7 @@ restService.post('/opptytop', function(req, res) {
     
     console.log("opptytop----------- ");
     console.log("Req  : " + JSON.stringify(req.body));
-    intentName = req.body.result.metadata.intentName);
+    intentName = req.body.result.metadata.intentName;
     console.log(" Intent : " + intentName );
     
     var qString = "";
