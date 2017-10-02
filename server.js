@@ -761,9 +761,9 @@ restService.post('/opptytop', function(req, res) {
                 var suggests = [];
 
                 for (var i = 0; i < sortNumber; i++) {
-                    speech = speech + 'Opportunity Number: ' + resObj.items[i].OptyNumber + ', Name: ' + resObj.items[i].Name + ';\r\n';
+                    speech = speech + 'Opportunity Number: ' + result.items[i].OptyNumber + ', Name: ' + result.items[i].Name + ';\r\n';
                     suggests.push({
-                        "title": resObj.items[i].OptyNumber
+                        "title": result.items[i].OptyNumber
                     })
                 }
                 if (req.body.originalRequest.source == "google") {
