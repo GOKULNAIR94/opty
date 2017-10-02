@@ -817,8 +817,9 @@ restService.post('/opptytop', function(req, res) {
                 QueryOpty( qString, loginEncoded, req, res, function( result ){
                     
                     //console.log( "result : " + JSON.stringify(result));
-                    speech = "Opportunity Name: " + result.Name +" ,  Account : " + result.TargetPartyName + ". The customer " + result.TargetPartyName + " is at high risk. Would you like to know more details like revenue, churn index or News about the account. Try saying ";
-                    var suggests = ["What is the revevnue", "What is the churn index", "What is in the news about " + result.TargetPartyName];
+                    speech = "Opportunity Name: " + result.Name +" ,  Account : " + result.TargetPartyName + ". The customer " + result.TargetPartyName + " is at high risk. Would you like to know more details like revenue, churn index or News about the account. ";
+                    var suggests = [{ "title" : ""},{ "title" : "What is the revevnue"},{ "title" : "What is the churn index"},{ "title" : "What is in the news about " + result.TargetPartyName}];
+                    
                     if (req.body.originalRequest.source == "google") {
                         res.json({
                             speech: speech,
