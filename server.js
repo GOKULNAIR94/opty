@@ -741,6 +741,70 @@ restService.post('/oppty', function(req, res) {
 
 });
 
+restService.post('/opptytop', function(req, res) {
+    console.log("Req  : " + JSON.stringify(req.body));
+    console.log(" Intent : " + req.body.result.metadata.intentName);
+    var sortBy = req.body.result.parameters.optyAttribut;
+    
+    getAuth(req, res, function(req, res, UserAuth) {
+        console.log("Req  Source: " + req.body.originalRequest.source);
+        console.log(" UserAuth returned : " + UserAuth);
+        loginEncoded = 'Basic ' + UserAuth;
+        
+        var qString = "/salesApi/resources/latest/opportunities?onlyData=true&orderBy=" + sortBy + ":desc";
+        QueryOpty( qString, loginEncoded, req, res, function( result ){
+            try{
+                var rowCount = resObj.items.length;
+                console.log( "rowCount : " + rowCount);
+                var suggests = [];
+
+                for (var i = 0; i < rowCount; i++) {
+                    speech = speech + 'Opportunity Number: ' + resObj.items[i].OptyNumber + ', Name: ' + resObj.items[i].Name + ';\r\n';
+                    suggests.push({
+                        "title": resObj.items[i].OptyNumber
+                    })
+                }
+                if (req.body.originalRequest.source == "google") {
+                    res.json({
+                        speech: speech,
+                        displayText: speech,
+                        //contextOut : [{"name":"oppty-followup","lifespan":5,"parameters":{"objType":"activities"}}],
+                        data: {
+                            google: {
+                                'expectUserResponse': true,
+                                'isSsml': false,
+                                'noInputPrompts': [],
+                                'richResponse': {
+                                    'items': [{
+                                        'simpleResponse': {
+                                            'textToSpeech': speech,
+                                            'displayText': speech
+                                        }
+                                    }],
+                                    "suggestions": suggests
+                                }
+                            }
+                        }
+                    });
+                }else{
+                    res.json({
+                        speech: speech,
+                        displayText: speech
+                    });
+                }
+            }
+            catch( e ){
+                console.log( "Error top opty : " + e );
+                speech = "Something went wrong! Please try again later!";
+                res.json({
+                    speech: speech,
+                    displayText: speech
+                });
+            }
+        });
+    });
+});
+
 restService.listen((process.env.PORT || 9000), function() {
     console.log("Server up and listening");
 });
