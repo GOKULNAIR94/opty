@@ -44,6 +44,7 @@ pword = 'lntLNT2K16_1';
 var loginEncoded;
 var userid;
 var intentName = ""; 
+
 function getAuth(req, res, callback) {
     try {
         if (req.body.originalRequest != null) {
@@ -746,7 +747,8 @@ restService.post('/opptytop', function(req, res) {
     
     console.log("opptytop----------- ");
     console.log("Req  : " + JSON.stringify(req.body));
-    console.log(" Intent : " + req.body.result.metadata.intentName);
+    intentName = req.body.result.metadata.intentName);
+    console.log(" Intent : " + intentName );
     
     var qString = "";
     getAuth(req, res, function(req, res, UserAuth) {
