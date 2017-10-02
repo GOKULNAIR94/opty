@@ -187,7 +187,7 @@ restService.post('/oppty', function(req, res) {
                             if (oAttrib == 'Revenue') {
                                 rev = '$' + resObj.items[0].Revenue / 1000000 + 'M';
                                 optyOther = '$' + resObj.items[0].ExpectAmount / 1000000 + 'M';
-                                speech = 'Current Revenue for Opportunity ' + oName + ' is ' + rev + '. The expected amount for this opportunity is ' + optyOther + ".\n Would you like to know what's going on with " + resObj.items[0].TargetPartyName + "?";
+                                speech = 'Current Revenue for Opportunity ' + oName + ' is ' + rev + '. The expected amount for this opportunity is ' + optyOther + ".\n";
                             } else if (oAttrib == 'WinProb') {
                                 rev = resObj.items[0].WinProb;
                                 speech = 'Opportunity ' + oName + ' is ' + rev + "% probable to Win.";
@@ -200,7 +200,7 @@ restService.post('/oppty', function(req, res) {
                             } else if (oAttrib == 'SalesStage') {
                                 rev = resObj.items[0].SalesStage;
                                 optyOther = resObj.items[0].AverageDaysAtStage;
-                                speech = 'Opportunity ' + oName + ' is currently in Stage' + rev + '. On an average an opportunity stays in this stage for ' + optyOther + " days.\n Would you like to know what's going on with " + resObj.items[0].TargetPartyName + "?";
+                                speech = 'Opportunity ' + oName + ' is currently in Stage' + rev + '. On an average an opportunity stays in this stage for ' + optyOther + " days.\n";
                             } else if (oAttrib == 'TargetPartyName') {
                                 rev = resObj.items[0].TargetPartyName; //TargetPartyName
                                 console.log(rev);
@@ -526,7 +526,8 @@ restService.post('/oppty', function(req, res) {
                                     var contactEmail = resObj.PrimaryContactEmailAddress;
                                     var contactPhone = resObj.PrimaryFormattedPhoneNumber;
 
-                                    speech = 'Here are the details for Activity: ' + activityNumber + ',\n\r Subject: ' + subject + ',\n\r Status: ' + status + ',\n\r Start Date: ' + mydate(startDate, "yyyy-mm-dd") + ',\n\r End Date: ' + mydate(endDate, "yyyy-mm-dd") + ',\n\r Opportunity Associated: ' + optyName + ',\n\r Customer Name: ' + contactName + ',\n\r Phone: ' + contactPhone + ',\n\r Email: ' + contactEmail + ',\n\r Account: ' + AccountName + ".\n Would you like to know what's going on with " + AccountName + "?";
+                                    speech = 'Here are the details for Activity: ' + activityNumber + ',\n\r Subject: ' + subject + ',\n\r Status: ' + status + ',\n\r Start Date: ' + mydate(startDate, "yyyy-mm-dd") + ',\n\r End Date: ' + mydate(endDate, "yyyy-mm-dd") + ',\n\r Opportunity Associated: ' + optyName + ',\n\r Customer Name: ' + contactName + ',\n\r Phone: ' + contactPhone + ',\n\r Email: ' + contactEmail + ',\n\r Account: ' + AccountName + ".\n Would you like to know the churn index or what is in the news about " + AccountName + ", or would you like to close this activity?";
+                                    var suggests = [{ "title" : "Close this activity"},{ "title" : "What is the churn index"},{ "title" : "What is in the news"}];
                                     
                                     if (req.body.originalRequest.source == "google") {
                                         res.json({
@@ -545,7 +546,7 @@ restService.post('/oppty', function(req, res) {
                                                                 'displayText': speech
                                                             }
                                                         }],
-                                                        "suggestions": [{ "title": "Yes" },{ "title": "No" }]
+                                                        "suggestions": suggests
                                                     }
                                                 }
                                             }
@@ -818,8 +819,8 @@ restService.post('/opptytop', function(req, res) {
                 QueryOpty( qString, loginEncoded, req, res, function( result ){
                     
                     //console.log( "result : " + JSON.stringify(result));
-                    speech = "Opportunity Name: " + result.Name +" ,  Account : " + result.TargetPartyName + ". The customer " + result.TargetPartyName + " is at high risk. Would you like to know more details like revenue, churn index or what is in the news about the account. ";
-                    var suggests = [{ "title" : ""},{ "title" : "What is the revenue"},{ "title" : "What is the churn index"},{ "title" : "What is in the news"}];
+                    speech = "Opportunity Name: " + result.Name +" ,  Account : " + result.TargetPartyName + ". The customer " + result.TargetPartyName + " is at high risk. Would you like to know more details like revenue, churn index or what is in the news about the account?";
+                    var suggests = [{ "title" : "What is the revenue"},{ "title" : "What is the churn index"},{ "title" : "What is in the news"}];
                     
                     if (req.body.originalRequest.source == "google") {
                         res.json({
