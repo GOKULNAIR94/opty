@@ -43,7 +43,7 @@ uname = 'Akashdeep';
 pword = 'lntLNT2K16_1';
 var loginEncoded;
 var userid;
-
+var intentName = ""; 
 function getAuth(req, res, callback) {
     try {
         if (req.body.originalRequest != null) {
@@ -747,65 +747,106 @@ restService.post('/opptytop', function(req, res) {
     console.log("opptytop----------- ");
     console.log("Req  : " + JSON.stringify(req.body));
     console.log(" Intent : " + req.body.result.metadata.intentName);
-    var sortBy = req.body.result.parameters.optyAttribut;
-    var sortNumber = req.body.result.parameters.number;
     
+    var qString = "";
     getAuth(req, res, function(req, res, UserAuth) {
         console.log("Req  Source: " + req.body.originalRequest.source);
         console.log(" UserAuth returned : " + UserAuth);
         loginEncoded = 'Basic ' + UserAuth;
         
-        var qString = "/salesApi/resources/latest/opportunities?onlyData=true&orderBy=" + sortBy + ":desc";
-        QueryOpty( qString, loginEncoded, req, res, function( result ){
-            try{
-                var rowCount = result.items.length;
-                console.log( "rowCount : " + rowCount);
-                var suggests = [];
+        if( intentName == "opty_top"){
+            var sortBy = req.body.result.parameters.optyAttribut;
+            var sortNumber = req.body.result.parameters.number;
+            qString = "/salesApi/resources/latest/opportunities?onlyData=true&orderBy=" + sortBy + ":desc";
+            QueryOpty( qString, loginEncoded, req, res, function( result ){
+                try{
+                    var rowCount = result.items.length;
+                    console.log( "rowCount : " + rowCount);
+                    var suggests = [];
 
-                for (var i = 0; i < sortNumber; i++) {
-                    speech = speech + 'Opportunity Number: ' + result.items[i].OptyNumber + ', Name: ' + result.items[i].Name + ';\r\n';
-                    suggests.push({
-                        "title": result.items[i].OptyNumber
-                    })
-                }
-                if (req.body.originalRequest.source == "google") {
-                    res.json({
-                        speech: speech,
-                        displayText: speech,
-                        //contextOut : [{"name":"oppty-followup","lifespan":5,"parameters":{"objType":"activities"}}],
-                        data: {
-                            google: {
-                                'expectUserResponse': true,
-                                'isSsml': false,
-                                'noInputPrompts': [],
-                                'richResponse': {
-                                    'items': [{
-                                        'simpleResponse': {
-                                            'textToSpeech': speech,
-                                            'displayText': speech
-                                        }
-                                    }],
-                                    "suggestions": suggests
+                    for (var i = 0; i < sortNumber; i++) {
+                        speech = speech + 'Opportunity Number: ' + result.items[i].OptyNumber + ', Name: ' + result.items[i].Name + ';\r\n';
+                        suggests.push({
+                            "title": result.items[i].OptyNumber
+                        })
+                    }
+                    if (req.body.originalRequest.source == "google") {
+                        res.json({
+                            speech: speech,
+                            displayText: speech,
+                            //contextOut : [{"name":"oppty-followup","lifespan":5,"parameters":{"objType":"activities"}}],
+                            data: {
+                                google: {
+                                    'expectUserResponse': true,
+                                    'isSsml': false,
+                                    'noInputPrompts': [],
+                                    'richResponse': {
+                                        'items': [{
+                                            'simpleResponse': {
+                                                'textToSpeech': speech,
+                                                'displayText': speech
+                                            }
+                                        }],
+                                        "suggestions": suggests
+                                    }
                                 }
                             }
-                        }
-                    });
-                }else{
+                        });
+                    }else{
+                        res.json({
+                            speech: speech,
+                            displayText: speech
+                        });
+                    }
+                }
+                catch( e ){
+                    console.log( "Error top opty : " + e );
+                    speech = "Something went wrong! Please try again later!";
                     res.json({
                         speech: speech,
                         displayText: speech
                     });
                 }
+            });
+        }else{
+            if( intentName == "opty_top - custom" ){
+                var opptyNumber = req.body.result.parameters.opptyNumber;
+                qString = "/salesApi/resources/latest/opportunities/" + opptyNumber;
+                QueryOpty( qString, loginEncoded, req, res, function( result ){
+                    
+                    console.log( "result : " + JSON.stringify(result));
+                    speech = "Name : " + result.Name;
+                    if (req.body.originalRequest.source == "google") {
+                        res.json({
+                            speech: speech,
+                            displayText: speech,
+                            //contextOut : [{"name":"oppty-followup","lifespan":5,"parameters":{"objType":"activities"}}],
+                            data: {
+                                google: {
+                                    'expectUserResponse': true,
+                                    'isSsml': false,
+                                    'noInputPrompts': [],
+                                    'richResponse': {
+                                        'items': [{
+                                            'simpleResponse': {
+                                                'textToSpeech': speech = "Id : " + ;,
+                                                'displayText': speech
+                                            }
+                                        }],
+                                        "suggestions": suggests
+                                    }
+                                }
+                            }
+                        });
+                    }else{
+                        res.json({
+                            speech: speech,
+                            displayText: speech
+                        });
+                    }
+                }
             }
-            catch( e ){
-                console.log( "Error top opty : " + e );
-                speech = "Something went wrong! Please try again later!";
-                res.json({
-                    speech: speech,
-                    displayText: speech
-                });
-            }
-        });
+        }
     });
 });
 
