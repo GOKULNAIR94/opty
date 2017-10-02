@@ -28,7 +28,7 @@ module.exports = function(req, res) {
 
 
 
-    var speech = 'The churn index is 0.76. I have mailed you the churn report. The customer is at high risk. Your last meeting with the customer was 65 days ago. Would you like me to create an activity for the meeting?'
+    var speech = 'The churn index is 0.76. I have mailed you the churn report. The customer is at high risk. Your last meeting with the customer was 65 days ago. Would you like schedule a meeting?'
 
     console.log(speech);
     console.log('SMTP Configured');
