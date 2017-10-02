@@ -42,7 +42,7 @@ module.exports = function(req, res) {
             cc: "Gokul.Nair@lntinfotech.com",
 
             // Subject of the message
-            subject: 'Churn Report of Mikkel Mathiasen of ', //
+            subject: 'Churn Report of Mikkel Mathiasen.', //
 
             // HTML body
             html: '<p><b>Hello,</b></p>' +
@@ -82,8 +82,7 @@ module.exports = function(req, res) {
     });
     return res.json({
         speech: speech,
-        displayText: speech,
-        source: 'webhook-OSC-oppty'
+        displayText: speech
     });
 
 
