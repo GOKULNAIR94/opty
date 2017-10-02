@@ -28,7 +28,7 @@ module.exports = function(req, res) {
 
 
 
-    var speech = 'Churn Report of Mikkel Mathiasen has been mailed to you. Please give a few minutes for the email to arrive in your inbox. Is there anything else I can help you with?';
+    var speech = 'The churn index is 0.76. I have mailed you the churn report. The customer is at high risk. Your last meeting with the customer was 65 days ago. Would you like me to create an activity for the meeting?'
 
     console.log(speech);
     console.log('SMTP Configured');
@@ -37,7 +37,7 @@ module.exports = function(req, res) {
         let message = {
             from: 'VIKI <reachme@kaaman.onmicrosoft.com>',
             // Comma separated list of recipients
-            to: "gokul.nair@lntinfotech.com",
+            to: "Kaaman.Agarwal@lntinfotech.com",
 
             cc: "Gokul.Nair@lntinfotech.com",
 
