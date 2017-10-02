@@ -745,6 +745,7 @@ restService.post('/opptytop', function(req, res) {
     console.log("Req  : " + JSON.stringify(req.body));
     console.log(" Intent : " + req.body.result.metadata.intentName);
     var sortBy = req.body.result.parameters.optyAttribut;
+    var sortNumber = req.body.result.parameters.number;
     
     getAuth(req, res, function(req, res, UserAuth) {
         console.log("Req  Source: " + req.body.originalRequest.source);
@@ -758,7 +759,7 @@ restService.post('/opptytop', function(req, res) {
                 console.log( "rowCount : " + rowCount);
                 var suggests = [];
 
-                for (var i = 0; i < rowCount; i++) {
+                for (var i = 0; i < sortNumber; i++) {
                     speech = speech + 'Opportunity Number: ' + resObj.items[i].OptyNumber + ', Name: ' + resObj.items[i].Name + ';\r\n';
                     suggests.push({
                         "title": resObj.items[i].OptyNumber
