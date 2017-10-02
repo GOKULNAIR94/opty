@@ -742,6 +742,8 @@ restService.post('/oppty', function(req, res) {
 });
 
 restService.post('/opptytop', function(req, res) {
+    speech = "";
+    
     console.log("opptytop----------- ");
     console.log("Req  : " + JSON.stringify(req.body));
     console.log(" Intent : " + req.body.result.metadata.intentName);
