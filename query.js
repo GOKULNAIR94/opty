@@ -1,6 +1,6 @@
 module.exports = function ( qString, loginEncoded, req, resp, callback){ 
     var http = require("https");
-
+    console.log( "qString : " + qString);
     var options = {
       "method": "GET",
       "hostname": "acs.crm.ap2.oraclecloud.com",
