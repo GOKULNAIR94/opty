@@ -742,6 +742,7 @@ restService.post('/oppty', function(req, res) {
 });
 
 restService.post('/opptytop', function(req, res) {
+    console.log("opptytop----------- ");
     console.log("Req  : " + JSON.stringify(req.body));
     console.log(" Intent : " + req.body.result.metadata.intentName);
     var sortBy = req.body.result.parameters.optyAttribut;
