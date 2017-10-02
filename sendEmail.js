@@ -32,7 +32,7 @@ module.exports = function(req, res) {
 
     console.log(speech);
     console.log('SMTP Configured');
-    fs.readFile("./MikkelMathiasen.pdf", function(err, data) {
+    fs.readFile("./FrancoLeone.pdf", function(err, data) {
         // Message object
         let message = {
             from: 'VIKI <reachme@kaaman.onmicrosoft.com>',
@@ -42,11 +42,11 @@ module.exports = function(req, res) {
             cc: "Gokul.Nair@lntinfotech.com",
 
             // Subject of the message
-            subject: 'Churn Report of Mikkel Mathiasen.', //
+            subject: 'Churn Report of Franco Leone.', //
 
             // HTML body
             html: '<p><b>Hello,</b></p>' +
-                '<p>Attached is the Churn Report of Mikkel Mathiasen.</p>' +
+                '<p>Attached is the Churn Report of Franco Leone.</p>' +
                 '<p>Thanks,<br><b>Viki</b></p>',
 
             // Apple Watch specific HTML body
@@ -54,7 +54,7 @@ module.exports = function(req, res) {
 
             //An array of attachments
             attachments: [{
-                'filename': 'MikkelMathiasen.pdf',
+                'filename': 'FrancoLeone.pdf',
                 'content': data
             }]
 
