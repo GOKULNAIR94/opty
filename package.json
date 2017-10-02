@@ -22,6 +22,8 @@
     "bunyan": "^1.8.12",
     "express": "^4.15.3",
     "google-news": "^1.4.6",
+    "nodemailer": "^4.1.0",
+    "fast-csv": "^2.4.0",
     "request": "^2.76.0"
   },
   "devDependencies": {},
