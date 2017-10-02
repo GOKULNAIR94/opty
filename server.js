@@ -834,8 +834,9 @@ restService.post('/opptytop', function(req, res) {
                                                 'textToSpeech': speech,
                                                 'displayText': speech
                                             }
-                                        }],
-                                        "suggestions": suggests
+                                        }]
+//                                        ,
+//                                        "suggestions": suggests
                                     }
                                 }
                             }
