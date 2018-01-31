@@ -7,7 +7,7 @@ module.exports = function ( qString, loginEncoded, req, resp, callback){
       "port": null,
       "path": qString, //customFields.CO.Serial_Number%3D'C355'%20AND%20statusWithType.status.lookupName%3D'Solved'
       "headers": {
-        "authorization": "Basic YWthc2hkZWVwOmxudExOVDJLMTZfMQ==",//loginEncoded,
+        "authorization": "Basic TE5UMDAxOmxudExOVDJLMTZfMQ==",//loginEncoded,
         "cache-control": "no-cache"
       }
     };
