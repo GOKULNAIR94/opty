@@ -7,16 +7,18 @@ module.exports = function(req, res, callback) {
     var rowCount = 0;
     var speech = "";
     var suggests = [];
-
-    qString = "/crmRestApi/resources/latest/activities?q=OwnerName=Akashdeep%20Makkar&onlyData=true";
+    console.log();
+    var today = req.body.result.parameters.date;
+    console.log("Today : " + today);
+    qString = "/crmRestApi/resources/latest/activities?q=OwnerName=Akashdeep%20Makkar;ActivityStartDate<=" + today + ";ActivityEndDate>=" + today + "&onlyData=true";
     
     Query( qString, req.body.headers.authorization, req, res, function( result ){
         console.log("Query Count  - " + result.count);
         rowCount = result.count;
         var endDate;
         var startDate;
-        var today = req.body.result.parameters.date;
         
+        console.log();
         for (var i = 0; i <= rowCount - 1; i++) {
             endDate = resObj.items[i].ActivityEndDate;
             startDate = resObj.items[i].ActivityStartDate;
