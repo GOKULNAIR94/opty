@@ -21,8 +21,8 @@ module.exports = function(req, res, callback) {
             speech = "All caught up! Enjoy your day!";
         }else{
             for (var i = 0; i <= rowCount - 1; i++) {
-                endDate = resObj.items[i].ActivityEndDate;
-                startDate = resObj.items[i].ActivityStartDate;
+                endDate = result.items[i].ActivityEndDate;
+                startDate = result.items[i].ActivityStartDate;
     
                 endDate = mydate(endDate, "yyyy-mm-dd");
                 startDate = mydate(startDate, "yyyy-mm-dd");
