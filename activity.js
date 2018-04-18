@@ -17,27 +17,30 @@ module.exports = function(req, res, callback) {
         rowCount = result.count;
         var endDate;
         var startDate;
-        
-        console.log();
-        for (var i = 0; i <= rowCount - 1; i++) {
-            endDate = resObj.items[i].ActivityEndDate;
-            startDate = resObj.items[i].ActivityStartDate;
-
-            endDate = mydate(endDate, "yyyy-mm-dd");
-            startDate = mydate(startDate, "yyyy-mm-dd");
-            /*console.log("Start Date: "+startDate); 
-            console.log("End Date: "+endDate);   
-            console.log("Today: "+today); */
-            if (today <= endDate && today >= startDate) {
-                if (result.items[i].ActivityNumber != null && result.items[i].ActivityNumber != "") {
-                    speech = speech + 'Activity Number: ' + result.items[i].ActivityNumber + ', Subject: ' + result.items[i].Subject + ';\r\n';
-                    suggests.push({
-                        "title": result.items[i].ActivityNumber
-                    })
+        if( rowCount == 0 ){
+            speech = "All caught up! Enjoy your day!";
+        }else{
+            for (var i = 0; i <= rowCount - 1; i++) {
+                endDate = resObj.items[i].ActivityEndDate;
+                startDate = resObj.items[i].ActivityStartDate;
+    
+                endDate = mydate(endDate, "yyyy-mm-dd");
+                startDate = mydate(startDate, "yyyy-mm-dd");
+                /*console.log("Start Date: "+startDate); 
+                console.log("End Date: "+endDate);   
+                console.log("Today: "+today); */
+                if (today <= endDate && today >= startDate) {
+                    if (result.items[i].ActivityNumber != null && result.items[i].ActivityNumber != "") {
+                        speech = speech + 'Activity Number: ' + result.items[i].ActivityNumber + ', Subject: ' + result.items[i].Subject + ';\r\n';
+                        suggests.push({
+                            "title": result.items[i].ActivityNumber
+                        })
+                    }
+                    console.log(speech);
                 }
-                console.log(speech);
             }
         }
+        
         if (req.body.originalRequest.source == "google") {
             res.json({
                 speech: speech,
