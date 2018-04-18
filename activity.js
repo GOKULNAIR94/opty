@@ -79,10 +79,11 @@ module.exports = function(req, res, callback) {
                                     speech = 'Here are the details for Activity: ' + activityNumber + ',\n\r Subject: ' + subject + ',\n\r Status: ' + status + ',\n\r Start Date: ' + mydate(startDate, "yyyy-mm-dd") + ',\n\r End Date: ' + mydate(endDate, "yyyy-mm-dd") + ',\n\r Opportunity Associated: ' + optyName + ',\n\r Customer Name: ' + contactName + ',\n\r Phone: ' + contactPhone + ',\n\r Email: ' + contactEmail + ',\n\r Account: ' + AccountName + ".\n Would you like to know the churn index or what is in the news about " + AccountName + ", or would you like to close this activity?";
                                     var suggests = [{ "title" : "Get me news"},{ "title" : "What is the churn index"},{ "title" : "Close this activity"}];
                                     
-            });
-            SendResponse(speech, suggests, contextOut, req, res, function() {
-                console.log("Finished!");
-            });
+                                    SendResponse(speech, suggests, contextOut, req, res, function() {
+                                        console.log("Finished!");
+                                    });
+                                });
+            
             break;
         }
         
