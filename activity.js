@@ -11,6 +11,7 @@ module.exports = function(req, res, callback) {
     qString = "/crmRestApi/resources/latest/activities?q=OwnerName=Akashdeep%20Makkar&onlyData=true";
     
     Query( qString, req.body.headers.authorization, req, res, function( result ){
+        console.log("Query Count  - " + result.count);
         rowCount = result.count;
 
         for (var i = 0; i <= rowCount - 1; i++) {
