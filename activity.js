@@ -3,6 +3,8 @@ module.exports = function(req, res, callback) {
 
     var qString = "";
     var rowCount = 0;
+    var speech = "";
+    var suggests = [];
 
     qString = "/crmRestApi/resources/latest/activities?q=OwnerName=Akashdeep%20Makkar&onlyData=true";
     
