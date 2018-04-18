@@ -2,13 +2,17 @@ module.exports = function(req, res, callback) {
     console.log("Activity Reached!");
 
     var Query = require("./query");
+    var mydate = require('dateformat');
+    var now = new Date();
+    var today = mydate(now, "yyyy-mm-dd");
 
     var qString = "";
     var rowCount = 0;
     var speech = "";
     var suggests = [];
     console.log();
-    var today = req.body.result.parameters.date;
+    
+    today = (req.body.result.parameters.date || today);
     console.log("Today : " + today);
     qString = "/crmRestApi/resources/latest/activities?q=OwnerName=Akashdeep%20Makkar;ActivityStartDate<=" + today + ";ActivityEndDate>=" + today + "&onlyData=true";
     
