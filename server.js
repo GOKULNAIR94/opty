@@ -67,7 +67,7 @@ function getAuth(req, res, callback) {
             }
 
         }
-        var varPath = "/salesApi/resources/latest/VikiAuthv1_c?q=UserId_c=" + userid + "&onlyData=true"
+        var varPath = "/crmRestApi/resources/latest/VikiAuthv1_c?q=UserId_c=" + userid + "&onlyData=true"
         console.log("varPath Login : " + varPath);
         var options = {
             host: 'acs.crm.ap2.oraclecloud.com',
@@ -146,9 +146,9 @@ restService.post('/oppty', function(req, res) {
 
             if (oType == 'opportunities') {
                 if (oType == 'opportunities' && oName2 == 'Test') {
-                    urlPath = '/salesApi/resources/latest/opportunities?q=OptyNumber=' + oNumber + '&onlyData=true'; //&fields=Name,' + oAttrib + ',OptyNumber'
+                    urlPath = '/crmRestApi/resources/latest/opportunities?q=OptyNumber=' + oNumber + '&onlyData=true'; //&fields=Name,' + oAttrib + ',OptyNumber'
                 } else if (oType == 'opportunities' && oNumber2 == 'Testing') {
-                    urlPath = '/salesApi/resources/latest/opportunities?q=Name=' + oName + '&onlyData=true'; //&fields=Name,' + oAttrib + ',OptyNumber'
+                    urlPath = '/crmRestApi/resources/latest/opportunities?q=Name=' + oName + '&onlyData=true'; //&fields=Name,' + oAttrib + ',OptyNumber'
                 }
                 console.log("urlPath : " + urlPath);
                 options = {
@@ -318,10 +318,10 @@ restService.post('/oppty', function(req, res) {
                 var activityNumber = req.body.result.parameters.activityNumber;
 
                 if (!activityNumber) {
-                    urlPath = '/salesApi/resources/latest/activities?q=OwnerName=Akashdeep%20Makkar&onlyData=true';
+                    urlPath = '/crmRestApi/resources/latest/activities?q=OwnerName=Akashdeep%20Makkar&onlyData=true';
                 } else {
 
-                    urlPath = '/salesApi/resources/latest/activities/' + activityNumber + '?onlyData=true';
+                    urlPath = '/crmRestApi/resources/latest/activities/' + activityNumber + '?onlyData=true';
                 }
                 console.log(urlPath);
                 options = {
@@ -592,7 +592,7 @@ restService.post('/oppty', function(req, res) {
                 console.log(actionType);
                 if( oNumber != null && oNumber != ""){
                     
-                    urlPath = '/salesApi/resources/latest/opportunities/' + oNumber;
+                    urlPath = '/crmRestApi/resources/latest/opportunities/' + oNumber;
                     console.log(urlPath);
                     options = {
                         "method": "PATCH",
@@ -633,13 +633,13 @@ restService.post('/oppty', function(req, res) {
                 }
                 else{
                     if( oName != null && oName != ""){
-                        var qString = "/salesApi/resources/latest/opportunities?q=Name=" + encodeURIComponent(oName)
+                        var qString = "/crmRestApi/resources/latest/opportunities?q=Name=" + encodeURIComponent(oName)
                         QueryOpty( qString, loginEncoded, req, res, function( result ){
 
                             if( result.items.length >0 ){
                                 
                                 //Start
-                                urlPath = '/salesApi/resources/latest/opportunities/' + result.items[0].OptyNumber;
+                                urlPath = '/crmRestApi/resources/latest/opportunities/' + result.items[0].OptyNumber;
                                 console.log(urlPath);
                                 options = {
                                     "method": "PATCH",
@@ -704,7 +704,7 @@ restService.post('/oppty', function(req, res) {
 
             } else if (req.body.result.contexts[0].parameters.objType == 'activities') {
                 console.log(actionType);
-                urlPath = '/salesApi/resources/latest/activities/' + activityNumber;
+                urlPath = '/crmRestApi/resources/latest/activities/' + activityNumber;
                 console.log(urlPath);
                 var options = {
                     "method": "PATCH",
@@ -761,7 +761,7 @@ restService.post('/opptytop', function(req, res) {
         if( intentName == "opty_top"){
             var sortBy = req.body.result.parameters.optyAttribut;
             var sortNumber = req.body.result.parameters.number;
-            qString = "/salesApi/resources/latest/opportunities?onlyData=true&orderBy=" + sortBy + ":desc";
+            qString = "/crmRestApi/resources/latest/opportunities?onlyData=true&orderBy=" + sortBy + ":desc";
             QueryOpty( qString, loginEncoded, req, res, function( result ){
                 try{
                     var rowCount = result.items.length;
@@ -815,7 +815,7 @@ restService.post('/opptytop', function(req, res) {
         }else{
             if( intentName == "opty_top - custom" ){
                 var opptyNumber = req.body.result.parameters.opptyNumber;
-                qString = "/salesApi/resources/latest/opportunities/" + opptyNumber;
+                qString = "/crmRestApi/resources/latest/opportunities/" + opptyNumber;
                 QueryOpty( qString, loginEncoded, req, res, function( result ){
                     
                     //console.log( "result : " + JSON.stringify(result));
