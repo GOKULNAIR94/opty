@@ -14,8 +14,9 @@ module.exports = function(req, res, callback) {
         console.log("Query Count  - " + result.count);
         rowCount = result.count;
         var endDate;
-        var startDate
-
+        var startDate;
+        var today = req.body.result.parameters.date;
+        
         for (var i = 0; i <= rowCount - 1; i++) {
             endDate = resObj.items[i].ActivityEndDate;
             startDate = resObj.items[i].ActivityStartDate;
