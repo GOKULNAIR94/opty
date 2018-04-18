@@ -66,6 +66,7 @@ module.exports = function(req, res, callback) {
             var activityNumber = req.body.result.parameters.activityNumber;
             qString = "/crmRestApi/resources/latest/activities/" + activityNumber + "?onlyData=true";
             Query( qString, req.body.headers.authorization, req, res, function( result ){
+                console.log("Activity number : " + activityNumber);
                 var subject = result.Subject;
                                     var status = result.StatusCode;
                                     var startDate = result.ActivityStartDate;
