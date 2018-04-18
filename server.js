@@ -48,6 +48,7 @@ var SendEmail = require("./sendEmail");
 var Activity = require("./activity");
 
 restService.post('/oppty', function(req, res) {
+    console.log("Opty Reached!");
 
     if(intentName.indexOf("Activities - Sales") == 0){
         

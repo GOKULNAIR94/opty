@@ -1,4 +1,6 @@
 module.exports = function(req, res, callback) {
+    console.log("Activity Reached!");
+
     var Query = require("./query");
 
     var qString = "";
