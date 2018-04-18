@@ -2,77 +2,89 @@ module.exports = function(req, res, callback) {
     console.log("Activity Reached!");
 
     var Query = require("./query");
+    var SendResponse = require("./sendResponse");
     var mydate = require('dateformat');
     var now = new Date();
     var today = mydate(now, "yyyy-mm-dd");
 
+    var intentName = req.body.result.metadata.intentName;
     var qString = "";
     var rowCount = 0;
     var speech = "";
     var suggests = [];
+    var contextOut = [];
     console.log();
     
     today = (req.body.result.parameters.date || today);
     console.log("Today : " + today);
-    qString = "/crmRestApi/resources/latest/activities?q=OwnerName=Akashdeep%20Makkar;ActivityStartDate<=" + today + ";ActivityEndDate>=" + today + "&onlyData=true";
+
+    switch (true) {
+        case (intentName == "Activities - Sales"):
+        {
+            
+        qString = "/crmRestApi/resources/latest/activities?q=OwnerName=Akashdeep%20Makkar;ActivityStartDate<=" + today + ";ActivityEndDate>=" + today + "&onlyData=true";
     
-    Query( qString, req.body.headers.authorization, req, res, function( result ){
-        console.log("Query Count  - " + result.count);
-        rowCount = result.count;
-        var endDate;
-        var startDate;
-        if( rowCount == 0 ){
-            speech = "All caught up! Enjoy your day!";
-        }else{
-            for (var i = 0; i <= rowCount - 1; i++) {
-                endDate = result.items[i].ActivityEndDate;
-                startDate = result.items[i].ActivityStartDate;
-    
-                endDate = mydate(endDate, "yyyy-mm-dd");
-                startDate = mydate(startDate, "yyyy-mm-dd");
-                /*console.log("Start Date: "+startDate); 
-                console.log("End Date: "+endDate);   
-                console.log("Today: "+today); */
-                if (today <= endDate && today >= startDate) {
-                    if (result.items[i].ActivityNumber != null && result.items[i].ActivityNumber != "") {
-                        speech = speech + 'Activity Number: ' + result.items[i].ActivityNumber + ', Subject: ' + result.items[i].Subject + ';\r\n';
-                        suggests.push({
-                            "title": result.items[i].ActivityNumber
-                        })
+        Query( qString, req.body.headers.authorization, req, res, function( result ){
+            console.log("Query Count  - " + result.count);
+            rowCount = result.count;
+            var endDate;
+            var startDate;
+            if( rowCount == 0 ){
+                speech = "All caught up! Enjoy your day!";
+            }else{
+                for (var i = 0; i <= rowCount - 1; i++) {
+                    endDate = result.items[i].ActivityEndDate;
+                    startDate = result.items[i].ActivityStartDate;
+        
+                    endDate = mydate(endDate, "yyyy-mm-dd");
+                    startDate = mydate(startDate, "yyyy-mm-dd");
+                    /*console.log("Start Date: "+startDate); 
+                    console.log("End Date: "+endDate);   
+                    console.log("Today: "+today); */
+                    if (today <= endDate && today >= startDate) {
+                        if (result.items[i].ActivityNumber != null && result.items[i].ActivityNumber != "") {
+                            speech = speech + 'Activity Number: ' + result.items[i].ActivityNumber + ', Subject: ' + result.items[i].Subject + ';\r\n';
+                            suggests.push({
+                                "title": result.items[i].ActivityNumber
+                            })
+                        }
+                        console.log(speech);
                     }
-                    console.log(speech);
                 }
             }
+
+            SendResponse(speech, suggests, contextOut, req, res, function() {
+                console.log("Finished!");
+            });
+
+        });
+            break;
         }
         
-        if (req.body.originalRequest.source == "google") {
-            res.json({
-                speech: speech,
-                displayText: speech,
-                //contextOut : [{"name":"oppty-followup","lifespan":5,"parameters":{"objType":"activities"}}],
-                data: {
-                    google: {
-                        'expectUserResponse': true,
-                        'isSsml': false,
-                        'noInputPrompts': [],
-                        'richResponse': {
-                            'items': [{
-                                'simpleResponse': {
-                                    'textToSpeech': speech,
-                                    'displayText': speech
-                                }
-                            }],
-                            "suggestions": suggests
-                        }
-                    }
-                }
+        case (intentName == "Activities - Sales - custom"):
+        {
+            var activityNumber = req.body.result.parameters.activityNumber;
+            qString = "/crmRestApi/resources/latest/activities/" + activityNumber + "?onlyData=true";
+            Query( qString, req.body.headers.authorization, req, res, function( result ){
+                var subject = result.Subject;
+                                    var status = result.StatusCode;
+                                    var startDate = result.ActivityStartDate;
+                                    var endDate = result.ActivityEndDate;
+                                    var optyName = result.OpportunityName;
+                                    var contactName = result.PrimaryContactName;
+                                    var contactEmail = result.PrimaryContactEmailAddress;
+                                    var contactPhone = result.PrimaryFormattedPhoneNumber;
+
+                                    speech = 'Here are the details for Activity: ' + activityNumber + ',\n\r Subject: ' + subject + ',\n\r Status: ' + status + ',\n\r Start Date: ' + mydate(startDate, "yyyy-mm-dd") + ',\n\r End Date: ' + mydate(endDate, "yyyy-mm-dd") + ',\n\r Opportunity Associated: ' + optyName + ',\n\r Customer Name: ' + contactName + ',\n\r Phone: ' + contactPhone + ',\n\r Email: ' + contactEmail + ',\n\r Account: ' + AccountName + ".\n Would you like to know the churn index or what is in the news about " + AccountName + ", or would you like to close this activity?";
+                                    var suggests = [{ "title" : "Get me news"},{ "title" : "What is the churn index"},{ "title" : "Close this activity"}];
+                                    
             });
-        }else{
-            res.json({
-                speech: speech,
-                displayText: speech
+            SendResponse(speech, suggests, contextOut, req, res, function() {
+                console.log("Finished!");
             });
+            break;
         }
-    });
+        
+    }
 
 }
