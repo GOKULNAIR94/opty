@@ -3,7 +3,7 @@ module.exports = function ( qString, loginEncoded, req, resp, callback){
     console.log( "qString : " + qString);
     var options = {
       "method": "GET",
-      "hostname": "acs.crm.ap2.oraclecloud.com",
+      "hostname": "acs.fa.ap2.oraclecloud.com",
       "port": null,
       "path": qString, //customFields.CO.Serial_Number%3D'C355'%20AND%20statusWithType.status.lookupName%3D'Solved'
       "headers": {

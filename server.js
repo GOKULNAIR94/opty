@@ -70,7 +70,7 @@ function getAuth(req, res, callback) {
         var varPath = "/crmRestApi/resources/latest/VikiAuthv1_c?q=UserId_c=" + userid + "&onlyData=true"
         console.log("varPath Login : " + varPath);
         var options = {
-            host: 'acs.crm.ap2.oraclecloud.com',
+            host: 'acs.fa.ap2.oraclecloud.com',
             path: varPath,
             headers: {
                 'Authorization': req.body.headers.authorization
@@ -153,7 +153,7 @@ restService.post('/oppty', function(req, res) {
                 console.log("urlPath : " + urlPath);
                 options = {
                     //ca: fs.readFileSync('MyCert'),
-                    host: 'acs.crm.ap2.oraclecloud.com',
+                    host: 'acs.fa.ap2.oraclecloud.com',
                     path: urlPath,
                     headers: {
                         'Authorization': loginEncoded
@@ -326,7 +326,7 @@ restService.post('/oppty', function(req, res) {
                 console.log(urlPath);
                 options = {
                     //ca: fs.readFileSync('MyCert'),
-                    host: 'acs.crm.ap2.oraclecloud.com',
+                    host: 'acs.fa.ap2.oraclecloud.com',
                     path: urlPath,
                     headers: {
                         'Authorization': loginEncoded
@@ -596,7 +596,7 @@ restService.post('/oppty', function(req, res) {
                     console.log(urlPath);
                     options = {
                         "method": "PATCH",
-                        "hostname": "acs.crm.ap2.oraclecloud.com",
+                        "hostname": "acs.fa.ap2.oraclecloud.com",
                         "port": null,
                         "path": urlPath,
                         "headers": {
@@ -643,7 +643,7 @@ restService.post('/oppty', function(req, res) {
                                 console.log(urlPath);
                                 options = {
                                     "method": "PATCH",
-                                    "hostname": "acs.crm.ap2.oraclecloud.com",
+                                    "hostname": "acs.fa.ap2.oraclecloud.com",
                                     "port": null,
                                     "path": urlPath,
                                     "headers": {
@@ -708,7 +708,7 @@ restService.post('/oppty', function(req, res) {
                 console.log(urlPath);
                 var options = {
                     "method": "PATCH",
-                    "hostname": "acs.crm.ap2.oraclecloud.com",
+                    "hostname": "acs.fa.ap2.oraclecloud.com",
                     "port": null,
                     "path": urlPath,
                     "headers": {
