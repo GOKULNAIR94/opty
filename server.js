@@ -131,9 +131,10 @@ restService.post('/opptytop', function(req, res) {
     }else{
         if( intentName == "opty_top - custom" ){
             var opptyNumber = req.body.result.parameters.opptyNumber;
+            console.log('Opty Number : ' + opptyNumber);
             qString = "/crmRestApi/resources/latest/opportunities/" + opptyNumber;
             QueryOpty( qString, loginEncoded, req, res, function( result ){
-                
+                console.log('OResults' );
                 //console.log( "result : " + JSON.stringify(result));
                 speech = "Opportunity Name: " + result.Name +" ,\r\n  Account : " + result.TargetPartyName + ".\r\n Would you like to know more details like status, churn index or what is in the news about the account?";
                 var suggests = [{ "title" : "What is the status"},{ "title" : "What is the churn index"},{ "title" : "What is in the news"}];
