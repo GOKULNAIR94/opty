@@ -49,8 +49,8 @@ pword = 'lntLNT2K16_1';
 var loginEncoded;
 var userid;
 var intentName = ""; 
-var contextOut;
-var suggests;
+var contextOut =[];
+var suggests = [];
 var opptyNumber;
 var opptyName;
 
@@ -105,7 +105,7 @@ restService.post('/opptytop', function(req, res) {
                     speech = speech + 'Opportunity Number: ' + result.items[i].OptyNumber + ', Name: ' + result.items[i].Name + ", Revenue : "  + ('$' + result.items[i].Revenue  / 1000000 + 'M') + ';\r\n';
                     suggests.push({
                         "title": result.items[i].OptyNumber
-                    })
+                    });
                 }
                 SendResponse(speech, suggests, contextOut, req, res, function() {
                     console.log("Finished!");
@@ -133,14 +133,15 @@ restService.post('/opptytop', function(req, res) {
                     //console.log( "result : " + JSON.stringify(result));
                     speech = "Opportunity Name: " + result.Name +" ,\r\n  Account : " + result.TargetPartyName + ".\r\n Would you like to know more details like status, churn index or what is in the news about the account?";
                     suggests = [{ "title" : "What is the status"},{ "title" : "What is the churn index"},{ "title" : "What is in the news"}];
-                    
-                    contextOut = [{
+
+                    contextOut.push({
                         "name": "accountname",
                         "lifespan": 1,
                         "parameters": {
                             "accountname": result.TargetPartyName
                         }
-                    }];
+                    });
+
                     console.log("Context Out : " + JSON.stringify(contextOut));
                     SendResponse(speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
@@ -218,19 +219,20 @@ restService.post('/opptytop', function(req, res) {
 
             
                     }
-                    contextOut = [{
+                    contextOut.push({
                         "name": "optynumber",
                         "lifespan": 1,
                         "parameters": {
                             "optynumber": result.items[0].OptyNumber
                         }
-                    },{
+                    });
+                    contextOut.push({
                         "name": "accountname",
                         "lifespan": 1,
                         "parameters": {
-                            "accountname": result.items[0].TargetPartyName
+                            "accountname": result.TargetPartyName
                         }
-                    }];
+                    });
 
                     SendResponse(speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
