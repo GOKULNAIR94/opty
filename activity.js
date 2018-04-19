@@ -79,23 +79,23 @@ module.exports = function(req, res, callback) {
 
                     speech = 'Here are the details for Activity ' + activityNumber + ":";
                     if( subject )
-                        speech += ' \n\rSubject: ' + subject;
+                        speech += ' \nSubject: ' + subject;
                     if( status )
-                        speech += ', \n\rStatus: ' + status;
+                        speech += ', \nStatus: ' + status;
                     if( startDate )
-                        speech += ', \n\rStart Date: ' + mydate(startDate, "yyyy-mm-dd");
+                        speech += ', \nStart Date: ' + mydate(startDate, "yyyy-mm-dd");
                     if( endDate )
-                        speech += ',\n\rEnd Date: ' + mydate(endDate, "yyyy-mm-dd");
+                        speech += ',\nEnd Date: ' + mydate(endDate, "yyyy-mm-dd");
                     if( optyName )
-                        speech += ',\n\rOpportunity Associated: ' + optyName;
+                        speech += ',\nOpportunity Associated: ' + optyName;
                     if( contactName )
-                        speech += ',\n\rCustomer Name: ' + contactName;
+                        speech += ',\nCustomer Name: ' + contactName;
                     if( contactPhone )
-                        speech += ',\n\rPhone: ' + contactPhone;
+                        speech += ',\nPhone: ' + contactPhone;
                     if( contactEmail )
-                        speech += ',\n\rEmail: ' + contactEmail;
+                        speech += ',\nEmail: ' + contactEmail;
                     if( AccountName )
-                        speech += ',\n\rAccount: ' + AccountName;
+                        speech += ',\nAccount: ' + AccountName;
                     speech += ".\nWould you like to know the churn index or what is in the news about " + AccountName + ", or would you like to close this activity?";
                     
                     var suggests = [{
