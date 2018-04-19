@@ -244,7 +244,7 @@ restService.post('/opptytop', function(req, res) {
                     opptyNumber = req.body.result.parameters.opptyNumber
                 else{
                     var cont = req.body.result.contexts.filter(x => {
-                        return x.name == optynumber
+                        return x.name == "optynumber"
                     });
                     opptyNumber = cont.parameters.optynumber;
                 }
@@ -272,7 +272,7 @@ restService.post('/opptytop', function(req, res) {
     }
     if(intentName == "opty_top - custom - custom-news"){
         var account = req.body.result.contexts.filter(x => {
-            return x.name == accountname
+            return x.name == "accountname"
         });
         var accountName = cont.parameters.accountname;
         GetNews( accountName, req, res, function(result) {
