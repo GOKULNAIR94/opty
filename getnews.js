@@ -19,7 +19,8 @@ module.exports = function( track, req, res, callback) {
         var cont = req.body.result.contexts.filter(x => {
             return x.name == "actions_intent_option"
         });
-        toSend["option"] = cont[0].parameters.OPTION;
+        if(cont[0])
+            toSend["option"] = cont[0].parameters.OPTION;
         
         console.log("toSend Activity : " + JSON.stringify(toSend));
         var newoptions = {
