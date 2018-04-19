@@ -62,28 +62,17 @@ module.exports = function(req, res) {
 
         };
 
-        transporter.verify(function(error, success) {
+        transporter.sendMail(message, function(error, info){
             if (error) {
-                console.log(error);
+                console.log( "Error : " + error);
+                speech = "Unable to send mail. Please try again later.";
             } else {
-                console.log('Server is ready to take our messages');
+                console.log('Email sent: ' + info.response);
             }
-        });
-
-        console.log('Sending Mail');
-        transporter.sendMail(message, (error, info) => {
-            if (error) {
-                console.log('Error occurred');
-                console.log(error.message);
-                return;
-            }
-            console.log('Message sent successfully!');
-            console.log('Server responded with "%s"', info.response);
-            transporter.close();
             return res.json({
                 speech: speech,
                 displayText: speech
             });
-        })
+        });
     });
 }
