@@ -114,8 +114,9 @@ module.exports = function(req, res, callback) {
                             console.log("Finished!");
                         });
                     }else{
+                        console.log("Call Get news");
                         GetNews( AccountName, req, res, function(result) {
-                            console.log("SendEmail Called");
+                            console.log("Get News Called");
                         });
                     }
                 });
