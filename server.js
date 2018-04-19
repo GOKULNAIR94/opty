@@ -13,6 +13,10 @@ restService.use(bodyParser.json());
 
 
 var QueryOpty = require("./query");
+var SendEmail = require("./sendEmail");
+var Activity = require("./activity");
+var Oppty = require("./oppty");
+var SendResponse = require("./sendResponse");
 
 var oNumber = '';
 var oName = '';
@@ -44,18 +48,31 @@ pword = 'lntLNT2K16_1';
 var loginEncoded;
 var userid;
 var intentName = ""; 
-var SendEmail = require("./sendEmail");
-var Activity = require("./activity");
+var contextOut;
+var suggests;
 
 restService.post('/oppty', function(req, res) {
     intentName = req.body.result.metadata.intentName;
     console.log("Opty Reached!");
 
-    if(intentName.indexOf("Activities - Sales") == 0){
-        
-        Activity(req, res, function(result) {
-            console.log("Activity Called");
-        });
+    switch (true) {
+    
+            case (intentName.indexOf("Activities - Sales") == 0):
+            {
+                Activity(req, res, function(result) {
+                    console.log("Activity Called");
+                });
+                break;
+            }
+
+            case (intentName.indexOf("oppty") == 0):
+            {
+                Oppty(req, res, function(result) {
+                    console.log("Activity Called");
+                });
+                break;
+            }
+
     }
 
 });
@@ -90,34 +107,9 @@ restService.post('/opptytop', function(req, res) {
                         "title": result.items[i].OptyNumber
                     })
                 }
-                if (req.body.originalRequest.source == "google") {
-                    res.json({
-                        speech: speech,
-                        displayText: speech,
-                        //contextOut : [{"name":"oppty-followup","lifespan":5,"parameters":{"objType":"activities"}}],
-                        data: {
-                            google: {
-                                'expectUserResponse': true,
-                                'isSsml': false,
-                                'noInputPrompts': [],
-                                'richResponse': {
-                                    'items': [{
-                                        'simpleResponse': {
-                                            'textToSpeech': speech,
-                                            'displayText': speech
-                                        }
-                                    }],
-                                    "suggestions": suggests
-                                }
-                            }
-                        }
-                    });
-                }else{
-                    res.json({
-                        speech: speech,
-                        displayText: speech
-                    });
-                }
+                SendResponse(speech, suggests, contextOut, req, res, function() {
+                    console.log("Finished!");
+                });
             }
             catch( e ){
                 console.log( "Error top opty : " + e );
@@ -129,45 +121,93 @@ restService.post('/opptytop', function(req, res) {
             }
         });
     }else{
-        if( intentName == "opty_top - custom" ){
-            var opptyNumber = req.body.result.parameters.opptyNumber;
-            console.log('Opty Number : ' + opptyNumber);
-            qString = "/crmRestApi/resources/latest/opportunities/" + opptyNumber;
-            QueryOpty( qString, loginEncoded, req, res, function( result ){
-                console.log('OResults' );
-                //console.log( "result : " + JSON.stringify(result));
-                speech = "Opportunity Name: " + result.Name +" ,\r\n  Account : " + result.TargetPartyName + ".\r\n Would you like to know more details like status, churn index or what is in the news about the account?";
-                var suggests = [{ "title" : "What is the status"},{ "title" : "What is the churn index"},{ "title" : "What is in the news"}];
-                
-                if (req.body.originalRequest.source == "google") {
-                    res.json({
-                        speech: speech,
-                        displayText: speech,
-                        //contextOut : [{"name":"oppty-followup","lifespan":5,"parameters":{"objType":"activities"}}],
-                        data: {
-                            google: {
-                                'expectUserResponse': true,
-                                'isSsml': false,
-                                'noInputPrompts': [],
-                                'richResponse': {
-                                    'items': [{
-                                        'simpleResponse': {
-                                            'textToSpeech': speech,
-                                            'displayText': speech
-                                        }
-                                    }],
-                                    "suggestions": suggests
-                                }
-                            }
+        switch (true) {
+    
+            case (intentName == "opty_top - custom"):
+            {
+                var opptyNumber;
+                opptyNumber = req.body.result.parameters.opptyNumber;
+                qString = "/crmRestApi/resources/latest/opportunities/" + opptyNumber + '?onlyData=true';;
+                QueryOpty( qString, loginEncoded, req, res, function( result ){
+                    console.log('OResults' );
+                    //console.log( "result : " + JSON.stringify(result));
+                    speech = "Opportunity Name: " + result.Name +" ,\r\n  Account : " + result.TargetPartyName + ".\r\n Would you like to know more details like status, churn index or what is in the news about the account?";
+                    suggests = [{ "title" : "What is the status"},{ "title" : "What is the churn index"},{ "title" : "What is in the news"}];
+                    
+                    SendResponse(speech, suggests, contextOut, req, res, function() {
+                        console.log("Finished!");
+                    });
+                });
+                break;
+            }
+
+            case (intentName.indexOf("oppty") == 0):
+            {
+                var opptyName = encodeURIComponent(req.body.result.parameters.opptyName);
+                var oAttrib = req.body.result.parameters.optyAttribut;
+                var rev;
+                var optyOther;
+                qString = "/crmRestApi/resources/latest/opportunities/q=Name=" + opptyName + '&onlyData=true';
+                QueryOpty( qString, loginEncoded, req, res, function( result ){
+                    console.log('OResults' );
+                    //console.log( "result : " + JSON.stringify(result));
+                    speech = "Opportunity Name: " + result.Name +" ,\r\n  Account : " + result.TargetPartyName + ".\r\n Would you like to know more details like status, churn index or what is in the news about the account?";
+                    suggests = [{ "title" : "What is the status"},{ "title" : "What is the churn index"},{ "title" : "What is in the news"}];
+                    switch (oAttrib) {
+    
+                        case ("Revenue"):
+                        {
+                            rev = '$' + resObj.items[0].Revenue / 1000000 + 'M';
+                            optyOther = '$' + resObj.items[0].ExpectAmount / 1000000 + 'M';
+                            speech = 'Current Revenue for Opportunity ' + oName + ' is ' + rev + '. The expected amount for this opportunity is ' + optyOther + ".\n";
+                            break;
                         }
+                        case ("WinProb"):
+                        {
+                            rev = resObj.items[0].WinProb;
+                                speech = 'Opportunity ' + oName + ' is ' + rev + "% probable to Win.";
+                            break;
+                        }
+                        case ("LastUpdatedBy"):
+                        {
+                            rev = resObj.items[0].LastUpdatedBy;
+                                rev = rev.charAt(0).toUpperCase() + rev.slice(1);
+                                optyOther = resObj.items[0].LastUpdateDate;
+                                speech = 'Current Sales Person working on Opportunity: ' + oName + ' is ' + rev + '. The last time ' + rev + ' updated this opportunity was on ' + optyOther;
+                            break;
+                        }
+                        case ("SalesStage"):
+                        {
+                            rev = resObj.items[0].SalesStage;
+                                optyOther = resObj.items[0].AverageDaysAtStage;
+                                speech = 'Opportunity ' + oName + ' is currently in Stage' + rev + '. On an average an opportunity stays in this stage for ' + optyOther + " days.\n";
+                            break;
+                        }
+                        case ("TargetPartyName"):
+                        {
+                            rev = resObj.items[0].TargetPartyName; //TargetPartyName
+                                console.log(rev);
+                                optyOther = resObj.items[0].PrimaryContactPartyName;
+                                speech = 'Opportunity ' + oName + ' is for account ' + rev + '. The primary contact person for this opportnity is ' + optyOther;
+                            break;
+                        }
+                        case ("PrimaryContactPartyName"):
+                        {
+                            rev = resObj.items[0].PrimaryContactPartyName;
+                                optyOther = resObj.items[0].PrimaryContactFormattedPhoneNumber;
+                                speech = 'The primary contact for opportunity ' + oName + ' is ' + rev + '. Phone Number: ' + optyOther + '. Email Address: ' + optyOther2;
+                            break;
+                        }
+
+            
+                    }
+                    SendResponse(speech, suggests, contextOut, req, res, function() {
+                        console.log("Finished!");
                     });
-                }else{
-                    res.json({
-                        speech: speech,
-                        displayText: speech
-                    });
-                }
-            });
+                });
+                break;
+            }
+
         }
     }    
     if( intentName == "opty_top - custom - custom" || intentName=='Activities - Sales - custom - custom' ){
