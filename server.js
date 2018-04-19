@@ -50,6 +50,8 @@ var userid;
 var intentName = ""; 
 var contextOut;
 var suggests;
+var opptyNumber;
+var opptyName;
 
 restService.post('/oppty', function(req, res) {
     intentName = req.body.result.metadata.intentName;
@@ -118,7 +120,7 @@ restService.post('/opptytop', function(req, res) {
     
             case (intentName == "opty_top - custom"):
             {
-                var opptyNumber;
+                
                 opptyNumber = req.body.result.parameters.opptyNumber;
                 qString = "/crmRestApi/resources/latest/opportunities/" + opptyNumber + '?onlyData=true';;
                 QueryOpty( qString, loginEncoded, req, res, function( result ){
@@ -136,7 +138,8 @@ restService.post('/opptytop', function(req, res) {
 
             case (intentName.indexOf("oppty") == 0):
             {
-                var opptyName = encodeURIComponent(req.body.result.parameters.opptyName);
+                opptyName = encodeURIComponent(req.body.result.parameters.opptyName);
+                opptyNumber = req.body.result.parameters.opptyNumber;
                 var oAttrib = req.body.result.parameters.optyAttribut;
                 var rev;
                 var optyOther;
