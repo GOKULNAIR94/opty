@@ -145,13 +145,13 @@ restService.post('/opptytop', function(req, res) {
                 var optyOther;
                 
                 if( opptyNumber ){
-                    qString = "/crmRestApi/resources/latest/opportunities/" + opptyNumber + '&onlyData=true';
+                    qString = "/crmRestApi/resources/latest/opportunities/" + opptyNumber + '?onlyData=true';
                 }else{
                     if(opptyName){
-                        qString = "/crmRestApi/resources/latest/opportunities/q=Name=" + opptyName + '&onlyData=true';
+                        qString = "/crmRestApi/resources/latest/opportunities?q=Name=" + opptyName + '&onlyData=true';
                     }
                 }
-                
+
                 QueryOpty( qString, loginEncoded, req, res, function( result ){
                     console.log('OResults' );
                     //console.log( "result : " + JSON.stringify(result));
