@@ -222,13 +222,19 @@ restService.post('/opptytop', function(req, res) {
             
             case (intentName.indexOf("opty_top - custom - attrib - custom") == 0 ):
             {
-                opptyNumber = req.body.result.parameters.opptyNumber;
                 var oAttrib = req.body.result.parameters.optyAttribut;
                 var prob = req.body.result.parameters.Probability;
-                var cont = req.body.result.contexts.filter(x => {
-                    return x.name == optynumber
-                });
                 
+                
+                if(req.body.result.parameters.opptyNumber)
+                    opptyNumber = req.body.result.parameters.opptyNumber
+                else{
+                    var cont = req.body.result.contexts.filter(x => {
+                        return x.name == optynumber
+                    });
+                    opptyNumber = cont.parameters.optynumber;
+                }
+
                 qString = "/crmRestApi/resources/latest/opportunities/" + opptyNumber;
 
                 var body = {};
