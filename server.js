@@ -205,6 +205,13 @@ restService.post('/opptytop', function(req, res) {
 
             
                     }
+                    contextOut = [{
+                        "name": "optynumber",
+                        "lifespan": 1,
+                        "parameters": {
+                            "optynumber": result.items[0].OptyNumber
+                        }
+                    }];
                     SendResponse(speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
                     });
