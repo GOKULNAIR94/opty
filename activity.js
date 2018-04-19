@@ -109,10 +109,6 @@ module.exports = function(req, res, callback) {
                         "title": "Close this activity"
                     }];
 
-                    SendResponse(speech, suggests, contextOut, req, res, function() {
-                        console.log("Finished!");
-                    });
-
                     if( intentName == "Activities - Sales - custom" ){
                         SendResponse(speech, suggests, contextOut, req, res, function() {
                             console.log("Finished!");
