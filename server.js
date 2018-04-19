@@ -274,7 +274,7 @@ restService.post('/opptytop', function(req, res) {
         var account = req.body.result.contexts.filter(x => {
             return x.name == "accountname"
         });
-        var accountName = cont.parameters.accountname;
+        var accountName = account.parameters.accountname;
         GetNews( accountName, req, res, function(result) {
             console.log("Get News Called");
         });
