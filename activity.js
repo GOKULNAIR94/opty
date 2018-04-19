@@ -77,7 +77,27 @@ module.exports = function(req, res, callback) {
                     var contactEmail = result.PrimaryContactEmailAddress;
                     var contactPhone = result.PrimaryFormattedPhoneNumber;
 
-                    speech = 'Here are the details for Activity: ' + activityNumber + ',\n\r Subject: ' + subject + ',\n\r Status: ' + status + ',\n\r Start Date: ' + mydate(startDate, "yyyy-mm-dd") + ',\n\r End Date: ' + mydate(endDate, "yyyy-mm-dd") + ',\n\r Opportunity Associated: ' + optyName + ',\n\r Customer Name: ' + contactName + ',\n\r Phone: ' + contactPhone + ',\n\r Email: ' + contactEmail + ',\n\r Account: ' + AccountName + ".\n Would you like to know the churn index or what is in the news about " + AccountName + ", or would you like to close this activity?";
+                    speech = 'Here are the details for Activity ' + activityNumber + ":";
+                    if( subject )
+                        speech += ' \n\rSubject: ' + subject;
+                    if( status )
+                        speech += ', \n\rStatus: ' + status;
+                    if( startDate )
+                        speech += ', \n\rStart Date: ' + mydate(startDate, "yyyy-mm-dd");
+                    if( endDate )
+                        speech += ',\n\rEnd Date: ' + mydate(endDate, "yyyy-mm-dd");
+                    if( optyName )
+                        speech += ',\n\rOpportunity Associated: ' + optyName;
+                    if( contactName )
+                        speech += ',\n\rCustomer Name: ' + contactName;
+                    if( contactPhone )
+                        speech += ',\n\rPhone: ' + contactPhone;
+                    if( contactEmail )
+                        speech += ',\n\rEmail: ' + contactEmail;
+                    if( AccountName )
+                        speech += ',\n\rAccount: ' + AccountName;
+                    speech += ".\nWould you like to know the churn index or what is in the news about " + AccountName + ", or would you like to close this activity?";
+                    
                     var suggests = [{
                         "title": "Get me news"
                     }, {
