@@ -4,6 +4,7 @@ module.exports = function(req, res, callback) {
     var Query = require("./query");
     var SendResponse = require("./sendResponse");
     var SendEmail = require("./sendEmail");
+    var GetNews = require("./getnews");
 
     var mydate = require('dateformat');
     var now = new Date();
@@ -63,7 +64,7 @@ module.exports = function(req, res, callback) {
                 break;
             }
 
-        case (intentName == "Activities - Sales - custom"):
+        case (intentName == "Activities - Sales - custom" || intentName == "Activities - Sales - custom - news"):
             {
                 var activityNumber = req.body.result.parameters.activityNumber;
                 qString = "/crmRestApi/resources/latest/activities/" + activityNumber + "?onlyData=true";
@@ -111,6 +112,16 @@ module.exports = function(req, res, callback) {
                     SendResponse(speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
                     });
+
+                    if( intentName == "Activities - Sales - custom" ){
+                        SendResponse(speech, suggests, contextOut, req, res, function() {
+                            console.log("Finished!");
+                        });
+                    }else{
+                        GetNews( AccountName, res, function(result) {
+                            console.log("SendEmail Called");
+                        });
+                    }
                 });
 
                 break;
