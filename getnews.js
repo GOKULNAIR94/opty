@@ -15,14 +15,11 @@ module.exports = function( track, req, res, callback) {
             "source": req.body.originalRequest.source
         };
         console.log("Context : " + JSON.stringify(req.body.result));
-        for(var i=0; i< req.body.result.contexts.length; i++){
-            if( req.body.result.contexts[i].parameters["OPTION"] != null && req.body.result.contexts[i].parameters["OPTION"] != "" ){
-                toSend["option"] = req.body.result.contexts[i].parameters["OPTION"];
-            }else{
-                if( req.body.result.contexts[i].parameters["headline.original"] != null && req.body.result.contexts[i].parameters["headline.original"] != "")
-                    toSend["headline"] = req.body.result.contexts[i].parameters["headline.original"];
-            }
-        }
+        
+        var cont = req.body.result.contexts.filter(x => {
+            return x.name == "actions_intent_option"
+        });
+        toSend["option"] = cont[0].parameters.OPTION;
         
         console.log("toSend Activity : " + JSON.stringify(toSend));
         var newoptions = {
