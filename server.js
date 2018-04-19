@@ -223,7 +223,7 @@ restService.post('/opptytop', function(req, res) {
                         "name": "accountname",
                         "lifespan": 1,
                         "parameters": {
-                            "accountname": result.TargetPartyName
+                            "accountname": result.items[0].TargetPartyName
                         }
                     }];
 
