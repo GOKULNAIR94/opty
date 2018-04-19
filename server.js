@@ -136,7 +136,7 @@ restService.post('/opptytop', function(req, res) {
 
                     contextOut.push({
                         "name": "accountname",
-                        "lifespan": 1,
+                        "lifespan": 5,
                         "parameters": {
                             "accountname": result.TargetPartyName
                         }
@@ -221,14 +221,14 @@ restService.post('/opptytop', function(req, res) {
                     }
                     contextOut.push({
                         "name": "optynumber",
-                        "lifespan": 1,
+                        "lifespan": 5,
                         "parameters": {
                             "optynumber": result.items[0].OptyNumber
                         }
                     });
                     contextOut.push({
                         "name": "accountname",
-                        "lifespan": 1,
+                        "lifespan": 5,
                         "parameters": {
                             "accountname": result.TargetPartyName
                         }
