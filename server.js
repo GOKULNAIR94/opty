@@ -278,7 +278,7 @@ restService.post('/opptytop', function(req, res) {
             console.log("SendEmail Called");
         });
     }
-    if(intentName == "opty_top - custom - custom-news"){
+    if(intentName == "opty_top - custom - custom-news" || intentName == "opty_top - custom - custom-news - details"){
         console.log("Contexts : " + JSON.stringify(req.body.result.contexts));
         
         var account = req.body.result.contexts.filter(x => {
