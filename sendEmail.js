@@ -37,7 +37,7 @@ module.exports = function(req, res) {
     fs.readFile("./FrancoLeone.pdf", function(err, data) {
         // Message object
         let message = {
-            from: 'VIKI <reachme@kaaman.onmicrosoft.com>',
+            from: 'VIKI <viki@kaaman.onmicrosoft.com>',
             // Comma separated list of recipients
             to: toemail,
 
