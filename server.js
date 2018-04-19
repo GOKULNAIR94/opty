@@ -71,7 +71,7 @@ restService.post('/opptytop', function(req, res) {
     var qString = "";
 
     console.log("Req  Source: " + req.body.originalRequest.source);
-    console.log(" UserAuth returned : " + UserAuth);
+
     loginEncoded = req.body.headers.authorization;
     
     if( intentName == "opty_top"){
