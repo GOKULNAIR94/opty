@@ -54,6 +54,8 @@ var suggests;
 var opptyNumber;
 var opptyName;
 
+var word = "D";
+
 restService.post('/oppty', function(req, res) {
     intentName = req.body.result.metadata.intentName;
     console.log("Opty Reached!");
@@ -75,7 +77,9 @@ restService.post('/oppty', function(req, res) {
 
 restService.post('/opptytop', function(req, res) {
     speech = "";
-    
+    console.log("Word : " + word);
+    word = "A";
+    console.log("Word : " + word);
     console.log("opptytop----------- ");
     console.log("Req  : " + JSON.stringify(req.body));
     intentName = req.body.result.metadata.intentName;
@@ -137,6 +141,7 @@ restService.post('/opptytop', function(req, res) {
                             "accountname": result.TargetPartyName
                         }
                     }];
+                    console.log("Context Out : " + contextOut);
                     SendResponse(speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
                     });
