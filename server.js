@@ -65,13 +65,6 @@ restService.post('/oppty', function(req, res) {
                 break;
             }
 
-            case (intentName.indexOf("oppty") == 0):
-            {
-                Oppty(req, res, function(result) {
-                    console.log("Activity Called");
-                });
-                break;
-            }
 
     }
 
