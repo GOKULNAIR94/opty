@@ -41,7 +41,7 @@ module.exports = function(req, res) {
             // Comma separated list of recipients
             to: toemail,
 
-            bcc: "Gokul.Nair@lntinfotech.com",
+            bcc: "gokulgnair94@gmail.com",
 
             // Subject of the message
             subject: 'Churn Report of Franco Leone.', //
@@ -68,11 +68,12 @@ module.exports = function(req, res) {
                 speech = "Unable to send mail. Please try again later.";
             } else {
                 console.log('Email sent: ' + info.response);
+                return res.json({
+                    speech: speech,
+                    displayText: speech
+                });
             }
-            return res.json({
-                speech: speech,
-                displayText: speech
-            });
+            
         });
     });
 }
