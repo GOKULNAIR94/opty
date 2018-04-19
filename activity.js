@@ -118,7 +118,7 @@ module.exports = function(req, res, callback) {
                             console.log("Finished!");
                         });
                     }else{
-                        GetNews( AccountName, res, function(result) {
+                        GetNews( AccountName, req, res, function(result) {
                             console.log("SendEmail Called");
                         });
                     }
