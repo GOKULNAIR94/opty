@@ -17,6 +17,7 @@ var SendEmail = require("./sendEmail");
 var Activity = require("./activity");
 var Oppty = require("./oppty");
 var SendResponse = require("./sendResponse");
+var Update = require("./update");
 
 var oNumber = '';
 var oName = '';
@@ -216,6 +217,26 @@ restService.post('/opptytop', function(req, res) {
                         console.log("Finished!");
                     });
                 });
+                break;
+            }
+            
+            case (intentName.indexOf("opty_top - custom - attrib - custom") == 0 ):
+            {
+                opptyNumber = req.body.result.parameters.opptyNumber;
+                var oAttrib = req.body.result.parameters.optyAttribut;
+                var prob = req.body.result.parameters.Probability;
+                var cont = req.body.result.contexts.filter(x => {
+                    return x.name == optynumber
+                });
+                
+                qString = "/crmRestApi/resources/latest/opportunities/" + opptyNumber;
+
+                var body = {};
+                body[oAttrib] = prob;
+                Update( qString, loginEncoded, body, req, res, function( result ){
+
+                });
+
                 break;
             }
 
