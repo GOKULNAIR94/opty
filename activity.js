@@ -3,6 +3,8 @@ module.exports = function(req, res, callback) {
 
     var Query = require("./query");
     var SendResponse = require("./sendResponse");
+    var SendEmail = require("./sendEmail");
+
     var mydate = require('dateformat');
     var now = new Date();
     var today = mydate(now, "yyyy-mm-dd");
