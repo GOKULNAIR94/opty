@@ -2,6 +2,7 @@ module.exports = function( track, req, res, callback) {
     console.log("Activity Reached!");
 
     var SendResponse = require("./sendResponse");
+    var http = require('https');
 
         var varHost = 'vikinews.herokuapp.com';
         var varPath = '/inputmsg';
@@ -36,7 +37,7 @@ module.exports = function( track, req, res, callback) {
         var body = "";
         var responseObject;
 
-        var post_req = http.request(newoptions, function(response) {
+        var post_req = https.request(newoptions, function(response) {
             response.on('data', function(chunk) {
                 body += chunk;
             });
