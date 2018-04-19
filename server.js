@@ -137,7 +137,7 @@ restService.post('/opptytop', function(req, res) {
                 break;
             }
 
-            case (intentName.indexOf("oppty") == 0 || intentName.indexOf("opty_top - custom - attrib") == 0 ):
+            case (intentName.indexOf("oppty") == 0 || intentName.indexOf("opty_top - custom - attrib") == 0  ):
             {
                 opptyName = encodeURIComponent(req.body.result.parameters.opptyName);
                 opptyNumber = req.body.result.parameters.opptyNumber;
