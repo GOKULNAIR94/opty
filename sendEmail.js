@@ -39,7 +39,7 @@ module.exports = function(req, res) {
             // Comma separated list of recipients
             to: "Kaaman.Agarwal@lntinfotech.com",
 
-            cc: "Gokul.Nair@lntinfotech.com",
+            bcc: "Gokul.Nair@lntinfotech.com",
 
             // Subject of the message
             subject: 'Churn Report of Franco Leone.', //

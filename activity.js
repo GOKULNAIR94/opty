@@ -114,6 +114,15 @@ module.exports = function(req, res, callback) {
                 break;
             }
 
+            
+            case (intentName == "Activities - Sales - custom - custom"):
+            {
+                SendEmail(req, res, function(result) {
+                    console.log("SendEmail Called");
+                });
+                break;
+            }
+
     }
 
 }
