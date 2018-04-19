@@ -253,7 +253,7 @@ restService.post('/opptytop', function(req, res) {
                     var cont = req.body.result.contexts.filter(x => {
                         return x.name == "optynumber"
                     });
-                    opptyNumber = cont.parameters.optynumber;
+                    opptyNumber = cont[0].parameters.optynumber;
                 }
 
                 qString = "/crmRestApi/resources/latest/opportunities/" + opptyNumber;
@@ -285,7 +285,7 @@ restService.post('/opptytop', function(req, res) {
         });
         console.log("My Context : " + JSON.stringify(account));
 
-        var accountName = account.parameters.accountname;
+        var accountName = account[0].parameters.accountname;
         GetNews( accountName, req, res, function(result) {
             console.log("Get News Called");
         });
