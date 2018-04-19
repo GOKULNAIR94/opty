@@ -271,7 +271,7 @@ restService.post('/opptytop', function(req, res) {
         });
     }
     if(intentName == "opty_top - custom - custom-news"){
-        console.log("A : " + req.body.result.contexts);
+        console.log("A : " + JSON.stringify(req.body.result.contexts));
         var account = req.body.result.contexts.filter(x => {
             return x.name == "accountname"
         });
