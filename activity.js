@@ -64,7 +64,7 @@ module.exports = function(req, res, callback) {
                 break;
             }
 
-        case (intentName == "Activities - Sales - custom" || intentName == "Activities - Sales - custom - news"):
+        case (intentName == "Activities - Sales - custom" || intentName == "Activities - Sales - custom - news" || intentName == "Activities - Sales - custom - news - custom"):
             {
                 var activityNumber = req.body.result.parameters.activityNumber;
                 qString = "/crmRestApi/resources/latest/activities/" + activityNumber + "?onlyData=true";
