@@ -130,6 +130,13 @@ restService.post('/opptytop', function(req, res) {
                     speech = "Opportunity Name: " + result.Name +" ,\r\n  Account : " + result.TargetPartyName + ".\r\n Would you like to know more details like status, churn index or what is in the news about the account?";
                     suggests = [{ "title" : "What is the status"},{ "title" : "What is the churn index"},{ "title" : "What is in the news"}];
                     
+                    contextOut = [{
+                        "name": "accountname",
+                        "lifespan": 1,
+                        "parameters": {
+                            "accountname": result.TargetPartyName
+                        }
+                    }];
                     SendResponse(speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
                     });
@@ -212,7 +219,14 @@ restService.post('/opptytop', function(req, res) {
                         "parameters": {
                             "optynumber": result.items[0].OptyNumber
                         }
+                    },{
+                        "name": "accountname",
+                        "lifespan": 1,
+                        "parameters": {
+                            "accountname": result.TargetPartyName
+                        }
                     }];
+
                     SendResponse(speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
                     });
@@ -220,7 +234,7 @@ restService.post('/opptytop', function(req, res) {
                 break;
             }
             
-            case (intentName.indexOf("opty_top - custom - attrib - update") == 0 ):
+            case ( intentName == "opty_top - custom - attrib - update" ):
             {
                 var oAttrib = req.body.result.parameters.optyAttribut;
                 var prob = req.body.result.parameters.Probability;
@@ -251,11 +265,22 @@ restService.post('/opptytop', function(req, res) {
 
         }
     }    
-    if( intentName == "opty_top - custom - custom" || intentName=='Activities - Sales - custom - custom' ){
+    if( intentName == "opty_top - custom - custom" || intentName=='Activities - Sales - custom - custom' || intentName == "opty_top - custom - custom" ){
         SendEmail(req, res, function(result) {
             console.log("SendEmail Called");
         });
     }
+    if(intentName == "opty_top - custom - custom-news"){
+        var account = req.body.result.contexts.filter(x => {
+            return x.name == accountname
+        });
+        var accountName = cont.parameters.accountname;
+        GetNews( accountName, req, res, function(result) {
+            console.log("Get News Called");
+        });
+    }
+
+    
 });
 
 restService.listen((process.env.PORT || 9000), function() {
