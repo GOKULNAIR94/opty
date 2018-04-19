@@ -34,7 +34,7 @@ var request;
 var responseString;
 var rev = '';
 var oName = '';
-var resObj = '';
+
 var opty = '';
 var optyOther = '';
 var optyother2 = '';
@@ -136,7 +136,7 @@ restService.post('/opptytop', function(req, res) {
                 break;
             }
 
-            case (intentName.indexOf("oppty") == 0):
+            case (intentName.indexOf("oppty") == 0 || intentName == "opty_top - custom - attrib"):
             {
                 opptyName = encodeURIComponent(req.body.result.parameters.opptyName);
                 opptyNumber = req.body.result.parameters.opptyNumber;
