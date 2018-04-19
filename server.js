@@ -18,6 +18,7 @@ var Activity = require("./activity");
 var Oppty = require("./oppty");
 var SendResponse = require("./sendResponse");
 var Update = require("./update");
+var GetNews = require("./getnews");
 
 var oNumber = '';
 var oName = '';
