@@ -234,7 +234,10 @@ restService.post('/opptytop', function(req, res) {
                 var body = {};
                 body[oAttrib] = prob;
                 Update( qString, loginEncoded, body, req, res, function( result ){
-
+                    speech = "The probability has been updated to " + prob ;
+                    SendResponse(speech, suggests, contextOut, req, res, function() {
+                        console.log("Finished!");
+                    });
                 });
 
                 break;
