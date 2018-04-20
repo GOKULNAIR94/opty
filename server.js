@@ -214,7 +214,7 @@ restService.post('/opptytop', function(req, res) {
                         {
                             rev = result.items[0].PrimaryContactPartyName;
                                 optyOther = result.items[0].PrimaryContactFormattedPhoneNumber;
-                                speech = 'The primary contact for opportunity ' + result.items[0].name + ' is ' + rev + '. Phone Number: ' + optyOther + '. Email Address: ' + optyOther2;
+                                speech = 'The primary contact for opportunity ' + result.items[0].Name + ' is ' + rev + '. Phone Number: ' + optyOther + '. Email Address: ' + optyOther2;
                             break;
                         }
 
