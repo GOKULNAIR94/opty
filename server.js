@@ -178,13 +178,13 @@ restService.post('/opptytop', function(req, res) {
                         {
                             rev = '$' + result.items[0].Revenue / 1000000 + 'M';
                             optyOther = '$' + result.items[0].ExpectAmount / 1000000 + 'M';
-                            speech = 'Current Revenue for Opportunity ' + oName + ' is ' + rev + '. The expected amount for this opportunity is ' + optyOther + ".\n";
+                            speech = 'Current Revenue for Opportunity ' + result.items[0].name + ' is ' + rev + '. The expected amount for this opportunity is ' + optyOther + ".\n";
                             break;
                         }
                         case ("WinProb"):
                         {
                             rev = result.items[0].WinProb;
-                                speech = 'Opportunity ' + oName + ' is ' + rev + "% probable to Win.";
+                                speech = 'Opportunity ' + result.items[0].name + ' is ' + rev + "% probable to Win.";
                             break;
                         }
                         case ("LastUpdatedBy"):
@@ -192,14 +192,14 @@ restService.post('/opptytop', function(req, res) {
                             rev = result.items[0].LastUpdatedBy;
                                 rev = rev.charAt(0).toUpperCase() + rev.slice(1);
                                 optyOther = result.items[0].LastUpdateDate;
-                                speech = 'Current Sales Person working on Opportunity: ' + oName + ' is ' + rev + '. The last time ' + rev + ' updated this opportunity was on ' + optyOther;
+                                speech = 'Current Sales Person working on Opportunity: ' + result.items[0].name + ' is ' + rev + '. The last time ' + rev + ' updated this opportunity was on ' + optyOther;
                             break;
                         }
                         case ("SalesStage"):
                         {
                             rev = result.items[0].SalesStage;
                                 optyOther = result.items[0].AverageDaysAtStage;
-                                speech = 'Opportunity ' + oName + ' is currently in Stage' + rev + '. On an average an opportunity stays in this stage for ' + optyOther + " days.\n";
+                                speech = 'Opportunity ' + result.items[0].name + ' is currently in Stage' + rev + '. On an average an opportunity stays in this stage for ' + optyOther + " days.\n";
                             break;
                         }
                         case ("TargetPartyName"):
@@ -207,14 +207,14 @@ restService.post('/opptytop', function(req, res) {
                             rev = result.items[0].TargetPartyName; //TargetPartyName
                                 console.log(rev);
                                 optyOther = result.items[0].PrimaryContactPartyName;
-                                speech = 'Opportunity ' + oName + ' is for account ' + rev + '. The primary contact person for this opportnity is ' + optyOther;
+                                speech = 'Opportunity ' + result.items[0].name + ' is for account ' + rev + '. The primary contact person for this opportnity is ' + optyOther;
                             break;
                         }
                         case ("PrimaryContactPartyName"):
                         {
                             rev = result.items[0].PrimaryContactPartyName;
                                 optyOther = result.items[0].PrimaryContactFormattedPhoneNumber;
-                                speech = 'The primary contact for opportunity ' + oName + ' is ' + rev + '. Phone Number: ' + optyOther + '. Email Address: ' + optyOther2;
+                                speech = 'The primary contact for opportunity ' + result.items[0].name + ' is ' + rev + '. Phone Number: ' + optyOther + '. Email Address: ' + optyOther2;
                             break;
                         }
 
