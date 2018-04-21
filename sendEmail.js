@@ -29,6 +29,7 @@ module.exports = function(req, res) {
 
 
     var toemail = "Kaaman.Agarwal@lntinfotech.com";
+
     toemail = "gokulgnair94@gmail.com";
     var speech = 'The churn index is 0.76. I have mailed you the churn report. The customer is at high risk. Your last meeting with the customer was 65 days ago. Would you like to schedule a meeting?'
 
@@ -37,7 +38,7 @@ module.exports = function(req, res) {
     fs.readFile("./FrancoLeone.pdf", function(err, data) {
         // Message object
         let message = {
-            from: 'VIKI <viki@kaaman.onmicrosoft.com>',
+            from: 'VIKI <' + req.body.headers.emailuser+ '>',
             // Comma separated list of recipients
             to: toemail,
 
