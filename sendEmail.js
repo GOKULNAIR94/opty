@@ -30,90 +30,51 @@ module.exports = function(req, res) {
 
     var toemail = "Kaaman.Agarwal@lntinfotech.com";
 
-    // toemail = "gokulgnair94@gmail.com";
+    toemail = "gokulgnair94@gmail.com";
     var speech = 'The churn index is 0.76. I have mailed you the churn report. The customer is at high risk. Your last meeting with the customer was 65 days ago. Would you like to schedule a meeting?'
 
     console.log(speech);
     console.log('SMTP Configured');
+    fs.readFile("./FrancoLeone.pdf", function(err, data) {
+        // Message object
+        let message = {
+            from: 'VIKI <' + req.body.headers.emailuser+ '>',
+            // Comma separated list of recipients
+            to: toemail,
 
-    console.log('* [example 1.1] sending test email');
- 
-    // Require'ing module and setting default options
-    
-    var send = require('gmail-send')({
-    //var send = require('../index.js')({
-    user: req.body.headers.emailuser,
-    // user: credentials.user,                  // Your GMail account used to send emails
-    pass: req.body.headers.emailpw,
-    // pass: credentials.pass,                  // Application-specific password
-    to:   toemail,
-    // to:   credentials.user,                  // Send to yourself
-                                            // you also may set array of recipients:
-                                            // [ 'user1@gmail.com', 'user2@gmail.com' ]
-    // from:    credentials.user,            // from: by default equals to user
-    // replyTo: credentials.user,            // replyTo: by default undefined
-    // bcc: 'some-user@mail.com',            // almost any option of `nodemailer` will be passed to it
-    subject: 'test subject',
-    text:    'gmail-send example 1',         // Plain text
-    //html:    '<b>html text</b>'            // HTML
-    });
-    
-    
-    // Override any default option and send email
-    
-    console.log('* [example 1.1] sending test email');
-    
-    var filepath = './FrancoLeone.pdf';  // File to attach
-    
-    send({ // Overriding default parameters
-    subject: 'attached '+filepath,         // Override value set as default
-    files: [ filepath ],
-    }, function (err, res) {
-    console.log('* [example 1.1] send() callback returned: err:', err, '; res:', res);
-    });
+            bcc: "gokulgnair94@gmail.com",
 
+            // Subject of the message
+            subject: 'Churn Report of Franco Leone.', //
 
+            // HTML body
+            html: '<p><b>Hello,</b></p>' +
+                '<p>Attached is the Churn Report of Franco Leone.</p>' +
+                '<p>Thanks,<br><b>Viki</b></p>',
 
-    // fs.readFile("./FrancoLeone.pdf", function(err, data) {
-    //     // Message object
-    //     let message = {
-    //         from: 'VIKI <' + req.body.headers.emailuser+ '>',
-    //         // Comma separated list of recipients
-    //         to: toemail,
+            // Apple Watch specific HTML body
+            watchHtml: '<b>Hello</b> to myself',
 
-    //         bcc: "gokulgnair94@gmail.com",
+            //An array of attachments
+            attachments: [{
+                'filename': 'FrancoLeone.pdf',
+                'content': data
+            }]
 
-    //         // Subject of the message
-    //         subject: 'Churn Report of Franco Leone.', //
+        };
 
-    //         // HTML body
-    //         html: '<p><b>Hello,</b></p>' +
-    //             '<p>Attached is the Churn Report of Franco Leone.</p>' +
-    //             '<p>Thanks,<br><b>Viki</b></p>',
-
-    //         // Apple Watch specific HTML body
-    //         watchHtml: '<b>Hello</b> to myself',
-
-    //         //An array of attachments
-    //         attachments: [{
-    //             'filename': 'FrancoLeone.pdf',
-    //             'content': data
-    //         }]
-
-    //     };
-
-    //     transporter.sendMail(message, function(error, info){
-    //         if (error) {
-    //             console.log( "Error : " + error);
-    //             speech = "Unable to send mail. Please try again later.";
-    //         } else {
-    //             console.log('Email sent: ' + info.response);
-    //             return res.json({
-    //                 speech: speech,
-    //                 displayText: speech
-    //             });
-    //         }
+        transporter.sendMail(message, function(error, info){
+            if (error) {
+                console.log( "Error : " + error);
+                speech = "Unable to send mail. Please try again later.";
+            } else {
+                console.log('Email sent: ' + info.response);
+                return res.json({
+                    speech: speech,
+                    displayText: speech
+                });
+            }
             
-    //     });
-    // });
+        });
+    });
 }
