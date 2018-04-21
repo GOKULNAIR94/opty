@@ -30,7 +30,7 @@ module.exports = function(req, res) {
 
     var toemail = "Kaaman.Agarwal@lntinfotech.com";
 
-    toemail = "gokulgnair94@gmail.com";
+    // toemail = "gokulgnair94@gmail.com";
     var speech = 'The churn index is 0.76. I have mailed you the churn report. The customer is at high risk. Your last meeting with the customer was 65 days ago. Would you like to schedule a meeting?'
 
     console.log(speech);
