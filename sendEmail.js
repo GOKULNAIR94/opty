@@ -12,8 +12,8 @@ module.exports = function(req, res) {
     let transporter = nodemailer.createTransport({
         service: 'Outlook365', // no need to set host or port etc.
         auth: {
-            user: 'viki@kaaman.onmicrosoft.com',//'reachme@kaaman.onmicrosoft.com',
-            pass: 'Oracle123'//'K@agar55wal'
+            user: req.body.headers.emailuser,
+            pass: req.body.headers.emailpw 
         }
     });
 //    var to_email = req.body.result.parameters.emailaddress;
