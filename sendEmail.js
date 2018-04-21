@@ -10,7 +10,7 @@ module.exports = function(req, res) {
     console.log("Inside");
     // Create a SMTP transporter object
     let transporter = nodemailer.createTransport({
-        service: 'Outlook365', // no need to set host or port etc.
+        service: 'smtp.gmail.com', // no need to set host or port etc.
         auth: {
             user: req.body.headers.emailuser,
             pass: req.body.headers.emailpw 
