@@ -18,12 +18,13 @@
   "homepage": "https://github.com/GOKULNAIR94/gbot#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
-    "dateformat": "^2.0.0",
     "bunyan": "^1.8.12",
+    "dateformat": "^2.0.0",
     "express": "^4.15.3",
+    "fast-csv": "^2.4.0",
+    "gmail-send": "^1.2.14",
     "google-news": "^1.4.6",
     "nodemailer": "^4.1.0",
-    "fast-csv": "^2.4.0",
     "request": "^2.76.0"
   },
   "devDependencies": {},
