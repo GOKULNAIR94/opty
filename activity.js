@@ -35,7 +35,7 @@ module.exports = function(req, res, callback) {
                     var startDate;
                     if (rowCount == 0) {
                         speech = "All caught up! Enjoy your day!";
-                        speechText = speech;
+                        speechText = "All caught up! Enjoy your day!";
                     } else {
                         speech = "OK. Activity";
                         speechText = "You have the following activities for the day:\n";
