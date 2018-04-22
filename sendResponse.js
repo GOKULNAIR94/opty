@@ -1,5 +1,6 @@
 module.exports = function ( speech, suggests, contextOut, req, res, callback){ 
 
+    console.log("OG Request : " + JSON.stringify(req.body.originalRequest));
             switch(req.body.originalRequest.source) {
                 case "google":{
                     res.json({
@@ -8,6 +9,20 @@ module.exports = function ( speech, suggests, contextOut, req, res, callback){
                         contextOut : contextOut,
                         data: {
                             google: {
+                                'expectUserResponse': true,
+                                'isSsml': false,
+                                'noInputPrompts': [],
+                                'richResponse': {
+                                    'items': [{
+                                        'simpleResponse': {
+                                            'textToSpeech': speech,
+                                            'displayText': speech
+                                        }
+                                    }],
+                                    "suggestions": suggests
+                                }
+                            },
+                            facebook: {
                                 'expectUserResponse': true,
                                 'isSsml': false,
                                 'noInputPrompts': [],
@@ -29,7 +44,38 @@ module.exports = function ( speech, suggests, contextOut, req, res, callback){
                 case "facebook":{
                     res.json({
                         speech: speech,
-                        displayText: speech
+                        displayText: speech,
+                        contextOut : contextOut,
+                        data: {
+                            google: {
+                                'expectUserResponse': true,
+                                'isSsml': false,
+                                'noInputPrompts': [],
+                                'richResponse': {
+                                    'items': [{
+                                        'simpleResponse': {
+                                            'textToSpeech': speech,
+                                            'displayText': speech
+                                        }
+                                    }],
+                                    "suggestions": suggests
+                                }
+                            },
+                            facebook: {
+                                'expectUserResponse': true,
+                                'isSsml': false,
+                                'noInputPrompts': [],
+                                'richResponse': {
+                                    'items': [{
+                                        'simpleResponse': {
+                                            'textToSpeech': speech,
+                                            'displayText': speech
+                                        }
+                                    }],
+                                    "suggestions": suggests
+                                }
+                            }
+                        }
                     });
                     break;
                 }

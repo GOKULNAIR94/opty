@@ -35,7 +35,7 @@ module.exports = function(req, res, callback) {
                     if (rowCount == 0) {
                         speech = "All caught up! Enjoy your day!";
                     } else {
-                        speech = "You have the following activities for the day:";
+                        speech = "You have the following activities for the day:\n";
                         for (var i = 0; i <= rowCount - 1; i++) {
                             endDate = result.items[i].ActivityEndDate;
                             startDate = result.items[i].ActivityStartDate;
