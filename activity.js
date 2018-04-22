@@ -37,7 +37,7 @@ module.exports = function(req, res, callback) {
                         speech = "All caught up! Enjoy your day!";
                         speechText = "All caught up! Enjoy your day!";
                     } else {
-                        speech = "OK. Activity";
+                        speech = "Alright, Activity";
                         speechText = "You have the following activities for the day:\n";
                         for (var i = 0; i <= rowCount - 1; i++) {
                             endDate = result.items[i].ActivityEndDate;
