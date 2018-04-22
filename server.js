@@ -96,7 +96,7 @@ restService.post('/opptytop', function(req, res) {
     if( intentName == "opty_top"){
         var sortBy = req.body.result.parameters.optyAttribut;
         var sortNumber = req.body.result.parameters.number;
-        qString = "/crmRestApi/resources/latest/opportunities?q=OwnerResourcePartyId=300000006439988onlyData=true&orderBy=" + sortBy + ":desc";
+        qString = "/crmRestApi/resources/latest/opportunities?q=OwnerResourcePartyId=300000006439988&onlyData=true&orderBy=" + sortBy + ":desc";
         QueryOpty( qString, loginEncoded, req, res, function( result ){
             try{
                 var rowCount = result.items.length;
