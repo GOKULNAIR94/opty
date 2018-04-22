@@ -51,7 +51,7 @@ module.exports = function(req, res, callback) {
 
                             if (today <= endDate && today >= startDate) {
                                 if (result.items[i].ActivityNumber != null && result.items[i].ActivityNumber != "") {
-                                    speech = speech + '. ' + result.items[i].ActivityNumber + ', ' + result.items[i].Subject + ';\r\n';
+                                    speech = speech + ' ' + result.items[i].ActivityNumber + ', ' + result.items[i].Subject + ';\r\n';
                                     speechText = speech + 'Activity: ' + result.items[i].ActivityNumber + ', ' + result.items[i].Subject + ';\r\n';
                                     suggests.push({
                                         "title": result.items[i].ActivityNumber
