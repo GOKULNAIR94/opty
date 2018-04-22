@@ -126,7 +126,7 @@ module.exports = function(req, res, callback) {
                         speechText += ',\nAccount: ' + AccountName;
     
                     speech += ".\nWould you like to know the churn index or news about " + AccountName + ", get the service requests from this user or should I close this activity?";
-                    speechText += ".\nWould you like to know the churn index or news about " + AccountName + ", get the highest priority service requests from this user or should I close this activity?";
+                    speechText += ".\nWould you like to know the churn index or news about " + AccountName + ", get the service requests from this user or should I close this activity?";
                     
 
                     var suggests = [{
