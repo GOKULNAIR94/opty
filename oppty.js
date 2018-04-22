@@ -87,8 +87,7 @@ module.exports = function(req, res, callback) {
                         speech += ', \nStatus: ' + status;
                     if( startDate )
                         speech += ', \nStart Date: ' + mydate(startDate, "yyyy-mm-dd");
-                    if( endDate )
-                        speech += ',\nEnd Date: ' + mydate(endDate, "yyyy-mm-dd");
+                    
                     if( optyName )
                         speech += ',\nOpportunity Associated: ' + optyName;
                     if( contactName )
