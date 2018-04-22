@@ -111,6 +111,7 @@ restService.post('/opptytop', function(req, res) {
                         "title": result.items[i].OptyNumber
                     });
                 }
+                speechText = speech;
                 SendResponse( speechText, speech, suggests, contextOut, req, res, function() {
                     console.log("Finished!");
                 });
@@ -149,6 +150,7 @@ restService.post('/opptytop', function(req, res) {
                     });
 
                     console.log("Context Out : " + JSON.stringify(contextOut));
+                    speechText = speech;
                     SendResponse( speechText, speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
                     });
@@ -241,7 +243,7 @@ restService.post('/opptytop', function(req, res) {
                             "accountname": result.TargetPartyName
                         }
                     });
-
+                    speechText = speech;
                     SendResponse( speechText, speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
                     });
@@ -270,6 +272,7 @@ restService.post('/opptytop', function(req, res) {
                 body[oAttrib] = prob;
                 Update( qString, loginEncoded, body, req, res, function( result ){
                     speech = "The probability has been updated to " + prob ;
+                    speechText = speech;
                     SendResponse( speechText, speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
                     });
