@@ -54,6 +54,7 @@ module.exports = function ( speech, suggests, contextOut, req, res, callback){
                                     ]
                                   }
                                 }
+                            }
                         }
                     });
                     break;
