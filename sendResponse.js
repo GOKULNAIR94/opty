@@ -1,31 +1,44 @@
 module.exports = function ( speech, suggests, contextOut, req, res, callback){ 
 
-    if (req.body.originalRequest.source == "google") {
-                res.json({
-                    speech: speech,
-                    displayText: speech,
-                    contextOut : contextOut,
-                    data: {
-                        google: {
-                            'expectUserResponse': true,
-                            'isSsml': false,
-                            'noInputPrompts': [],
-                            'richResponse': {
-                                'items': [{
-                                    'simpleResponse': {
-                                        'textToSpeech': speech,
-                                        'displayText': speech
-                                    }
-                                }],
-                                "suggestions": suggests
+            switch(req.body.originalRequest.source) {
+                case "google":{
+                    res.json({
+                        speech: speech,
+                        displayText: speech,
+                        contextOut : contextOut,
+                        data: {
+                            google: {
+                                'expectUserResponse': true,
+                                'isSsml': false,
+                                'noInputPrompts': [],
+                                'richResponse': {
+                                    'items': [{
+                                        'simpleResponse': {
+                                            'textToSpeech': speech,
+                                            'displayText': speech
+                                        }
+                                    }],
+                                    "suggestions": suggests
+                                }
                             }
                         }
-                    }
-                });
-            }else{
-                res.json({
-                    speech: speech,
-                    displayText: speech
-                });
+                    });
+                    break;
+                }
+                    
+                case "facebook":{
+                    res.json({
+                        speech: speech,
+                        displayText: speech
+                    });
+                    break;
+                }
+
+                default:{
+                    res.json({
+                        speech: speech,
+                        displayText: speech
+                    });
+                }
             }
 }
