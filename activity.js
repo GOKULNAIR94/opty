@@ -35,6 +35,7 @@ module.exports = function(req, res, callback) {
                     if (rowCount == 0) {
                         speech = "All caught up! Enjoy your day!";
                     } else {
+                        speech = "You have the following activities for the day:";
                         for (var i = 0; i <= rowCount - 1; i++) {
                             endDate = result.items[i].ActivityEndDate;
                             startDate = result.items[i].ActivityStartDate;
@@ -44,6 +45,7 @@ module.exports = function(req, res, callback) {
                             /*console.log("Start Date: "+startDate); 
                             console.log("End Date: "+endDate);   
                             console.log("Today: "+today); */
+
                             if (today <= endDate && today >= startDate) {
                                 if (result.items[i].ActivityNumber != null && result.items[i].ActivityNumber != "") {
                                     speech = speech + 'Activity Number: ' + result.items[i].ActivityNumber + ', Subject: ' + result.items[i].Subject + ';\r\n';

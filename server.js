@@ -102,6 +102,8 @@ restService.post('/opptytop', function(req, res) {
                 console.log( "rowCount : " + rowCount);
                 var suggests = [];
 
+                speech = "Here the top " + sortNumber + " opportunities:";
+
                 for (var i = 0; i < sortNumber; i++) {
                     speech = speech + 'Opportunity Number: ' + result.items[i].OptyNumber + ', Name: ' + result.items[i].Name + ", Revenue : "  + ('$' + result.items[i].Revenue  / 1000000 + 'M') + ';\r\n';
                     suggests.push({
