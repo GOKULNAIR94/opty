@@ -37,7 +37,7 @@ module.exports = function(req, res, callback) {
                         speech = "All caught up! Enjoy your day!";
                         speechText = "All caught up! Enjoy your day!";
                     } else {
-                        speech = "Alright, Activity";
+                        speech = "Alright. Activity";
                         speechText = "You have the following activities for the day:\n";
                         for (var i = 0; i <= rowCount - 1; i++) {
                             endDate = result.items[i].ActivityEndDate;
@@ -52,7 +52,7 @@ module.exports = function(req, res, callback) {
                             if (today <= endDate && today >= startDate) {
                                 if (result.items[i].ActivityNumber != null && result.items[i].ActivityNumber != "") {
                                     speech = speech + ' ' + result.items[i].ActivityNumber + ', ' + result.items[i].Subject + ';\r\n';
-                                    speechText = speech + 'Activity: ' + result.items[i].ActivityNumber + ', ' + result.items[i].Subject + ';\r\n';
+                                    speechText = speechText + 'Activity: ' + result.items[i].ActivityNumber + ', ' + result.items[i].Subject + ';\r\n';
                                     suggests.push({
                                         "title": result.items[i].ActivityNumber
                                     })
