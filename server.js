@@ -29,6 +29,7 @@ var oNumber2 = oNumber + 'Testing';
 var uname = "";
 var pword = "";
 var speech = "";
+var speechText = "";
 var http = require('https');
 var options = '';
 var urlPath = '';
@@ -110,7 +111,7 @@ restService.post('/opptytop', function(req, res) {
                         "title": result.items[i].OptyNumber
                     });
                 }
-                SendResponse(speech, suggests, contextOut, req, res, function() {
+                SendResponse( speechText, speech, suggests, contextOut, req, res, function() {
                     console.log("Finished!");
                 });
             }
@@ -148,7 +149,7 @@ restService.post('/opptytop', function(req, res) {
                     });
 
                     console.log("Context Out : " + JSON.stringify(contextOut));
-                    SendResponse(speech, suggests, contextOut, req, res, function() {
+                    SendResponse( speechText, speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
                     });
                 });
@@ -241,7 +242,7 @@ restService.post('/opptytop', function(req, res) {
                         }
                     });
 
-                    SendResponse(speech, suggests, contextOut, req, res, function() {
+                    SendResponse( speechText, speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
                     });
                 });
@@ -269,7 +270,7 @@ restService.post('/opptytop', function(req, res) {
                 body[oAttrib] = prob;
                 Update( qString, loginEncoded, body, req, res, function( result ){
                     speech = "The probability has been updated to " + prob ;
-                    SendResponse(speech, suggests, contextOut, req, res, function() {
+                    SendResponse( speechText, speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
                     });
                 });
