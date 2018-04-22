@@ -23,11 +23,13 @@ module.exports = function ( speech, suggests, contextOut, req, res, callback){
                                 }
                             },
                             facebook: {
-                                'expectUserResponse': true,
-                                'isSsml': false,
-                                'noInputPrompts': [],
-                                'richResponse': {
-                                    "title":"Welcome!",
+                                "attachment":{
+                                  "type":"template",
+                                  "payload":{
+                                    "template_type":"generic",
+                                    "elements":[
+                                       {
+                                        "title":"Welcome!",
                                         "image_url":"https://petersfancybrownhats.com/company_image.png",
                                         "subtitle":"We have the right hat for everyone.",
                                         "default_action": {
@@ -47,9 +49,11 @@ module.exports = function ( speech, suggests, contextOut, req, res, callback){
                                             "title":"Start Chatting",
                                             "payload":"DEVELOPER_DEFINED_PAYLOAD"
                                           }              
-                                        ] 
+                                        ]      
+                                      }
+                                    ]
+                                  }
                                 }
-                            }
                         }
                     });
                     break;
