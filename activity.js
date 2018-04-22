@@ -14,6 +14,7 @@ module.exports = function(req, res, callback) {
     var qString = "";
     var rowCount = 0;
     var speech = "";
+    var speechText = "";
     var suggests = [];
     var contextOut = [];
     console.log();
@@ -34,8 +35,10 @@ module.exports = function(req, res, callback) {
                     var startDate;
                     if (rowCount == 0) {
                         speech = "All caught up! Enjoy your day!";
+                        speechText = speech;
                     } else {
-                        speech = "You have the following activities for the day:\n";
+                        speech = "OK. Activity";
+                        speechText = "You have the following activities for the day:\n";
                         for (var i = 0; i <= rowCount - 1; i++) {
                             endDate = result.items[i].ActivityEndDate;
                             startDate = result.items[i].ActivityStartDate;
@@ -48,7 +51,8 @@ module.exports = function(req, res, callback) {
 
                             if (today <= endDate && today >= startDate) {
                                 if (result.items[i].ActivityNumber != null && result.items[i].ActivityNumber != "") {
-                                    speech = speech + 'Activity: ' + result.items[i].ActivityNumber + ', ' + result.items[i].Subject + ';\r\n';
+                                    speech = speech + '. ' + result.items[i].ActivityNumber + ', ' + result.items[i].Subject + ';\r\n';
+                                    speechText = speech + 'Activity: ' + result.items[i].ActivityNumber + ', ' + result.items[i].Subject + ';\r\n';
                                     suggests.push({
                                         "title": result.items[i].ActivityNumber
                                     })
@@ -58,7 +62,7 @@ module.exports = function(req, res, callback) {
                         }
                     }
 
-                    SendResponse(speech, suggests, contextOut, req, res, function() {
+                    SendResponse( speechText, speech, suggests, contextOut, req, res, function() {
                         console.log("Finished!");
                     });
 
@@ -114,7 +118,7 @@ module.exports = function(req, res, callback) {
                     }];
 
                     if( intentName == "Activities - Sales - custom" ){
-                        SendResponse(speech, suggests, contextOut, req, res, function() {
+                        SendResponse( speechText, speech, suggests, contextOut, req, res, function() {
                             console.log("Finished!");
                         });
                     }else{
