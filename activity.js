@@ -86,27 +86,49 @@ module.exports = function(req, res, callback) {
                     var contactEmail = result.PrimaryContactEmailAddress;
                     var contactPhone = result.PrimaryFormattedPhoneNumber;
 
-                    speech = 'Here are the details for Activity ' + activityNumber + ":";
-                    if( subject )
-                        speech += ' \nSubject: ' + subject;
-                    if( status )
+                    speech = "Activity, " + activityNumber;
+                    speechText = 'Here are the details for Activity ' + activityNumber + ":";
+                    if( subject ){
+                        speech += ', ' + subject;
+                        speechText += ' \nSubject: ' + subject;
+                    }
+                        
+                    if( status ){
                         speech += ', \nStatus: ' + status;
-                    if( startDate )
-                        speech += ', \nStart Date: ' + mydate(startDate, "yyyy-mm-dd");
-                    if( endDate )
-                        speech += ',\nEnd Date: ' + mydate(endDate, "yyyy-mm-dd");
-                    if( optyName )
-                        speech += ',\nOpportunity Associated: ' + optyName;
+                        speechText += ', \nStatus: ' + status;
+
+                    }
+                        
+                    if( startDate ){
+                        speech += ', \nDate: ' + mydate(startDate, "yyyy-mm-dd");
+                        speechText += ', \nDate: ' + mydate(startDate, "yyyy-mm-dd");
+                    }
+                        
+                    if( endDate ){
+                        speechText += ',\nEnd Date: ' + mydate(endDate, "yyyy-mm-dd");
+                    }
+                        
+                    if( optyName ){
+                        speech += ',\nOpportunity : ' + optyName;
+                        speechText += ',\nOpportunity : ' + optyName;
+                    }
+                        
                     if( contactName )
-                        speech += ',\nCustomer Name: ' + contactName;
+                        speechText += ',\nCustomer Name: ' + contactName;
+
                     if( contactPhone )
-                        speech += ',\nPhone: ' + contactPhone;
+                    speechText += ',\nPhone: ' + contactPhone;
+
                     if( contactEmail )
-                        speech += ',\nEmail: ' + contactEmail;
+                    speechText += ',\nEmail: ' + contactEmail;
+
                     if( AccountName )
-                        speech += ',\nAccount: ' + AccountName;
-                    speech += ".\nWould you like to know the churn index or what is in the news about " + AccountName + ", get the highest priority service requests from the user or would you like to close this activity?";
+                        speechText += ',\nAccount: ' + AccountName;
+    
+                    speech += ".\nWould you like to know the churn index or news about " + AccountName + ", get the service requests from this user or should I close this activity?";
+                    speechText += ".\nWould you like to know the churn index or news about " + AccountName + ", get the highest priority service requests from this user or should I close this activity?";
                     
+
                     var suggests = [{
                         "title": "Get me news"
                     }, {
