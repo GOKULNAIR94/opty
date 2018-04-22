@@ -99,7 +99,7 @@ module.exports = function(req, res, callback) {
                         speech += ',\nEmail: ' + contactEmail;
                     if( AccountName )
                         speech += ',\nAccount: ' + AccountName;
-                    speech += ".\nWould you like to know the churn index or what is in the news about " + AccountName + ", or would you like to close this activity?";
+                    speech += ".\nWould you like to know the churn index or what is in the news about " + AccountName + ", get the highest priority service requests from the user or would you like to close this activity?";
                     
                     var suggests = [{
                         "title": "Get me news"
@@ -107,6 +107,8 @@ module.exports = function(req, res, callback) {
                         "title": "What is the churn index"
                     }, {
                         "title": "Close this activity"
+                    }, {
+                        "title": "Highest priority tickets"
                     }];
 
                     if( intentName == "Activities - Sales - custom" ){
